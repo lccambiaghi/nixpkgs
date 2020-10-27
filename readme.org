@@ -1,0 +1,17 @@
+* Installation
+1. Install Nix
+2. Install Home Manager
+2. ~cd ~/.config~
+3. ~rm -rf nixpkgs~
+4. ~git clone https://github.com/lucperkins/nix-home-config nixpkgs~
+5. ~home-manager switch && source ~/.zshrc~
+
+* What is important?
+- ~emacs~
+- ~git~
+- ~shell~
+- ~cli~ with ~home.packages~
+- ~gui~ (with ~environment.systemPackages~?)
+- ~dotfiles~
+  + Of do I list them?
+- ~env~ variables (with ~/.env~?)
