@@ -51,12 +51,12 @@ in {
     extraConfig = {
       core = {
         editor = "emacsclient";
-        pager = "delta --dark";
+        # pager = "delta --dark";
         whitespace = "trailing-space,space-before-tab";
       };
 
-      commit.gpgsign = "true";
-      gpg.program = "gpg2";
+      # commit.gpgsign = "true";
+      # gpg.program = "gpg2";
 
       protocol.keybase.allow = "always";
       credential.helper = "osxkeychain";

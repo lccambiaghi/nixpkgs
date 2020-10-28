@@ -1,0 +1,39 @@
+# -*- mode: sh; -*-
+# === Use a specific python version ===
+# Usage in .envrc:
+#    use python <version>
+use_python() {
+    if [ -n "$(which pyenv)" ]; then
+        local pyversion=$1
+        eval "$(pyenv init -)"
+        pyenv local ${pyversion} || log_error "Could not find pyenv version '${pyversion}'. Consider running 'pyenv install ${pyversion}'"
+    fi
+}
+
+layout_poetry() {
+  if [[ ! -f pyproject.toml ]]; then
+    log_error 'No pyproject.toml found.  Use `poetry new` or `poetry init` to create one first.'
+    exit 2
+  fi
+
+  local VENV=$(dirname $(poetry run which python))
+  export VIRTUAL_ENV=$(echo "$VENV" | rev | cut -d'/' -f2- | rev)
+  export POETRY_ACTIVE=1
+  PATH_add "$VENV"
+}
+
+layout_anaconda() {
+  local ACTIVATE="/usr/local/anaconda3/bin/activate"
+
+  if [ -n "$1" ]; then
+    # Explicit environment name from layout command.
+    local env_name="$1"
+    source $ACTIVATE ${env_name}
+  elif (grep -q name: environment.yml); then
+    # Detect environment name from `environment.yml` file in `.envrc` directory
+    source $ACTIVATE `grep name: environment.yml | sed -e 's/name: //' | cut -d "'" -f 2 | cut -d '"' -f 2`
+  else
+    (>&2 echo No environment specified);
+    exit 1;
+  fi;
+}

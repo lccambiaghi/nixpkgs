@@ -3,6 +3,7 @@
 let
   # nigpkgsRev = "nixpkgs-unstable";
   # pkgs = import (fetchTarball "https://github.com/nixos/nixpkgs/archive/${nigpkgsRev}.tar.gz") {};
+  sources = import ./nix/sources.nix;
 
   # Import other Nix files
   imports = [
@@ -26,12 +27,8 @@ let
     run
   ];
 
-  pythonPackages = with pkgs.python38Packages; [
-    bpython
-    openapi-spec-validator
+  pythonPackages = with pkgs.python37Packages; [
     pip
-    requests
-    setuptools
 ];
 
 in {
@@ -45,8 +42,8 @@ in {
   programs.home-manager.enable = true;
 
   home = {
-    username = "luca";
-    homeDirectory = "/Users/luca";
+    username = builtins.getEnv "USER";
+    homeDirectory = builtins.getEnv "HOME";
     stateVersion = "20.09";
   };
 
@@ -67,7 +64,12 @@ in {
     showProgramPath = true;
   };
 
-  programs.direnv.enable = true;
+  programs.direnv = {
+      enable = true;
+      # enableNixDirenvIntegration = true;
+  };
+
+  programs.fzf.enable = true;
 
   # programs.poetry.enable = true
 
@@ -101,6 +103,13 @@ in {
   # Lorri daemon
   # services.lorri.enable = true;
 
+  home.sessionPath = [
+    # "$HOME/.pyenv/bin"
+    # "$HOME/.pyenv/shims"
+    "$HOME/.poetry/bin"
+    "$HOME/.emacs.d/bin"
+  ];
+
   home.sessionVariables = {
     EDITOR = "emacsclient";
     # BROWSER = "firefox";
@@ -112,14 +121,6 @@ in {
   #   settings = lib.attrsets.recursiveUpdate (import ../../program/terminal/alacritty/default-settings.nix) {
   #     shell.program = "/usr/local/bin/fish";
   #   };
-  # };
-
-  # programs.fish = lib.attrsets.recursiveUpdate (import ../../program/shell/fish/default.nix) {
-  #   shellInit = ''
-  #     bass source $HOME/.nix-profile/etc/profile.d/nix.sh
-  #     direnv hook fish | source
-  #     set PATH (fd --absolute-path . $HOME/.config/scripts | tr '\n' ':' | sed 's/.$//') $PATH
-  #   '';
   # };
 
   # spacemacs
@@ -137,9 +138,10 @@ in {
 
 
   home.packages = with pkgs; [
-    adoptopenjdk-bin # Java
+    # adoptopenjdk-bin # Java
     bash # /bin/bash
     bat # cat replacement written in Rust
+    clojure
     conftest
     curl # An old classic
     direnv # Per-directory environment variables
@@ -148,6 +150,9 @@ in {
     exa # ls replacement written in Rust
     fd # find replacement written in Rust
     fzf # Fuzzy finder
+    git-lfs
+    gitAndTools.gh
+    gitAndTools.git-crypt
     graphviz # dot
     gnupg # gpg
     htop # Resource monitoring
@@ -162,20 +167,30 @@ in {
     less
     mdcat # Markdown converter/reader for the CLI
     niv # Nix dependency management
+    nixpkgs-fmt
     nodejs # node and npm
+    nodePackages.pyright
     pinentry_mac # Necessary for GPG
-    # poetry
+    python37Packages.poetry
     pre-commit # Pre-commit CI hook tool
+    procs
     protobuf # Protocol Buffers
-    python3 # Have you upgraded yet???
+    python37 # Have you upgraded yet???
+    R
     ripgrep # grep replacement written in Rust
+    rsync
     spotify-tui # Spotify interface for the CLI
+    thefuck
     tree # Should be included in macOS but it's not
+    tmux
     vscode # My fav text editor if I'm being honest
+    watch
     wget
     xsv # CSV file parsing utility
     yarn # Node.js package manager
     youtube-dl # Download videos
+    zsh
+    zsh-powerlevel10k
   ] ++ pythonPackages ++ scripts;
 
 }

@@ -1,0 +1,35 @@
+{
+ ;; Paths
+ ;;   Directories in the current project to include in the classpath
+
+ :paths ["src"]
+
+ ;; External dependencies
+
+ :deps {
+        ;; com.billpiel/sayid {:mvn/version "0.0.18"}
+        org.clojure/clojure {:mvn/version "1.10.1"}
+        nrepl/nrepl         {:mvn/version "0.5.3"}
+        }
+
+ :aliases {:nrepl {:extra-deps {nrepl {:mvn/version "RELEASE"}}
+                   :main-opts  ["-m" "nrepl.cmdline"]}
+           :new   {:extra-deps {seancorfield/clj-new
+                                {:mvn/version "1.0.199"}}
+                   :main-opts  ["-m" "clj-new.create"]}
+           :test  {:extra-paths ["test"]
+                   :extra-deps  {lambdaisland/kaocha {:mvn/version "1.0-612"}}
+                   :main-opts   ["-m" "kaocha.runner"]}
+           :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "0.1.4"}}
+                   :main-opts  ["-m" "rebel-readline.main"]}
+           }
+
+ ;; Provider attributes
+
+ :mvn/repos {
+             "central"      {:url "https://repo1.maven.org/maven2/"}
+             "clojars"      {:url "https://repo.clojars.org/"}
+             "bedatadriven" {:url "https://nexus.bedatadriven.com/content/groups/public/"}
+             ;; "asm-all"      {:url "https://mvnrepository.com/artifact/org.ow2.asm/asm-all"}
+             }
+ }

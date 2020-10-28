@@ -15,3 +15,14 @@
 - ~dotfiles~
   + Of do I list them?
 - ~env~ variables (with ~/.env~?)
+* What is missing?
+- ~brew~ with:
+  + ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+- ~latex~ with:
+  + brew cask install basictex
+  + sudo tlmgr update --self && sudo tlmgr install dvipng
+- ~emacs~ + ~doom~
+- ~.ssh/id_rsa~
+- ~.gnupg~
+- R + packages
+- pyright

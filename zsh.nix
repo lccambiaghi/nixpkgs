@@ -20,14 +20,14 @@ let
     kga= "kubectl get all";
     kdl= "kubectl delete ";
     kds= "kubectl describe ";
-    pj= "$HOME/bin/pj";
+    pj= "python $HOME/bin/pretty_json.py";
     hms = "home-manager switch";
 
     # Reload zsh
     szsh = "source ~/.zshrc";
 
     # Reload home manager and zsh
-    reload = "home-manager switch && source ~/.zshrc";
+    reload = "cd ~/.config/nixpkgs && ./switch.sh && cd - && source ~/.zshrc";
 
     # Nix garbage collection
     garbage = "nix-collect-garbage -d && docker image prune --force";
@@ -36,13 +36,6 @@ let
     installed = "nix-env --query --installed";
   };
 in {
-  # Fancy filesystem navigator
-  # programs.broot = {
-  #   enable = true;
-  #   enableFishIntegration = true;
-  #   enableZshIntegration = true;
-  # };
-
   # fish shell settings
   # programs.fish = {
   #   inherit shellAliases;
@@ -52,12 +45,6 @@ in {
   # programs.bash = {
   #   enable = true;
   # };
-
-  # environment.shells = with pkgs; [
-  #    bashInteractive
-  #    fish
-  #    zsh
-  #  ];
 
   # zsh settings
   programs.zsh = {
@@ -69,9 +56,9 @@ in {
     # enableSyntaxHighlighting = true;
     # enableBashCompletion = true;
     envExtra = ''
-      export PATH="$HOME/.pyenv/bin:$PATH"
-      export PATH="$HOME/.pyenv/shims:$PATH"
-      export PATH="$HOME/.poetry/bin:$PATH"
+      # export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+      # export PYENV_SHELL="zsh"
+      # export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
     '';
     # localVariables = { POWERLEVEL9K_LEFT_PROMPT_ELEMENTS = [ "dir" "vcs" ] ; }
 
@@ -98,7 +85,7 @@ in {
       # fi
 
       # Autocomplete for various utilities
-      source <(kubectl completion zsh)
+      # source <(kubectl completion zsh)
       # source <(gh completion --shell zsh)
 
       # pyenv
@@ -106,15 +93,19 @@ in {
       #   eval "$(pyenv init -)"
       # fi
 
-      # direnv setup
-      if [ -n "$(which direnv)" ]; then
-        eval "$(direnv hook zsh)"
-      fi
-
       # Start up Docker daemon if not running
       # if [ $(docker-machine status default) != "Running" ]; then
       #   docker-machine start default
       # fi
+
+      if [ -f "/Applications/Emacs.app/Contents/MacOS/Emacs" ]; then
+        export EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs"
+        alias emacs="$EMACS -nw"
+      fi
+
+      if [ -f "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient" ]; then
+        alias emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
+      fi
 
       # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
