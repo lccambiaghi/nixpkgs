@@ -78,6 +78,8 @@ in {
         . ~/.nix-profile/etc/profile.d/nix.sh
       fi
 
+      eval $(thefuck --alias)
+
       # Load environment variables from a file; this approach allows me to not
       # commit secrets like API keys to Git
       # if [ -e ~/.env ]; then

@@ -1,10 +1,10 @@
 * Installation
 1. Install Nix
-2. Install Home Manager
-2. ~cd ~/.config~
-3. ~rm -rf nixpkgs~
-4. ~git clone https://github.com/lucperkins/nix-home-config nixpkgs~
-5. ~home-manager switch && source ~/.zshrc~
+2. ~git clone https://github.com/lccambiaghi/nixpkgs~
+3. ~./update-dependencies.sh~
+4. ~./switch.sh~
+5. ~ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"~
+6. ~brew bundle~
 
 * What is important?
 - ~emacs~
@@ -13,14 +13,10 @@
 - ~cli~ with ~home.packages~
 - ~gui~ (with ~environment.systemPackages~?)
 - ~dotfiles~
-  + Of do I list them?
 - ~env~ variables (with ~/.env~?)
 * What is missing?
 - ~brew~ with:
   + ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-- ~latex~ with:
-  + brew cask install basictex
-  + sudo tlmgr update --self && sudo tlmgr install dvipng
 - ~emacs~ + ~doom~
 - ~.ssh/id_rsa~
 - ~.gnupg~

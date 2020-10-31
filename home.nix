@@ -71,11 +71,20 @@ in {
 
   programs.fzf.enable = true;
 
-  # programs.poetry.enable = true
-
   programs.ssh.enable = true;
 
   programs.vim.enable = true;
+
+  programs.texlive = {
+    enable = true;
+    extraPackages = tpkgs: {
+      inherit (tpkgs)
+        scheme-medium
+        dvipng
+        latexmk ;
+    };
+  };
+
 
   # services.gpg-agent.enable = true;
 
@@ -116,6 +125,7 @@ in {
     # TERMINAL = "alacritty";
   };
 
+
     # programs.alacritty = {
   #   enable = true;
   #   settings = lib.attrsets.recursiveUpdate (import ../../program/terminal/alacritty/default-settings.nix) {
@@ -145,23 +155,25 @@ in {
     conftest
     curl # An old classic
     direnv # Per-directory environment variables
-    docker # World's #1 container tool
-    docker-machine # Docker daemon for macOS
+    # docker # World's #1 container tool
+    # docker-machine # Docker daemon for macOS
     exa # ls replacement written in Rust
     fd # find replacement written in Rust
+    font-awesome_5
     fzf # Fuzzy finder
     git-lfs
     gitAndTools.gh
     gitAndTools.git-crypt
     graphviz # dot
     gnupg # gpg
-    htop # Resource monitoring
+    # htop # Resource monitoring
     httpie # Like curl but more user friendly
+    # jetbrains.pycharm-community
     jq # JSON parsing for the CLI
     just # Intriguing new make replacement
     kind # Easy Kubernetes installation
     kubectl # Kubernetes CLI tool
-    kubectx # kubectl context switching
+    # kubectx # kubectl context switching
     kustomize
     lorri # Easy Nix shell
     less
@@ -171,7 +183,7 @@ in {
     nodejs # node and npm
     nodePackages.pyright
     pinentry_mac # Necessary for GPG
-    python37Packages.poetry
+    # python37Packages.poetry
     pre-commit # Pre-commit CI hook tool
     procs
     protobuf # Protocol Buffers
@@ -180,6 +192,9 @@ in {
     ripgrep # grep replacement written in Rust
     rsync
     spotify-tui # Spotify interface for the CLI
+    # texlive
+    # texlive.combined.scheme-medium
+    # imagemagick
     thefuck
     tree # Should be included in macOS but it's not
     tmux
@@ -189,8 +204,7 @@ in {
     xsv # CSV file parsing utility
     yarn # Node.js package manager
     youtube-dl # Download videos
-    zsh
-    zsh-powerlevel10k
+    # zsh-powerlevel10k
   ] ++ pythonPackages ++ scripts;
 
 }
