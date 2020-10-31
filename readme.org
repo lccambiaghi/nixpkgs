@@ -3,7 +3,7 @@
 2. ~git clone https://github.com/lccambiaghi/nixpkgs~
 3. ~./update-dependencies.sh~
 4. ~./switch.sh~
-5. ~ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"~
+5. =ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"=
 6. ~brew bundle~
 
 * What is important?
