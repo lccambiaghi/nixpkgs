@@ -5,6 +5,17 @@
 4. ~./switch.sh~
 5. ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 6. ~brew bundle~
+* nix-darwin
+** Rebuild
+#+BEGIN_SRC sh
+darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/configuration.nix
+#+END_SRC
+** How does it work?
+- ~configuration.nix~ is the main entrypoint. It imports all files in ~./modules~:
+  + ~default.nix~ declares ~macintosh~ and ~home-manager~
+  + ~packages.nix~ declares CLI pkgs
+  + ~macintosh.nix~ is where the magic happens. Among other things, it imports overlays:
+    - ~./overlays/emacs/default.nix~ declares Emacs
 
 * What is important?
 - ~emacs~
