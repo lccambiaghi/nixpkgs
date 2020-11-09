@@ -29,7 +29,17 @@ let
 
   pythonPackages = with pkgs.python37Packages; [
     pip
-];
+  ];
+
+  rPackages = with pkgs.rPackages; [
+    IRkernel
+    ISLR
+  ];
+
+  # R-with-pkgs = pkgs.rWrapper.override{ packages = with pkgs.rPackages; [
+  #   IRkernel
+  #   ISLR
+  # ]; };
 
 in {
   inherit imports;
@@ -152,6 +162,7 @@ in {
     bash # /bin/bash
     bat # cat replacement written in Rust
     clojure
+    # clang
     conftest
     curl # An old classic
     direnv # Per-directory environment variables
@@ -178,6 +189,7 @@ in {
     lorri # Easy Nix shell
     less
     mdcat # Markdown converter/reader for the CLI
+    # next
     niv # Nix dependency management
     nixpkgs-fmt
     nodejs # node and npm
@@ -188,7 +200,8 @@ in {
     procs
     protobuf # Protocol Buffers
     python37 # Have you upgraded yet???
-    R
+    # R
+    # R-with-pkgs
     ripgrep # grep replacement written in Rust
     rsync
     spotify-tui # Spotify interface for the CLI
