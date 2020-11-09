@@ -9,6 +9,7 @@ in with pkgs.stdenv; with lib; {
   # nix.buildCores = 0;
   nix.package = pkgs.nix;
   services.nix-daemon.enable = true;
+  # services.lorri.enable = true;
 
   # nixpkgs.overlays = [ (import ../overlays) ];
   nix.trustedUsers = [ "root" "luca" ];
@@ -20,10 +21,10 @@ in with pkgs.stdenv; with lib; {
   #   };
   # };
 
-  environment.shells = [ pkgs.zsh ];
-  environment.systemPackages = [ pkgs.zsh pkgs.gcc ];
-  programs.bash.enable = false;
-  programs.zsh.enable = true;
+  # environment.shells = [ pkgs.zsh ];
+  # environment.systemPackages = [ pkgs.zsh pkgs.gcc ];
+  # programs.bash.enable = false;
+  # programs.zsh.enable = true;
   environment.darwinConfig = "${homeDir}/.config/nixpkgs/configuration.nix";
 
   time.timeZone = "Europe/Paris";
@@ -161,12 +162,9 @@ in with pkgs.stdenv; with lib; {
   # launchd.user.agents.spacebar.serviceConfig.StandardOutPath = "/tmp/spacebar.out.log";
 
   # Recreate /run/current-system symlink after boot
-  services.activate-system.enable = true;
+  # services.activate-system.enable = true;
 
-  home-manager.users.luca = {
-
-
-  }
+  home-manager.users.luca = import ./home.nix;
 
   # home-manager.users.luca = {
   #   home.packages = (import ./packages.nix { inherit pkgs; });

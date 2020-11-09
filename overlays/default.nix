@@ -11,4 +11,10 @@ self: super: {
     };
   });
 
+  # NOTE: For local development
+  spacebar = super.spacebar.overrideAttrs (o: {
+    # src = "${builtins.getEnv("HOME")}/dev/personal/github.com/cmacrae/spacebar";
+    src = /Users/cmacrae/dev/spacebar;
+  });
+
 }

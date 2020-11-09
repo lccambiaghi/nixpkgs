@@ -66,6 +66,10 @@ in {
     initExtra = ''
       export TERM="xterm-256color"
 
+      export PATH=~/.nix-profile/bin:$PATH
+
+      source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+
       bindkey -e
 
       # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
