@@ -1,23 +1,26 @@
 * Installation
-1. Install Nix
-2. ~git clone https://github.com/lccambiaghi/nixpkgs~
-3. ~./update-dependencies.sh~
-4. ~./switch.sh~
-5. ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-6. ~brew bundle~
+1. Install ~nix~ daemon
+2. Install ~nix-darwin~
+3. Remove the default ~~/.config/nixpkgs~ and ~git clone https://github.com/lccambiaghi/nixpkgs~
+5. ~./update-dependencies.sh~
+6. ~./switch.sh~
+
+Maybe you don't need these anymore?
+7. ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+8. ~brew bundle~
+
 * nix-darwin
 Documentation: https://daiderd.com/nix-darwin/manual/index.html#sec-options
 ** Rebuild
 #+BEGIN_SRC sh
-darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/configuration.nix
+darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin-configuration.nix
 #+END_SRC
 ** How does it work?
-- ~configuration.nix~ is the main entrypoint.
-  + It imports ~./modules/default.nix~
-  + ~default.nix~ declares ~macintosh~ and ~home-manager~
-  + ~macintosh.nix~ is where the magic happens. Among other things, it imports overlays:
+- ~darwin-configuration.nix~ is the main entrypoint, it imports modularized configs:
+  + ~config.nix~ is where the magic happens. Among other things, it imports overlays:
     + ~./overlays/emacs/default.nix~ declares Emacs
-    + ~packages.nix~ declares CLI pkgs
+** TODO
+- ~wm.nix~ with ~yabai~ and ~skhd~
 
 * What is important?
 - ~emacs~

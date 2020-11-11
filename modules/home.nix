@@ -3,14 +3,7 @@
 let
   # nigpkgsRev = "nixpkgs-unstable";
   # pkgs = import (fetchTarball "https://github.com/nixos/nixpkgs/archive/${nigpkgsRev}.tar.gz") {};
-  sources = import ./nix/sources.nix;
-
-  # Import other Nix files
-  imports = [
-    ./git.nix
-    ./zsh.nix
-    # ./vscode.nix
-  ];
+  sources = import ../nix/sources.nix;
 
   # Handly shell command to view the dependency tree of Nix packages
   depends = pkgs.writeScriptBin "depends" ''
@@ -42,7 +35,42 @@ let
   # ]; };
 
 in {
-  inherit imports;
+  imports = [
+    ./zsh.nix
+  ];
+
+  home = {
+    username = builtins.getEnv "USER";
+    homeDirectory = builtins.getEnv "HOME";
+    stateVersion = "20.09";
+
+    sessionPath = [
+      "$HOME/.poetry/bin"
+      "$HOME/.emacs.d/bin"
+      "/run/current-system/sw/bin"
+      "$HOME/.nix-profile/bin:$PATH"
+    ];
+
+    sessionVariables = {
+      EDITOR = "emacsclient";
+      # BROWSER = "firefox";
+      # TERMINAL = "alacritty";
+    };
+
+    file.".config/direnv/direnvrc".source = ../dotfiles/direnvrc;
+
+    file.".clojure/deps.edn".source = ../dotfiles/deps.edn;
+
+    # home.file.".skhdrc".source = ../dotfiles/skhdrc;
+
+    # ".tmux.conf" = {
+    #  text = ''
+    #  set-option -g default-shell /run/current-system/sw/bin/fish
+    #  set-window-option -g mode-keys vi
+    #  '';
+    # };
+
+  };
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -50,24 +78,6 @@ in {
   };
 
   programs.home-manager.enable = true;
-
-  home = {
-    username = builtins.getEnv "USER";
-    homeDirectory = builtins.getEnv "HOME";
-    stateVersion = "20.09";
-  };
-
-  # Networking
-  # networking.dns = [
-  #   "1.1.1.1"
-  #   "8.8.8.8"
-  # ];
-  # networking.computerName = "Luca’s 💻";
-  # networking.hostName     = "LucaMacbookPor";
-  # networking.knownNetworkServices = [
-  #   "Wi-Fi"
-  #   "USB 10/100/1000 LAN"
-  # ];
 
   programs.htop = {
     enable = true;
@@ -80,6 +90,66 @@ in {
   };
 
   programs.fzf.enable = true;
+
+  programs.git = {
+    package = pkgs.gitAndTools.gitFull;
+    enable = true;
+    lfs.enable = true;
+    userName = "Luca Cambiaghi";
+    userEmail = "luca.cambiaghi@maersk.com";
+
+    # Replaces ~/.gitignore
+    ignores = [
+      ".cache/"
+      ".DS_Store"
+      ".idea/"
+      "*.swp"
+      "built-in-stubs.jar"
+      "dumb.rdb"
+      ".elixir_ls/"
+      ".vscode/"
+      "npm-debug.log"
+      "shell.nix"
+    ];
+
+    # Replaces aliases in ~/.gitconfig
+    aliases = {
+      ba = "branch -a";
+      bd = "branch -D";
+      br = "branch";
+      cam = "commit -am";
+      co = "checkout";
+      cob = "checkout -b";
+      ci = "commit";
+      cm = "commit -m";
+      cp = "commit -p";
+      d = "diff";
+      dco = "commit -S --amend";
+      s = "status";
+      pr = "pull --rebase";
+      st = "status";
+      l = "log --graph --pretty='%Cred%h%Creset - %C(bold blue)<%an>%Creset %s%C(yellow)%d%Creset %Cgreen(%cr)' --abbrev-commit --date=relative";
+      whoops = "reset --hard";
+      wipe = "commit -s";
+      fix = "rebase --exec 'git commit --amend --no-edit -S' -i origin/develop";
+    };
+
+    # Global Git config
+    extraConfig = {
+      core = {
+        editor = "emacsclient";
+        # pager = "delta --dark";
+        whitespace = "trailing-space,space-before-tab";
+      };
+
+      # commit.gpgsign = "true";
+      # gpg.program = "gpg2";
+
+      protocol.keybase.allow = "always";
+      credential.helper = "osxkeychain";
+      pull.rebase = "false";
+    };
+  };
 
   programs.ssh.enable = true;
 
@@ -105,9 +175,85 @@ in {
     };
   };
 
-  # services.gpg-agent.enable = true;
+  # programs.vscode = {
+  #   enable = true;
 
-  # services.keybase.enable = true;
+  #   package = with pkgs; vscodium;
+
+  #   userSettings = {
+  #     "workbench.colorTheme" = "GitHub Dark";
+  #   };
+
+  #   extensions = with pkgs.vscode-extensions; [
+  #     bbenoist.Nix
+  #   ];
+  # };
+
+  #   programs.firefox.enable = true;
+  #   # programs.firefox.package = pkgs.Firefox; # custom overlay
+  #   # programs.firefox.extensions =
+  #   #   with pkgs.nur.repos.rycee.firefox-addons; [
+  #   #     ublock-origin
+  #   #     browserpass
+  #   #     vimium
+  #   #   ];
+
+  #   programs.firefox.profiles =
+  #     let defaultSettings = {
+  #           "app.update.auto" = false;
+  #           # "browser.startup.homepage" = "https://lobste.rs";
+  #           # "browser.search.region" = "GB";
+  #           # "browser.search.countryCode" = "GB";
+  #           "browser.search.isUS" = false;
+  #           "browser.ctrlTab.recentlyUsedOrder" = false;
+  #           "browser.newtabpage.enabled" = false;
+  #           "browser.bookmarks.showMobileBookmarks" = true;
+  #           "browser.uidensity" = 1;
+  #           "browser.urlbar.placeholderName" = "DuckDuckGo";
+  #           "browser.urlbar.update1" = true;
+  #           "distribution.searchplugins.defaultLocale" = "en-GB";
+  #           "general.useragent.locale" = "en-GB";
+  #           "identity.fxaccounts.account.device.name" = config.networking.hostName;
+  #           "privacy.trackingprotection.enabled" = true;
+  #           "privacy.trackingprotection.socialtracking.enabled" = true;
+  #           "privacy.trackingprotection.socialtracking.annotate.enabled" = true;
+  #           "reader.color_scheme" = "sepia";
+  #           "services.sync.declinedEngines" = "addons,passwords,prefs";
+  #           "services.sync.engine.addons" = false;
+  #           "services.sync.engineStatusChanged.addons" = true;
+  #           "services.sync.engine.passwords" = false;
+  #           "services.sync.engine.prefs" = false;
+  #           "services.sync.engineStatusChanged.prefs" = true;
+  #           "signon.rememberSignons" = false;
+  #           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+  #         };
+  #     in {
+  #       home = {
+  #         id = 0;
+  #         settings = defaultSettings;
+  #         userChrome = (builtins.readFile (pkgs.substituteAll {
+  #           name = "homeUserChrome";
+  #           src = ../conf.d/userChrome.css;
+  #           tabLineColour = "#2aa198";
+  #         }));
+  #       };
+
+  #       work = {
+  #         id = 1;
+  #         settings = defaultSettings // {
+  #           "browser.startup.homepage" = "about:blank";
+  #           "browser.urlbar.placeholderName" = "Google";
+  #         };
+  #         userChrome = (builtins.readFile (pkgs.substituteAll {
+  #           name = "workUserChrome";
+  #           src = ../conf.d/userChrome.css;
+  #           tabLineColour = "#cb4b16";
+  #         }));
+  #       };
+  #     };
+
+  #   # programs.emacs.enable = true;
+  #   # programs.emacs.package = pkgs.emacsMacport;
 
   # Fonts
   # fonts.fontconfig.enable = true;
@@ -117,27 +263,6 @@ in {
   #   jetbrains-mono
   #   (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   # ];
-
-  home.sessionPath = [
-    "$HOME/.poetry/bin"
-    "$HOME/.emacs.d/bin"
-    "/run/current-system/sw/bin"
-    "$HOME/.nix-profile/bin:$PATH"
-  ];
-
-  home.sessionVariables = {
-    EDITOR = "emacsclient";
-    # BROWSER = "firefox";
-    # TERMINAL = "alacritty";
-  };
-
-
-    # programs.alacritty = {
-  #   enable = true;
-  #   settings = lib.attrsets.recursiveUpdate (import ../../program/terminal/alacritty/default-settings.nix) {
-  #     shell.program = "/usr/local/bin/fish";
-  #   };
-  # };
 
   # spacemacs
   # ".emacs.d" = {
@@ -152,7 +277,6 @@ in {
   # ".spacemacs".source = substituteAll ( (import ./spacemacs-substitutions.nix { inherit lib; })
   #                                       // { src =./spacemacs; });
 
-
   home.packages = with pkgs; [
     # adoptopenjdk-bin # Java
     azure-cli
@@ -163,7 +287,7 @@ in {
     conftest
     curl # An old classic
     direnv # Per-directory environment variables
-    # docker # World's #1 container tool
+    docker # World's #1 container tool
     # docker-machine # Docker daemon for macOS
     exa # ls replacement written in Rust
     fd # find replacement written in Rust
@@ -174,7 +298,6 @@ in {
     gitAndTools.git-crypt
     graphviz # dot
     gnupg # gpg
-    # htop # Resource monitoring
     httpie # Like curl but more user friendly
     # jetbrains.pycharm-community
     jq # JSON parsing for the CLI
