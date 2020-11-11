@@ -1,9 +1,11 @@
 { config, lib, pkgs, ... }:
 
 {
-  home.file.".config/direnv/direnvrc".source = ./direnv/direnvrc;
+  home.file.".config/direnv/direnvrc".source = ../dotfiles/direnvrc;
 
-  home.file.".clojure/deps.edn".source = ./clojure/deps.edn;
+  home.file.".clojure/deps.edn".source = ../dotfiles/deps.edn;
+
+  # home.file.".skhdrc".source = ../dotfiles/skhdrc;
 
   # ".tmux.conf" = {
   #  text = ''

@@ -95,16 +95,19 @@ in {
     };
   };
 
+  programs.kitty = {
+    enable = true;
+    settings = {
+      font_size = 16;
+    };
+    keybindings = {
+      "ctrl+c" = "copy_or_interrupt";
+    };
+  };
 
   # services.gpg-agent.enable = true;
 
   # services.keybase.enable = true;
-
-  # GUI apps (home-manager currently has issues adding them to ~/Applications)
-  # environment.systemPackages = with pkgs; [
-  #   kitty
-  # ];
-  # programs.nix-index.enable = true;
 
   # Fonts
   # fonts.fontconfig.enable = true;
@@ -115,18 +118,11 @@ in {
   #   (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   # ];
 
-  # Keyboard
-  # system.keyboard.enableKeyMapping      = true;
-  # system.keyboard.remapCapsLockToEscape = true;
-
-  # Lorri daemon
-  # services.lorri.enable = true;
-
   home.sessionPath = [
-    # "$HOME/.pyenv/bin"
-    # "$HOME/.pyenv/shims"
     "$HOME/.poetry/bin"
     "$HOME/.emacs.d/bin"
+    "/run/current-system/sw/bin"
+    "$HOME/.nix-profile/bin:$PATH"
   ];
 
   home.sessionVariables = {
@@ -159,6 +155,7 @@ in {
 
   home.packages = with pkgs; [
     # adoptopenjdk-bin # Java
+    azure-cli
     bash # /bin/bash
     bat # cat replacement written in Rust
     clojure
@@ -184,7 +181,7 @@ in {
     just # Intriguing new make replacement
     kind # Easy Kubernetes installation
     kubectl # Kubernetes CLI tool
-    # kubectx # kubectl context switching
+    kubectx # kubectl context switching
     kustomize
     lorri # Easy Nix shell
     less

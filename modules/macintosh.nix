@@ -4,7 +4,6 @@ let
   homeDir = builtins.getEnv("HOME");
 
 in with pkgs.stdenv; with lib; {
-  # system.stateVersion = 4;
   # nix.maxJobs = 8;
   # nix.buildCores = 0;
   nix.package = pkgs.nix;
@@ -14,20 +13,24 @@ in with pkgs.stdenv; with lib; {
   # nixpkgs.overlays = [ (import ../overlays) ];
   nix.trustedUsers = [ "root" "luca" ];
 
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnsupportedSystem = true;
+
   # nixpkgs.config.packageOverrides = pkgs: {
   #   nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
   #     inherit pkgs;
   #   };
   # };
 
-  # environment.shells = [ pkgs.zsh ];
+  environment.shells = [ pkgs.zsh ];
+
+  programs.nix-index.enable = true;
+
   # environment.systemPackages = [ pkgs.zsh pkgs.gcc ];
-  # programs.bash.enable = false;
-  # programs.zsh.enable = true;
+
   environment.darwinConfig = "${homeDir}/.config/nixpkgs/configuration.nix";
 
-  time.timeZone = "Europe/Paris";
+  # time.timeZone = "Europe/Paris";
   users.users.luca.shell = pkgs.zsh;
   users.users.luca.home = homeDir;
 
@@ -36,6 +39,14 @@ in with pkgs.stdenv; with lib; {
       autohide = false;
       mru-spaces = false;
       minimize-to-application = false;
+      expose-group-by-app = true;
+      tilesize            = 128;
+      orientation = "left";
+    };
+
+    loginwindow = {
+      GuestEnabled         = false;
+      DisableConsoleAccess = true;
     };
 
     screencapture.location = "${homeDir}/Desktop";
@@ -49,14 +60,57 @@ in with pkgs.stdenv; with lib; {
     trackpad = {
       Clicking = true;
       TrackpadThreeFingerDrag = true;
+      TrackpadRightClick      = false;
     };
 
-    # NSGlobalDomain._HIHideMenuBar = true;
+    NSGlobalDomain = {
+      "com.apple.trackpad.scaling"         = "3.0";
+      AppleMeasurementUnits                = "Centimeters";
+      AppleMetricUnits                     = 1;
+      AppleShowScrollBars                  = "Automatic";
+      AppleTemperatureUnit                 = "Celsius";
+      # InitialKeyRepeat                     = 15;
+      # KeyRepeat                            = 2;
+      NSAutomaticCapitalizationEnabled     = false;
+      NSAutomaticPeriodSubstitutionEnabled = false;
+      _HIHideMenuBar                       = true;
+    };
   };
 
   system.keyboard = {
     enableKeyMapping = true;
     remapCapsLockToControl = true;
+  };
+
+  # Firewall
+  system.defaults.alf = {
+    globalstate                = 1;
+    allowsignedenabled         = 1;
+    allowdownloadsignedenabled = 1;
+    stealthenabled             = 1;
+  };
+
+  services.spacebar.enable = true;
+  services.spacebar.package = pkgs.spacebar;
+  services.spacebar.config = {
+    debug_output       = "on";
+    # position           = "bottom";
+    position           = "top";
+    clock_format       = "%R";
+    space_icon_strip   = "    ";
+    text_font          = ''"Menlo:Bold:12.0"'';
+    icon_font          = ''"FontAwesome:Regular:12.0"'';
+    background_color   = "0xff202020";
+    foreground_color   = "0xffa8a8a8";
+    space_icon_color   = "0xff14b1ab";
+    dnd_icon_color     = "0xfffcf7bb";
+    clock_icon_color   = "0xff99d8d0";
+    power_icon_color   = "0xfff69e7b";
+    battery_icon_color = "0xffffbcbc";
+    power_icon_strip   = " ";
+    space_icon         = "";
+    clock_icon         = "";
+    dnd_icon           = "";
   };
 
   # services.skhd.enable = true;
@@ -127,35 +181,6 @@ in with pkgs.stdenv; with lib; {
   #     window_gap                   = 10;
   #     external_bar                 = "all:0:26";
   #   };
-
-  #   extraConfig = ''
-  #     # rules
-  #     yabai -m rule --add app='System Preferences' manage=off
-  #     yabai -m rule --add app='Live' manage=off
-  #     yabai -m rule --add label=vt220 title=vt220 sticky=on border=off manage=off opacity=0.0001
-  #   '';
-  # };
-
-  # services.spacebar.enable = true;
-  # services.spacebar.package = pkgs.spacebar;
-  # services.spacebar.config = {
-  #   debug_output       = "on";
-  #   position           = "bottom";
-  #   clock_format       = "%R";
-  #   space_icon_strip   = "   ";
-  #   text_font          = ''"Menlo:Bold:12.0"'';
-  #   icon_font          = ''"FontAwesome:Regular:12.0"'';
-  #   background_color   = "0xff202020";
-  #   foreground_color   = "0xffa8a8a8";
-  #   space_icon_color   = "0xff14b1ab";
-  #   dnd_icon_color     = "0xfffcf7bb";
-  #   clock_icon_color   = "0xff99d8d0";
-  #   power_icon_color   = "0xfff69e7b";
-  #   battery_icon_color = "0xffffbcbc";
-  #   power_icon_strip   = " ";
-  #   space_icon         = "";
-  #   clock_icon         = "";
-  #   dnd_icon           = "";
   # };
 
   # launchd.user.agents.spacebar.serviceConfig.StandardErrorPath = "/tmp/spacebar.err.log";
@@ -348,135 +373,6 @@ in with pkgs.stdenv; with lib; {
   #   #   };
   #   # } ;
 
-  #   programs.zsh = {
-  #     enable = true;
-  #     enableAutosuggestions = true;
-  #     enableCompletion = true;
-  #     defaultKeymap = "emacs";
-  #     sessionVariables = { RPROMPT = ""; };
-
-  #     shellAliases = {
-  #       k = "kubectl";
-  #       kp = "kube-prompt";
-  #       kc = "kubectx";
-  #       kn = "kubens";
-  #       t = "cd $(mktemp -d)";
-  #     };
-
-  #     oh-my-zsh.enable = true;
-
-  #     plugins = [
-  #       {
-  #         name = "autopair";
-  #         file = "autopair.zsh";
-  #         src = pkgs.fetchFromGitHub {
-  #           owner = "hlissner";
-  #           repo = "zsh-autopair";
-  #           rev = "4039bf142ac6d264decc1eb7937a11b292e65e24";
-  #           sha256 = "02pf87aiyglwwg7asm8mnbf9b2bcm82pyi1cj50yj74z4kwil6d1";
-  #         };
-  #       }
-  #       {
-  #         name = "fast-syntax-highlighting";
-  #         file = "fast-syntax-highlighting.plugin.zsh";
-  #         src = pkgs.fetchFromGitHub {
-  #           owner = "zdharma";
-  #           repo = "fast-syntax-highlighting";
-  #           rev = "v1.28";
-  #           sha256 = "106s7k9n7ssmgybh0kvdb8359f3rz60gfvxjxnxb4fg5gf1fs088";
-  #         };
-  #       }
-  #       {
-  #         name = "pi-theme";
-  #         file = "pi.zsh-theme";
-  #         src = pkgs.fetchFromGitHub {
-  #           owner = "tobyjamesthomas";
-  #           repo = "pi";
-  #           rev = "96778f903b79212ac87f706cfc345dd07ea8dc85";
-  #           sha256 = "0zjj1pihql5cydj1fiyjlm3163s9zdc63rzypkzmidv88c2kjr1z";
-  #         };
-  #       }
-  #       {
-  #         name = "z";
-  #         file = "zsh-z.plugin.zsh";
-  #         src = pkgs.fetchFromGitHub {
-  #           owner = "agkozak";
-  #           repo = "zsh-z";
-  #           rev = "41439755cf06f35e8bee8dffe04f728384905077";
-  #           sha256 = "1dzxbcif9q5m5zx3gvrhrfmkxspzf7b81k837gdb93c4aasgh6x6";
-  #         };
-  #       }
-  #     ];
-  #   };
-
-  #   # programs.tmux =
-  #   #   let
-  #   #     kubeTmux = pkgs.fetchFromGitHub {
-  #   #       owner = "jonmosco";
-  #   #       repo = "kube-tmux";
-  #   #       rev = "7f196eeda5f42b6061673825a66e845f78d2449c";
-  #   #       sha256 = "1dvyb03q2g250m0bc8d2621xfnbl18ifvgmvf95nybbwyj2g09cm";
-  #   #     };
-
-  #   #     tmuxYank = pkgs.fetchFromGitHub {
-  #   #       owner = "tmux-plugins";
-  #   #       repo = "tmux-yank";
-  #   #       rev = "ce21dafd9a016ef3ed4ba3988112bcf33497fc83";
-  #   #       sha256 = "04ldklkmc75azs6lzxfivl7qs34041d63fan6yindj936r4kqcsp";
-  #   #     };
-
-
-  #   #   in {
-  #   #     enable = true;
-  #   #     shortcut = "q";
-  #   #     keyMode = "vi";
-  #   #     clock24 = true;
-  #   #     terminal = "screen-256color";
-  #   #     customPaneNavigationAndResize = true;
-  #   #     secureSocket = false;
-  #   #     extraConfig = ''
-  #   #       unbind [
-  #   #       unbind ]
-  #   #       bind ] next-window
-  #   #       bind [ previous-window
-  #   #       bind Escape copy-mode
-  #   #       bind P paste-buffer
-  #   #       bind-key -T copy-mode-vi v send-keys -X begin-selection
-  #   #       bind-key -T copy-mode-vi y send-keys -X copy-selection
-  #   #       bind-key -T copy-mode-vi r send-keys -X rectangle-toggle
-  #   #       set -g mouse on
-  #   #       bind-key -r C-k resize-pane -U
-  #   #       bind-key -r C-j resize-pane -D
-  #   #       bind-key -r C-h resize-pane -L
-  #   #       bind-key -r C-l resize-pane -R
-  #   #       bind-key -r C-M-k resize-pane -U 5
-  #   #       bind-key -r C-M-j resize-pane -D 5
-  #   #       bind-key -r C-M-h resize-pane -L 5
-  #   #       bind-key -r C-M-l resize-pane -R 5
-  #   #       set -g display-panes-colour white
-  #   #       set -g display-panes-active-colour red
-  #   #       set -g display-panes-time 1000
-  #   #       set -g status-justify left
-  #   #       set -g set-titles on
-  #   #       set -g set-titles-string 'tmux: #T'
-  #   #       set -g repeat-time 100
-  #   #       set -g renumber-windows on
-  #   #       set -g renumber-windows on
-  #   #       setw -g monitor-activity on
-  #   #       setw -g automatic-rename on
-  #   #       setw -g clock-mode-colour red
-  #   #       setw -g clock-mode-style 24
-  #   #       setw -g alternate-screen on
-  #   #       set -g status-left-length 100
-  #   #       set -g status-left "#(${pkgs.bash}/bin/bash ${kubeTmux}/kube.tmux 250 green colour3)  "
-  #   #       set -g status-right-length 100
-  #   #       set -g status-right "#[fg=red,bg=default] %b %d #[fg=blue,bg=default] %R "
-  #   #       set -g status-bg default
-  #   #       setw -g window-status-format "#[fg=blue,bg=black] #I #[fg=blue,bg=black] #W "
-  #   #       setw -g window-status-current-format "#[fg=blue,bg=default] #I #[fg=red,bg=default] #W "
-  #   #       run-shell ${tmuxYank}/yank.tmux
-  #   #     '';
-  #   #   };
 
   # };
 }

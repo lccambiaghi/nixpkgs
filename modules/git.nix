@@ -8,6 +8,7 @@ in {
   programs.git = {
     package = pkgs.gitAndTools.gitFull;
     enable = true;
+    lfs.enable = true;
     userName = "Luca Cambiaghi";
     userEmail = "luca.cambiaghi@maersk.com";
 

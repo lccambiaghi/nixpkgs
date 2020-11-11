@@ -66,8 +66,6 @@ in {
     initExtra = ''
       export TERM="xterm-256color"
 
-      export PATH=~/.nix-profile/bin:$PATH
-
       source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 
       bindkey -e
@@ -158,6 +156,16 @@ in {
         };
       }
       # {
+      #     name = "z";
+      #     file = "zsh-z.plugin.zsh";
+      #     src = pkgs.fetchFromGitHub {
+      #       owner = "agkozak";
+      #       repo = "zsh-z";
+      #       rev = "41439755cf06f35e8bee8dffe04f728384905077";
+      #       sha256 = "1dzxbcif9q5m5zx3gvrhrfmkxspzf7b81k837gdb93c4aasgh6x6";
+      #     };
+      # }
+      # {
       #   name = "powerlevel10k-config";
       #   src = lib.cleanSource ./p10k-config;
       #   file = "p10k.zsh";
@@ -166,4 +174,3 @@ in {
 
   };
 }
-# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
