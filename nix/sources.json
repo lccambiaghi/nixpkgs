@@ -1,14 +1,50 @@
 {
+    "NUR": {
+        "branch": "master",
+        "description": "Nix User Repository: User contributed nix packages [maintainer=@Mic92]",
+        "homepage": "",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "ff45111397c59da101478f833fadc0284451eb61",
+        "sha256": "1fi38w5j6nw5sanpmqx6w346y2w02qxdfbj4glv96c34czgpm6c8",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/NUR/archive/ff45111397c59da101478f833fadc0284451eb61.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "emacs-nativecomp": {
+        "branch": "feature/native-comp",
+        "description": "Mirror of GNU Emacs",
+        "homepage": "http://www.gnu.org/software/emacs/",
+        "owner": "emacs-mirror",
+        "repo": "emacs",
+        "rev": "9bb2fc1e647bb74fd37a62c0b2f35c8eb4f8eece",
+        "sha256": "0yja1bdjn90df0pacj7dr9pq3w4ii4zrrzgydjn6rfy3d87axncq",
+        "type": "tarball",
+        "url": "https://github.com/emacs-mirror/emacs/archive/9bb2fc1e647bb74fd37a62c0b2f35c8eb4f8eece.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "emacs-overlay": {
+        "branch": "master",
+        "description": "Bleeding edge emacs overlay [maintainer=@adisbladis] ",
+        "homepage": "",
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "rev": "e16d55f2f545a9e30fe80828619248030bab5ae0",
+        "sha256": "0ivq45l529mqc825d14j3w907hr0fpkvs7fdnd7lndrh56q3jziz",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/emacs-overlay/archive/e16d55f2f545a9e30fe80828619248030bab5ae0.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "home-manager": {
         "branch": "master",
         "description": "Manage a user environment using Nix",
         "homepage": "https://rycee.gitlab.io/home-manager/",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "ef72617c4a1e14ddb2254b2199bd0103c6274bf5",
-        "sha256": "0p52ds4qvgb5p0kfxzmbla1c65as1b3391dqqj89qm37cb7nb5p1",
+        "rev": "4cc1b77c3fc4f4b3bc61921dda72663eea962fa3",
+        "sha256": "02y6bjakcbfc0wvf9b5qky792y9abyf1kgnk8r30f1advn3x69nc",
         "type": "tarball",
-        "url": "https://github.com/nix-community/home-manager/archive/ef72617c4a1e14ddb2254b2199bd0103c6274bf5.tar.gz",
+        "url": "https://github.com/nix-community/home-manager/archive/4cc1b77c3fc4f4b3bc61921dda72663eea962fa3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv": {
@@ -17,10 +53,34 @@
         "homepage": "https://github.com/nmattia/niv",
         "owner": "nmattia",
         "repo": "niv",
-        "rev": "20c899271f288d33114760bc298838575fc6c7f9",
-        "sha256": "07zswk6dhlydihl9g6skmy52grjvqpra8r98f2dmbgwzc1yhjhxq",
+        "rev": "ba57d5a29b4e0f2085917010380ef3ddc3cf380f",
+        "sha256": "1kpsvc53x821cmjg1khvp1nz7906gczq8mp83664cr15h94sh8i4",
         "type": "tarball",
-        "url": "https://github.com/nmattia/niv/archive/20c899271f288d33114760bc298838575fc6c7f9.tar.gz",
+        "url": "https://github.com/nmattia/niv/archive/ba57d5a29b4e0f2085917010380ef3ddc3cf380f.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs-darwin": {
+        "branch": "nixpkgs-20.09-darwin",
+        "description": "Nix Packages collection",
+        "homepage": "",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "3090c65041104931adda7625d37fa874b2b5c124",
+        "sha256": "0r0gfsvvh69cy39izrgqhqlj26hxdqf37n3is6b6pma75k97axsj",
+        "type": "tarball",
+        "url": "https://github.com/nixos/nixpkgs/archive/3090c65041104931adda7625d37fa874b2b5c124.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs-stable": {
+        "branch": "nixos-20.09",
+        "description": "Nix Packages collection",
+        "homepage": "",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "896270d629efd47d14972e96f4fbb79fc9f45c80",
+        "sha256": "0xmjjayg19wm6cn88sh724mrsdj6mgrql6r3zc0g4x9bx4y342p7",
+        "type": "tarball",
+        "url": "https://github.com/nixos/nixpkgs/archive/896270d629efd47d14972e96f4fbb79fc9f45c80.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs-unstable": {

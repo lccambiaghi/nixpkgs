@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
 
 let
-  # nigpkgsRev = "nixpkgs-unstable";
-  # pkgs = import (fetchTarball "https://github.com/nixos/nixpkgs/archive/${nigpkgsRev}.tar.gz") {};
   sources = import ../nix/sources.nix;
+  # emacs-overlay = import sources.emacs-overlay;
+  # emacs-darwin = import ../overlays/emacs { inherit pkgs; };
 
   # Handly shell command to view the dependency tree of Nix packages
   depends = pkgs.writeScriptBin "depends" ''
@@ -49,6 +49,7 @@ in {
       "$HOME/.emacs.d/bin"
       "/run/current-system/sw/bin"
       "$HOME/.nix-profile/bin:$PATH"
+      # "/usr/local/bin"
     ];
 
     sessionVariables = {
@@ -61,20 +62,46 @@ in {
 
     file.".clojure/deps.edn".source = ../dotfiles/deps.edn;
 
-    # home.file.".skhdrc".source = ../dotfiles/skhdrc;
+    # file.".config/nix/nix.conf".text = ''
+    #   substituters = https://cache.nixos.org https://cache.nixos.org/ https://mjlbach.cachix.org
+    #   trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= mjlbach.cachix.org-1:dR0V90mvaPbXuYria5mXvnDtFibKYqYc2gtl9MWSkqI=
+    # '';
 
-    # ".tmux.conf" = {
-    #  text = ''
-    #  set-option -g default-shell /run/current-system/sw/bin/fish
-    #  set-window-option -g mode-keys vi
-    #  '';
+    # file.".emacs.d" = {
+    #   source = "$HOME/.emacs.d";
+    #   recursive = true;
     # };
 
+    # home.file.".skhdrc".source = ../dotfiles/skhdrc;
+
   };
+
+  news.display = "silent";
 
   nixpkgs.config = {
     allowUnfree = true;
     allowUnsupportedSystem = true;
+  };
+
+  # nixpkgs.overlays = [ (import ../overlays) ];
+  # nixpkgs.config.packageOverrides = pkgs: {
+  #   nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+  #     inherit pkgs;
+  #   };
+  # };
+
+  # nixpkgs.overlays = [ emacs-overlay ];
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {url = https://github.com/mjlbach/emacs-pgtk-nativecomp-overlay/archive/master.tar.gz;}))
+  ];
+
+  programs.emacs = {
+    enable = true;
+    # package = pkgs.emacsWithPackagesFromUsePackage {
+    #   package = emacs-darwin;
+    #   config = "$HOME/.emacs.d/init.el";
+    # };
+    package = pkgs.emacsGcc;
   };
 
   programs.home-manager.enable = true;
@@ -92,7 +119,7 @@ in {
   programs.fzf.enable = true;
 
   programs.git = {
-    package = pkgs.gitAndTools.gitFull;
+    # package = pkgs.gitAndTools.gitFull;
     enable = true;
     lfs.enable = true;
     userName = "Luca Cambiaghi";
@@ -137,13 +164,17 @@ in {
     # Global Git config
     extraConfig = {
       core = {
-        editor = "emacsclient";
+        # editor = "emacsclient";
         # pager = "delta --dark";
         whitespace = "trailing-space,space-before-tab";
+        # fileMode = false;
       };
 
       # commit.gpgsign = "true";
       # gpg.program = "gpg2";
+
+      ui.color = "always";
+      github.user = "lccambiaghi";
 
       protocol.keybase.allow = "always";
       credential.helper = "osxkeychain";
@@ -279,10 +310,13 @@ in {
 
   home.packages = with pkgs; [
     # adoptopenjdk-bin # Java
+    argo
     azure-cli
     bash # /bin/bash
     bat # cat replacement written in Rust
+    cachix
     clojure
+    cmake
     # clang
     conftest
     curl # An old classic
@@ -293,6 +327,7 @@ in {
     fd # find replacement written in Rust
     font-awesome_5
     fzf # Fuzzy finder
+    # gcc
     git-lfs
     gitAndTools.gh
     gitAndTools.git-crypt
@@ -307,6 +342,8 @@ in {
     kubectx # kubectl context switching
     kustomize
     lorri # Easy Nix shell
+    libtool
+    # libvterm-neovim
     less
     mdcat # Markdown converter/reader for the CLI
     # next

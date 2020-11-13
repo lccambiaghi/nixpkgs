@@ -102,14 +102,14 @@ in {
       #   docker-machine start default
       # fi
 
-      if [ -f "/Applications/Emacs.app/Contents/MacOS/Emacs" ]; then
-        export EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs"
-        alias emacs="$EMACS -nw"
-      fi
+      # if [ -f "/Applications/Emacs.app/Contents/MacOS/Emacs" ]; then
+      #   export EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs"
+      #   alias emacs="$EMACS -nw"
+      # fi
 
-      if [ -f "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient" ]; then
-        alias emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
-      fi
+      # if [ -f "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient" ]; then
+      #   alias emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
+      # fi
 
       # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

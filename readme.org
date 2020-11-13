@@ -21,6 +21,8 @@ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin-configuratio
     + ~./overlays/emacs/default.nix~ declares Emacs
 ** TODO
 - ~wm.nix~ with ~yabai~ and ~skhd~
+* niv
+You add (and pin) channels in ~nix/sources.json~ and then run ~./update-dependencies.sh~
 
 * What is important?
 - ~emacs~
