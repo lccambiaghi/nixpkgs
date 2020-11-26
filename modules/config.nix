@@ -7,17 +7,30 @@ let
   user_shell = "zsh";
   user_description = "Luca Cambiaghi";
   user_brew_formulae = [
+    "kubectx"
+    "libvterm"
     "mas"
+    "parquet-tools"
+    # "R"
   ];
   user_brew_casks = [
-    "altserver"
-    "1password"
-    "caffeine"
-    "docker"
-    "dropbox"
-    # "knockknock"
-    # "netiquette"
-    "slack"
+    # "altserver"
+    # "amethyst"
+    # "1password"
+    # "iina"
+    # "discord"
+    # "docker"
+    # "dropbox"
+    # "google-chrome"
+    # "keybase" # maybe enable in home-manager
+    # "menumeters"
+    # "microsoft-azure-storage-explorer"
+    # "microsoft-office"
+    # "microsoft-teams"
+    # "private-internet-access"
+    # "pycharm-ce"
+    # "qbitorrent"
+    # "slack"
   ];
 
 in with pkgs.stdenv; with lib; {
@@ -31,7 +44,7 @@ in with pkgs.stdenv; with lib; {
   home-manager.users.luca = import ./home.nix;
 
   homebrew = {
-    enable = false;
+    enable = true;
     formulae = user_brew_formulae;
     cask_args.appdir = "/Users/${user_name}/Applications";
     casks = user_brew_casks;
@@ -181,92 +194,10 @@ in with pkgs.stdenv; with lib; {
     dnd_icon           = "";
   };
 
-  # services.skhd.enable = true;
-  # services.skhd.package =  pkgs.skhd;
-  # services.skhd.skhdConfig = ''
-  #   # focus window
-  #   shift + alt - j : yabai -m window --focus west
-  #   shift + alt - k : yabai -m window --focus south
-  #   shift + alt - i : yabai -m window --focus north
-  #   shift + alt - l : yabai -m window --focus east
-  # '';
-
-  # services.skhd.skhdConfig = (builtins.readFile (pkgs.substituteAll {
-  #   name = "homeUserChrome";
-  #   src = ../conf.d/skhd.conf;
-  #   vt220 = pkgs.writeShellScript "vt220OpenOrSelect" ''
-  #     WIN=$(${pkgs.yabai}/bin/yabai -m query --windows | ${pkgs.jq}/bin/jq '[.[]|select(.title=="vt220")]|unique_by(.id)')
-  #     if [[ $WIN != '[]' ]]; then
-  #       ID=$(echo $WIN | ${pkgs.jq}/bin/jq '.[].id')
-  #       FOCUSED=$(echo $WIN | ${pkgs.jq}/bin/jq '.[].focused')
-  #       if [[ $FOCUSED == 1 ]]; then
-  #         ${pkgs.yabai}/bin/yabai -m window --focus recent || \
-  #         ${pkgs.yabai}/bin/yabai -m space --focus recent
-  #       else
-  #         ${pkgs.yabai}/bin/yabai -m window --focus $ID
-  #       fi
-  #     else
-  #       open -n ~/.nix-profile/Applications/Alacritty.app \
-  #       --args --live-config-reload \
-  #       --config-file $HOME/.config/alacritty/live.yml \
-  #       -t vt220 --dimensions 80 24 --position 10000 10000 \
-  #       -e ${pkgs.tmux}/bin/tmux a -t vt
-  #     fi
-  #   '';
-  # }));
-
-  # launchd.daemons.serialconsole = {
-  #   command = "/usr/libexec/getty std.ttyUSB cu.usbserial";
-  #   serviceConfig = {
-  #     Label = "ae.cmacr.vt220";
-  #     KeepAlive = true;
-  #     EnvironmentVariables = {
-  #       PATH = (lib.replaceStrings ["$HOME"] [( builtins.getEnv("HOME") )] config.environment.systemPath);
-  #     };
-  #   };
-  # };
-
-  # services.yabai = {
-  #   enable = true;
-  #   package = pkgs.yabai;
-  #   enableScriptingAddition = true;
-  #   config = {
-  #     window_border                = "on";
-  #     window_border_width          = 4;
-  #     active_window_border_color   = "0xff00afaf";
-  #     normal_window_border_color   = "0xff505050";
-  #     focus_follows_mouse          = "autoraise";
-  #     mouse_follows_focus          = "off";
-  #     window_placement             = "second_child";
-  #     window_opacity               = "off";
-  #     window_opacity_duration      = "0.0";
-  #     active_window_border_topmost = "off";
-  #     window_topmost               = "on";
-  #     window_shadow                = "float";
-  #     active_window_opacity        = "1.0";
-  #     normal_window_opacity        = "1.0";
-  #     split_ratio                  = "0.50";
-  #     auto_balance                 = "on";
-  #     mouse_modifier               = "fn";
-  #     mouse_action1                = "move";
-  #     mouse_action2                = "resize";
-  #     layout                       = "bsp";
-  #     top_padding                  = 10;
-  #     bottom_padding               = 10;
-  #     left_padding                 = 10;
-  #     right_padding                = 10;
-  #     window_gap                   = 10;
-  #     # external_bar                 = "all:0:26";
-  #     external_bar                 = "all:26:0";
-  #   };
-  # };
-
   users.users.${user_name} = {
     description = "${user_description}";
     home = "/Users/${user_name}";
-    # name = "${user_full_name}";
     shell = pkgs.${user_shell};
-    # packages = user_packages;
   };
 
 }

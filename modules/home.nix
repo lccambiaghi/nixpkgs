@@ -20,14 +20,14 @@ let
     run
   ];
 
-  pythonPackages = with pkgs.python37Packages; [
-    pip
-  ];
-
-  rPackages = with pkgs.rPackages; [
-    IRkernel
-    ISLR
-  ];
+  customPython = pkgs.python37.buildEnv.override {
+    extraLibs = with pkgs.python37Packages; [
+      ipython
+      pip
+      pyyaml
+      tabulate
+    ];
+  };
 
   # R-with-pkgs = pkgs.rWrapper.override{ packages = with pkgs.rPackages; [
   #   IRkernel
@@ -37,6 +37,7 @@ let
 in {
   imports = [
     ./zsh.nix
+    # ./emacs.nix
   ];
 
   home = {
@@ -49,11 +50,12 @@ in {
       "$HOME/.emacs.d/bin"
       "/run/current-system/sw/bin"
       "$HOME/.nix-profile/bin:$PATH"
-      # "/usr/local/bin"
+      "/usr/local/bin"
     ];
 
     sessionVariables = {
       EDITOR = "emacsclient";
+      KUBE_EDITOR="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient";
       # BROWSER = "firefox";
       # TERMINAL = "alacritty";
     };
@@ -76,6 +78,8 @@ in {
 
   };
 
+  fonts.fontconfig.enable = true;
+
   news.display = "silent";
 
   nixpkgs.config = {
@@ -91,18 +95,6 @@ in {
   # };
 
   # nixpkgs.overlays = [ emacs-overlay ];
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {url = https://github.com/mjlbach/emacs-pgtk-nativecomp-overlay/archive/master.tar.gz;}))
-  ];
-
-  programs.emacs = {
-    enable = true;
-    # package = pkgs.emacsWithPackagesFromUsePackage {
-    #   package = emacs-darwin;
-    #   config = "$HOME/.emacs.d/init.el";
-    # };
-    package = pkgs.emacsGcc;
-  };
 
   programs.home-manager.enable = true;
 
@@ -201,6 +193,28 @@ in {
     settings = {
       font_size = 16;
     };
+    extraConfig = ''
+      allow_hyperlinks yes
+      enable_audio_bell no
+      tab_bar_style powerline
+
+      enabled_layouts splits
+
+      # open new split (window) with cmd+d retaining the cwd
+      map cmd+d new_window_with_cwd
+      # new split with default cwd
+      map cmd+shift+d new_window
+      # switch between next and previous splits
+      map cmd+]        next_window
+      map cmd+[        previous_window
+
+      # jump to beginning and end of word
+      map alt+left send_text all \x1b\x62
+      map alt+right send_text all \x1b\x66
+      # jump to beginning and end of line
+      map cmd+left send_text all \x01
+      map cmd+right send_text all \x05
+    '';
     keybindings = {
       "ctrl+c" = "copy_or_interrupt";
     };
@@ -286,14 +300,6 @@ in {
   #   # programs.emacs.enable = true;
   #   # programs.emacs.package = pkgs.emacsMacport;
 
-  # Fonts
-  # fonts.fontconfig.enable = true;
-  # fonts.enableFontDir = true;
-  # fonts.fonts = with pkgs; [
-  #   recursive
-  #   jetbrains-mono
-  #   (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-  # ];
 
   # spacemacs
   # ".emacs.d" = {
@@ -333,13 +339,14 @@ in {
     gitAndTools.git-crypt
     graphviz # dot
     gnupg # gpg
+    # gtk3
     httpie # Like curl but more user friendly
     # jetbrains.pycharm-community
     jq # JSON parsing for the CLI
     just # Intriguing new make replacement
     kind # Easy Kubernetes installation
     kubectl # Kubernetes CLI tool
-    kubectx # kubectl context switching
+    # kubectx # kubectl context switching
     kustomize
     lorri # Easy Nix shell
     libtool
@@ -351,14 +358,17 @@ in {
     nixpkgs-fmt
     nodejs # node and npm
     nodePackages.pyright
+    nodePackages.prettier
     pinentry_mac # Necessary for GPG
     # python37Packages.poetry
-    pre-commit # Pre-commit CI hook tool
+    customPython
+    # pre-commit # Pre-commit CI hook tool
     procs
     protobuf # Protocol Buffers
-    python37 # Have you upgraded yet???
-    # R
+    # python37 # Have you upgraded yet???
     # R-with-pkgs
+    roboto
+    roboto-mono
     ripgrep # grep replacement written in Rust
     rsync
     spotify-tui # Spotify interface for the CLI
@@ -370,11 +380,12 @@ in {
     tmux
     vscode # My fav text editor if I'm being honest
     watch
+    # webkitgtk
     wget
     xsv # CSV file parsing utility
     yarn # Node.js package manager
     youtube-dl # Download videos
     # zsh-powerlevel10k
-  ] ++ pythonPackages ++ scripts;
+  ] ++ scripts;
 
 }

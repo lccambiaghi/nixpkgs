@@ -19,8 +19,10 @@ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin-configuratio
 - ~darwin-configuration.nix~ is the main entrypoint, it imports modularized configs:
   + ~config.nix~ is where the magic happens. Among other things, it imports overlays:
     + ~./overlays/emacs/default.nix~ declares Emacs
-** TODO
-- ~wm.nix~ with ~yabai~ and ~skhd~
+** Flake
+#+begin_src sh
+darwin-rebuild switch --flake ~/.config/darwin
+#+end_src
 * niv
 You add (and pin) channels in ~nix/sources.json~ and then run ~./update-dependencies.sh~
 
@@ -33,10 +35,7 @@ You add (and pin) channels in ~nix/sources.json~ and then run ~./update-dependen
 - ~dotfiles~
 - ~env~ variables (with ~/.env~?)
 * What is missing?
-- ~brew~ with:
-  + ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 - ~emacs~ + ~doom~
 - ~.ssh/id_rsa~
 - ~.gnupg~
 - R + packages
-- pyright
