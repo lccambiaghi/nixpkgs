@@ -2,8 +2,6 @@
 
 let
   sources = import ../nix/sources.nix;
-  # emacs-overlay = import sources.emacs-overlay;
-  # emacs-darwin = import ../overlays/emacs { inherit pkgs; };
 
   # Handly shell command to view the dependency tree of Nix packages
   depends = pkgs.writeScriptBin "depends" ''
@@ -15,17 +13,56 @@ let
     nix-shell --pure --run "$@"
   '';
 
+  # Collect garbage, optimize store, repair paths
+  nix-cleanup-store = pkgs.writeShellScriptBin "nix-cleanup-store" ''
+    nix-collect-garbage -d
+    nix optimise-store 2>&1 | sed -E 's/.*'\'''(\/nix\/store\/[^\/]*).*'\'''/\1/g' | uniq | sudo -E ${self.pkgs.parallel}/bin/parallel 'nix-store --repair-path {}'
+  '';
+
+  # Symlink macOS apps installed via Nix into ~/Applications
+  nix-symlink-apps-macos = pkgs.writeShellScriptBin "nix-symlink-apps-macos" ''
+    for app in $(find ~/Applications -name '*.app')
+    do
+      if test -L $app && [[ $(readlink -f $app) == /nix/store/* ]]; then
+        rm $app
+      fi
+    done
+    for app in $(find ~/.nix-profile/Applications/ -name '*.app' -exec readlink -f '{}' \;)
+    do
+      ln -s $app ~/Applications/$(basename $app)
+    done
+  '';
+
+  # Update Homebrew pagkages/apps
+  brew-bundle-update = pkgs.writeShellScriptBin "brew-bundle-update" ''
+    brew update
+    brew bundle --file=~/.config/nixpkgs/Brewfile
+  '';
+
+  # Remove Homebrew pakages/apps not in Brewfile
+  brew-bundle-cleanup = pkgs.writeShellScriptBin "brew-bundle-cleanup" ''
+    brew bundle cleanup --zap --force --file=~/.config/nixpkgs/Brewfile
+  '';
+
   scripts = [
     depends
     run
+    nix-cleanup-store
+    nix-symlink-apps-macos
+    brew-bundle-update
+    brew-bundle-cleanup
   ];
 
   customPython = pkgs.python37.buildEnv.override {
     extraLibs = with pkgs.python37Packages; [
+      black
+      # debugpy
+      flake8
       ipython
+      isort
       pip
       pyyaml
-      tabulate
+      # tabulate
     ];
   };
 
@@ -56,6 +93,8 @@ in {
     sessionVariables = {
       EDITOR = "emacsclient";
       KUBE_EDITOR="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient";
+      LIBRARY_PATH="/usr/bin/gcc";
+      CLOJURE_LOAD_PATH="$HOME/git/clojure-clr/bin/4.0/Release/"; # NOTE this needs to be present and compiled
       # BROWSER = "firefox";
       # TERMINAL = "alacritty";
     };
@@ -63,6 +102,8 @@ in {
     file.".config/direnv/direnvrc".source = ../dotfiles/direnvrc;
 
     file.".clojure/deps.edn".source = ../dotfiles/deps.edn;
+
+    file.".ipython/profile_default/startup/2-pandas.py".source = ../dotfiles/2-pandas.py;
 
     # file.".config/nix/nix.conf".text = ''
     #   substituters = https://cache.nixos.org https://cache.nixos.org/ https://mjlbach.cachix.org
@@ -86,6 +127,9 @@ in {
     allowUnfree = true;
     allowUnsupportedSystem = true;
   };
+
+  # TODO overlays to root
+  # nixpkgs.overlays = [ (import ./emacs-darwin.nix) ];
 
   # nixpkgs.overlays = [ (import ../overlays) ];
   # nixpkgs.config.packageOverrides = pkgs: {
@@ -297,10 +341,6 @@ in {
   #       };
   #     };
 
-  #   # programs.emacs.enable = true;
-  #   # programs.emacs.package = pkgs.emacsMacport;
-
-
   # spacemacs
   # ".emacs.d" = {
   #    source = fetchFromGitHub {
@@ -329,6 +369,7 @@ in {
     direnv # Per-directory environment variables
     docker # World's #1 container tool
     # docker-machine # Docker daemon for macOS
+    #emacsGccDarwin
     exa # ls replacement written in Rust
     fd # find replacement written in Rust
     font-awesome_5
@@ -341,6 +382,7 @@ in {
     gnupg # gpg
     # gtk3
     httpie # Like curl but more user friendly
+    jansson
     # jetbrains.pycharm-community
     jq # JSON parsing for the CLI
     just # Intriguing new make replacement
@@ -351,14 +393,17 @@ in {
     lorri # Easy Nix shell
     libtool
     # libvterm-neovim
+    leiningen
     less
     mdcat # Markdown converter/reader for the CLI
+    # mono
     # next
     niv # Nix dependency management
     nixpkgs-fmt
     nodejs # node and npm
     nodePackages.pyright
     nodePackages.prettier
+    # nuget
     pinentry_mac # Necessary for GPG
     # python37Packages.poetry
     customPython
@@ -372,10 +417,11 @@ in {
     ripgrep # grep replacement written in Rust
     rsync
     spotify-tui # Spotify interface for the CLI
+    sqlite
     # texlive
     # texlive.combined.scheme-medium
     # imagemagick
-    thefuck
+    # thefuck
     tree # Should be included in macOS but it's not
     tmux
     vscode # My fav text editor if I'm being honest

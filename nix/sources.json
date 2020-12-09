@@ -17,10 +17,10 @@
         "homepage": "http://www.gnu.org/software/emacs/",
         "owner": "emacs-mirror",
         "repo": "emacs",
-        "rev": "9bb2fc1e647bb74fd37a62c0b2f35c8eb4f8eece",
-        "sha256": "0yja1bdjn90df0pacj7dr9pq3w4ii4zrrzgydjn6rfy3d87axncq",
+        "rev": "f8505fd3d43dd95492855eac88922b5b27201e7a",
+        "sha256": "13ig9sa9nf4xgw7kx3hrbf7917h0zb54lnbykwbxfbgyx84mhrk6",
         "type": "tarball",
-        "url": "https://github.com/emacs-mirror/emacs/archive/9bb2fc1e647bb74fd37a62c0b2f35c8eb4f8eece.tar.gz",
+        "url": "https://github.com/emacs-mirror/emacs/archive/f8505fd3d43dd95492855eac88922b5b27201e7a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "emacs-overlay": {
@@ -29,10 +29,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "e16d55f2f545a9e30fe80828619248030bab5ae0",
-        "sha256": "0ivq45l529mqc825d14j3w907hr0fpkvs7fdnd7lndrh56q3jziz",
+        "rev": "803499225b3be1ab7bc8a3251886a7ee90d56b6d",
+        "sha256": "0ypp0xrda06y34ry1254b5hxdbrv6av7xkx3qsh0x9acw51qsypa",
         "type": "tarball",
-        "url": "https://github.com/nix-community/emacs-overlay/archive/e16d55f2f545a9e30fe80828619248030bab5ae0.tar.gz",
+        "url": "https://github.com/nix-community/emacs-overlay/archive/803499225b3be1ab7bc8a3251886a7ee90d56b6d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "home-manager": {

@@ -5,20 +5,14 @@
 5. ~./update-dependencies.sh~
 6. ~./switch.sh~
 
-Maybe you don't need these anymore?
-7. ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-8. ~brew bundle~
-
 * nix-darwin
 Documentation: https://daiderd.com/nix-darwin/manual/index.html#sec-options
-** Rebuild
+** Rebuild switch
 #+BEGIN_SRC sh
-darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin-configuration.nix
+darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
 #+END_SRC
 ** How does it work?
-- ~darwin-configuration.nix~ is the main entrypoint, it imports modularized configs:
-  + ~config.nix~ is where the magic happens. Among other things, it imports overlays:
-    + ~./overlays/emacs/default.nix~ declares Emacs
+- ~darwin/configuration.nix~ is the main entrypoint. It imports ~home-manager~ as module and its config from ~home-manager/configuration.
 ** Flake
 #+begin_src sh
 darwin-rebuild switch --flake ~/.config/darwin

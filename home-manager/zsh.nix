@@ -18,10 +18,12 @@ let
     kpr= "kubectl get pods --field-selector status.phase=Running";
     wkpr= "watch -n 1 kubectl get pods --field-selector status.phase=Running";
     kga= "kubectl get all";
+    kgj= "kubectl get jobs";
     kdl= "kubectl delete ";
     kds= "kubectl describe ";
     pj= "python $HOME/bin/pretty_json.py";
     hms = "home-manager switch";
+    cljclr="mono $CLOJURE_LOAD_PATH/Clojure.Main.exe";
 
     # Reload zsh
     szsh = "source ~/.zshrc";
@@ -79,8 +81,6 @@ in {
       if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
         . ~/.nix-profile/etc/profile.d/nix.sh
       fi
-
-      eval $(thefuck --alias)
 
       # Load environment variables from a file; this approach allows me to not
       # commit secrets like API keys to Git
