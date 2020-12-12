@@ -2,6 +2,7 @@
 
 let
   sources = import ../nix/sources.nix;
+  homeDir = builtins.getEnv("HOME");
 
   # Handly shell command to view the dependency tree of Nix packages
   depends = pkgs.writeScriptBin "depends" ''
@@ -16,7 +17,7 @@ let
   # Collect garbage, optimize store, repair paths
   nix-cleanup-store = pkgs.writeShellScriptBin "nix-cleanup-store" ''
     nix-collect-garbage -d
-    nix optimise-store 2>&1 | sed -E 's/.*'\'''(\/nix\/store\/[^\/]*).*'\'''/\1/g' | uniq | sudo -E ${self.pkgs.parallel}/bin/parallel 'nix-store --repair-path {}'
+    nix optimise-store 2>&1 | sed -E 's/.*'\'''(\/nix\/store\/[^\/]*).*'\'''/\1/g' | uniq | sudo -E ${pkgs.parallel}/bin/parallel 'nix-store --repair-path {}'
   '';
 
   # Symlink macOS apps installed via Nix into ~/Applications
@@ -44,6 +45,16 @@ let
     brew bundle cleanup --zap --force --file=~/.config/nixpkgs/Brewfile
   '';
 
+  # change kitty themes
+  lightk = pkgs.writeShellScriptBin "lightk" ''
+    kitty @ set-colors -a -c "$HOME/.config/kitty/modus-operandi.conf"
+  '';
+
+  darkk = pkgs.writeShellScriptBin "darkk" ''
+    kitty @ set-colors -a -c "$HOME/.config/kitty/modus-vivendi.conf"
+  '';
+
+
   scripts = [
     depends
     run
@@ -51,6 +62,8 @@ let
     nix-symlink-apps-macos
     brew-bundle-update
     brew-bundle-cleanup
+    lightk
+    darkk
   ];
 
   customPython = pkgs.python37.buildEnv.override {
@@ -73,7 +86,7 @@ let
 
 in {
   imports = [
-    ./zsh.nix
+    ./shells.nix
     # ./emacs.nix
   ];
 
@@ -104,6 +117,12 @@ in {
     file.".clojure/deps.edn".source = ../dotfiles/deps.edn;
 
     file.".ipython/profile_default/startup/2-pandas.py".source = ../dotfiles/2-pandas.py;
+
+    file.".config/kitty/modus-operandi.conf".source = ../dotfiles/modus-operandi.conf;
+
+    file.".config/kitty/modus-vivendi.conf".source = ../dotfiles/modus-vivendi.conf;
+
+    # file.".npmrc".text = "prefix = ${homeDir}/.npm-packages";
 
     # file.".config/nix/nix.conf".text = ''
     #   substituters = https://cache.nixos.org https://cache.nixos.org/ https://mjlbach.cachix.org
@@ -220,14 +239,26 @@ in {
 
   programs.ssh.enable = true;
 
+  # programs.starship.enable = true;
+
   programs.vim.enable = true;
 
   programs.texlive = {
     enable = true;
     extraPackages = tpkgs: {
       inherit (tpkgs)
-        scheme-medium
+        # additional
+        capt-of
+        catchfile
         dvipng
+        framed
+        fvextra
+        minted
+        upquote
+        wrapfig
+        xstring
+        # base
+        scheme-medium
         latexmk ;
     };
   };
@@ -239,6 +270,7 @@ in {
     };
     extraConfig = ''
       allow_hyperlinks yes
+      allow_remote_control yes
       enable_audio_bell no
       tab_bar_style powerline
 
@@ -258,6 +290,14 @@ in {
       # jump to beginning and end of line
       map cmd+left send_text all \x01
       map cmd+right send_text all \x05
+
+      # shell
+      # shell /run/current-system/sw/bin/fish
+
+      # theme
+      kitty @ set-colors -a -c "$HOME/.config/kitty/themes/base16-tomorrow.conf"
+      # include modus-operandi.conf
+      include modus-vivendi.conf
     '';
     keybindings = {
       "ctrl+c" = "copy_or_interrupt";
@@ -374,7 +414,7 @@ in {
     fd # find replacement written in Rust
     font-awesome_5
     fzf # Fuzzy finder
-    # gcc
+    gcc
     git-lfs
     gitAndTools.gh
     gitAndTools.git-crypt
@@ -401,8 +441,11 @@ in {
     niv # Nix dependency management
     nixpkgs-fmt
     nodejs # node and npm
+    nodePackages.mermaid-cli
     nodePackages.pyright
     nodePackages.prettier
+    nodePackages.vega-lite
+    nodePackages.vega-cli
     # nuget
     pinentry_mac # Necessary for GPG
     # python37Packages.poetry

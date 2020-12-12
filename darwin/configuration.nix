@@ -4,7 +4,6 @@ let
   homeDir = builtins.getEnv("HOME");
   user_name = "luca";
   user_full_name = "Luca Cambiaghi";
-  user_shell = "zsh";
   user_description = "Luca Cambiaghi";
 
 in with pkgs.stdenv; with lib; {
@@ -50,16 +49,18 @@ in with pkgs.stdenv; with lib; {
   nix.package = pkgs.nix;
   nix.trustedUsers = [ "root" "luca" ];
 
-  environment.shells = [ pkgs.zsh ];
-  # environment.systemPackages = [ pkgs.zsh pkgs.gcc ];
+  environment.shells = [ "${homeDir}/.nix-profile/bin/fish" ]; # NOTE you need to chsh -s .nix-profile/bin/fish
   environment.darwinConfig = "${homeDir}/.config/nixpkgs/darwin/configuration.nix";
+
+  programs.fish.enable = true;
+
+  programs.nix-index.enable = true;
 
   ################
   # home-manager #
   ################
 
   home-manager.users.luca = import ../home-manager/configuration.nix;
-
 
   ########################
   # System configuration #
@@ -85,8 +86,6 @@ in with pkgs.stdenv; with lib; {
   };
 
   # time.timeZone = "Europe/Paris";
-
-  programs.nix-index.enable = true;
 
   system.stateVersion = 4;
 
@@ -121,8 +120,8 @@ in with pkgs.stdenv; with lib; {
 
   users.users.${user_name} = {
     description = "${user_description}";
-    home = "/Users/${user_name}";
-    shell = pkgs.${user_shell};
+    home = "${homeDir}";
+    shell = "${homeDir}/.nix-profile/bin/fish";
   };
 
 }

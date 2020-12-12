@@ -7,12 +7,11 @@
  ;; External dependencies
 
  :deps {
-        ;; com.billpiel/sayid {:mvn/version "0.0.18"}
         org.clojure/clojure {:mvn/version "1.10.1"}
         nrepl/nrepl         {:mvn/version "0.5.3"}
         }
 
- :aliases {:nrepl {:extra-deps {nrepl {:mvn/version "RELEASE"}}
+ :aliases {:nrepl {:extra-deps {nrepl/nrepl {:mvn/version "RELEASE"}}
                    :main-opts  ["-m" "nrepl.cmdline"]}
            :new   {:extra-deps {seancorfield/clj-new
                                 {:mvn/version "1.0.199"}}

@@ -32,23 +32,96 @@ let
     reload = "cd ~/.config/nixpkgs && ./switch.sh && cd - && source ~/.zshrc";
 
     # Nix garbage collection
-    garbage = "nix-collect-garbage -d && docker image prune --force";
+    garbage = "nix-collect-garbage -d && docker image prune --all --force";
 
     # See which Nix packages are installed
     installed = "nix-env --query --installed";
   };
 in {
-  # fish shell settings
-  # programs.fish = {
-  #   inherit shellAliases;
-  #   enable = true;
-  # };
+  programs.fish = {
+    inherit shellAliases;
+    enable = true;
+    loginShellInit = ''
+      if test -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+        fenv source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+      end
 
-  # programs.bash = {
-  #   enable = true;
-  # };
+      if test -e /nix/var/nix/profiles/default/etc/profile.d/nix.sh
+        fenv source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
+      end
 
-  # zsh settings
+      eval (direnv hook fish)
+
+      if test -e /Applications/Emacs.app/Contents/MacOS/Emacs
+        export EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs"
+        alias emacs="$EMACS -nw"
+      end
+
+      if test -e /Applications/Emacs.app/Contents/MacOS/bin/emacsclient
+        alias emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
+      end
+
+      # automatically change kitty colors based on time of day
+      if test (date "+%H") -le 15 # TODO how to sync with Emacs?
+          include "$HOME/.config/kitty/modus-operandi.conf"
+      else
+          include "$HOME/.config/kitty/modus-vivendi.conf"
+      end
+
+      # switch (sunshine -s "@55 12")
+      #   case 'day'
+      #      lightk
+      #   case 'night'
+      #     darkk
+      # end
+      '';
+
+    functions = {
+     fish_greeting = "";
+     __switch_them = {
+       body = "__fish_default_command_not_found_handler $argv[1]";
+       onEvent = "fish_command_not_found";
+     };
+    };
+
+    plugins = [
+      {
+        name = "bass";
+        src = pkgs.fetchFromGitHub {
+          owner = "edc";
+          repo = "bass";
+          rev = "50eba266b0d8a952c7230fca1114cbc9fbbdfbd4";
+          sha256 = "0ppmajynpb9l58xbrcnbp41b66g7p0c9l2nlsvyjwk6d16g4p4gy";
+        };
+      }
+
+      {
+        name = "foreign-env";
+        src = pkgs.fetchFromGitHub {
+          owner = "oh-my-fish";
+          repo = "plugin-foreign-env";
+          rev = "dddd9213272a0ab848d474d0cbde12ad034e65bc";
+          sha256 = "00xqlyl3lffc5l0viin1nyp819wf81fncqyz87jx8ljjdhilmgbs";
+          # sha256 = lib.fakeSha256
+        };
+      }
+    ];
+  };
+
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = false;
+    settings = {
+      # character.success_symbol = "[λ](bold green)";
+      character.success_symbol = "[~>](bold green)";
+      character.error_symbol= "[~>](bold red)";
+      scan_timeout = 10;
+      # kubernetes.disabled = false;
+      package.disabled = true;
+      python.format = "via [🐍 ( \($virtualenv\))]($style) ";
+    };
+  };
+
   programs.zsh = {
     inherit shellAliases;
     enable = true;
@@ -171,6 +244,6 @@ in {
       #   file = "p10k.zsh";
       # }
     ];
-
   };
+
 }

@@ -15,6 +15,7 @@ in
       "mono"
       "nuget"
       "parquet-tools"
+      # "crescentrose"/sunshine
     ];
     cask_args.appdir = "/Users/${user_name}/Applications";
     casks = [
@@ -25,6 +26,7 @@ in
       # "iina"
       # "discord"
       # "docker"
+      "dozer"
       # "dropbox"
       # "google-chrome"
       # "keybase" # maybe enable in home-manager
@@ -39,6 +41,7 @@ in
     ];
     taps = [
       "borkdude/brew"
+      # "crescentrose/sunshine"
     ];
   };
 }

@@ -1,6 +1,9 @@
 { ... }:
 
-{
+let
+  homeDir = builtins.getEnv("HOME");
+
+in {
 
   system.activationScripts.postActivation.text = ''
     # Enable HiDPI display modes (requires restart)
