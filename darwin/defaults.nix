@@ -72,6 +72,7 @@ in {
     NSGlobalDomain = {
       # "com.apple.trackpad.scaling"         = "3.0";
       AppleFontSmoothing = 1;
+      ApplePressAndHoldEnabled = true;
       AppleKeyboardUIMode = 3;
       AppleMeasurementUnits                = "Centimeters";
       AppleMetricUnits                     = 1;

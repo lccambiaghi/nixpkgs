@@ -46,13 +46,59 @@ in with pkgs.stdenv; with lib; {
 
   nixpkgs.config = import ../config.nix;
 
+  # TODO overlays to root
+  # nixpkgs.overlays = [ (import ./emacs-darwin.nix) ];
+
+  # nixpkgs.overlays = [ (import ../overlays) ];
+  # nixpkgs.config.packageOverrides = pkgs: {
+  #   nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+  #     inherit pkgs;
+  #   };
+  # };
+
+  # nixpkgs.overlays = [ emacs-overlay ];
+
+
   nix.package = pkgs.nix;
-  nix.trustedUsers = [ "root" "luca" ];
+  nix.trustedUsers = [ "root" "luca" "@admin"];
+
+  # TODO
+  # nix.nixPath = [
+  #   "darwin-config=$HOME/src/nix/config/darwin.nix"
+  #   "home-manager=$HOME/src/nix/home-manager"
+  #   "darwin=$HOME/src/nix/darwin"
+  #   "nixpkgs=$HOME/src/nix/nixpkgs"
+  #   "ssh-config-file=$HOME/.ssh/config"
+  #   "ssh-auth-sock=${xdg_configHome}/gnupg/S.gpg-agent.ssh"
+  # ];
 
   environment.shells = [ "${homeDir}/.nix-profile/bin/fish" ]; # NOTE you need to chsh -s .nix-profile/bin/fish
   environment.darwinConfig = "${homeDir}/.config/nixpkgs/darwin/configuration.nix";
 
-  programs.fish.enable = true;
+  # TODO maybe after having extracted it? What are the benefits?
+  # environment.systemPackages = import ./packages.nix { inherit pkgs; }
+
+  # environment.systemPath = [
+  #   "$HOME/.poetry/bin"
+  #   "$HOME/.emacs.d/bin"
+  #   "/run/current-system/sw/bin"
+  #   "$HOME/.nix-profile/bin:$PATH"
+  #   "/usr/local/bin"
+  #   # "$HOME/.npm-packages/bin"
+  # ];
+
+  # environment.variables = {
+  #   EDITOR = "emacsclient";
+  #   KUBE_EDITOR="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient";
+  #   LIBRARY_PATH="/usr/bin/gcc";
+  #   CLOJURE_LOAD_PATH="$HOME/git/clojure-clr/bin/4.0/Release/"; # NOTE this needs to be present and compiled
+  #   EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs";
+  #   # TERM="xterm";
+  #   TERM = "xterm-256color";
+  #   TERMINFO_DIRS = "${pkgs.kitty.terminfo.outPath}/share/terminfo";
+  #   # BROWSER = "firefox";
+  #   # TERMINAL = "alacritty";
+  # };
 
   programs.nix-index.enable = true;
 

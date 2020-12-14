@@ -101,6 +101,7 @@ in {
       "/run/current-system/sw/bin"
       "$HOME/.nix-profile/bin:$PATH"
       "/usr/local/bin"
+      # "$HOME/.npm-packages/bin"
     ];
 
     sessionVariables = {
@@ -108,10 +109,14 @@ in {
       KUBE_EDITOR="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient";
       LIBRARY_PATH="/usr/bin/gcc";
       CLOJURE_LOAD_PATH="$HOME/git/clojure-clr/bin/4.0/Release/"; # NOTE this needs to be present and compiled
+      EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs";
+      # TERM="xterm";
+      TERMINFO_DIRS = "${pkgs.kitty.terminfo.outPath}/share/terminfo";
       # BROWSER = "firefox";
       # TERMINAL = "alacritty";
     };
 
+    # TODO maybe use xdg.config for all of these?
     file.".config/direnv/direnvrc".source = ../dotfiles/direnvrc;
 
     file.".clojure/deps.edn".source = ../dotfiles/deps.edn;
@@ -122,7 +127,9 @@ in {
 
     file.".config/kitty/modus-vivendi.conf".source = ../dotfiles/modus-vivendi.conf;
 
-    # file.".npmrc".text = "prefix = ${homeDir}/.npm-packages";
+    file.".config/kitty/macos-launch-services-cmdline".text = "--listen-on unix:/tmp/mykitty";
+
+    file.".npmrc".text = "prefix = ${homeDir}/.npm-packages";
 
     # file.".config/nix/nix.conf".text = ''
     #   substituters = https://cache.nixos.org https://cache.nixos.org/ https://mjlbach.cachix.org
@@ -142,23 +149,8 @@ in {
 
   news.display = "silent";
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowUnsupportedSystem = true;
-  };
 
-  # TODO overlays to root
-  # nixpkgs.overlays = [ (import ./emacs-darwin.nix) ];
-
-  # nixpkgs.overlays = [ (import ../overlays) ];
-  # nixpkgs.config.packageOverrides = pkgs: {
-  #   nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-  #     inherit pkgs;
-  #   };
-  # };
-
-  # nixpkgs.overlays = [ emacs-overlay ];
-
+  # TODO use programs {} to group them
   programs.home-manager.enable = true;
 
   programs.htop = {
@@ -235,9 +227,35 @@ in {
       credential.helper = "osxkeychain";
       pull.rebase = "false";
     };
+
+    # signing = {
+    #     key = "XXXXXXXXXXXXXXXXXX";
+    #     signByDefault = true;
+    #   };
   };
 
-  programs.ssh.enable = true;
+  programs.ssh = {
+    enable = true;
+
+    # hashKnownHosts = true;
+    # userKnownHostsFile = "${xdg.configHome}/ssh/known_hosts";
+
+  };
+
+  # programs.xdg = {
+  #   enable = true;
+
+  #   configHome = "${home_directory}/.config";
+  #   dataHome   = "${home_directory}/.local/share";
+  #   cacheHome  = "${home_directory}/.cache";
+
+  #   configFile."gnupg/gpg-agent.conf".text = ''
+  #     enable-ssh-support
+  #     default-cache-ttl 86400
+  #     max-cache-ttl 86400
+  #     pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
+  #   '';
+  # };
 
   # programs.starship.enable = true;
 
@@ -248,6 +266,7 @@ in {
     extraPackages = tpkgs: {
       inherit (tpkgs)
         # additional
+        # altacv
         capt-of
         catchfile
         dvipng
@@ -290,14 +309,6 @@ in {
       # jump to beginning and end of line
       map cmd+left send_text all \x01
       map cmd+right send_text all \x05
-
-      # shell
-      # shell /run/current-system/sw/bin/fish
-
-      # theme
-      kitty @ set-colors -a -c "$HOME/.config/kitty/themes/base16-tomorrow.conf"
-      # include modus-operandi.conf
-      include modus-vivendi.conf
     '';
     keybindings = {
       "ctrl+c" = "copy_or_interrupt";
@@ -394,6 +405,7 @@ in {
   # ".spacemacs".source = substituteAll ( (import ./spacemacs-substitutions.nix { inherit lib; })
   #                                       // { src =./spacemacs; });
 
+  # TODO move to separate packages.nix file?
   home.packages = with pkgs; [
     # adoptopenjdk-bin # Java
     argo
@@ -414,7 +426,7 @@ in {
     fd # find replacement written in Rust
     font-awesome_5
     fzf # Fuzzy finder
-    gcc
+    # gcc
     git-lfs
     gitAndTools.gh
     gitAndTools.git-crypt
@@ -426,6 +438,7 @@ in {
     # jetbrains.pycharm-community
     jq # JSON parsing for the CLI
     just # Intriguing new make replacement
+    # libgccjit
     kind # Easy Kubernetes installation
     kubectl # Kubernetes CLI tool
     # kubectx # kubectl context switching
@@ -444,8 +457,8 @@ in {
     nodePackages.mermaid-cli
     nodePackages.pyright
     nodePackages.prettier
-    nodePackages.vega-lite
-    nodePackages.vega-cli
+    # nodePackages.vega-lite
+    # nodePackages.vega-cli
     # nuget
     pinentry_mac # Necessary for GPG
     # python37Packages.poetry

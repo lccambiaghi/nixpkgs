@@ -4,7 +4,6 @@ let
   # Set all shell aliases programatically
   shellAliases = {
     # Aliases for commonly used tools
-    em = "emacsclient -n ";
     grep = "grep --color=auto";
     cat = "bat";
     find = "fd";
@@ -29,18 +28,22 @@ let
     szsh = "source ~/.zshrc";
 
     # Reload home manager and zsh
-    reload = "cd ~/.config/nixpkgs && ./switch.sh && cd - && source ~/.zshrc";
+    reload = "cd ~/.config/nixpkgs && ./switch.sh && cd - && source ~/.config/fish/config.fish";
 
     # Nix garbage collection
     garbage = "nix-collect-garbage -d && docker image prune --all --force";
 
     # See which Nix packages are installed
     installed = "nix-env --query --installed";
+
+    # emacs
+    emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient";
+    em="emacsclient -n ";
   };
 in {
   programs.fish = {
-    inherit shellAliases;
     enable = true;
+    inherit shellAliases;
     loginShellInit = ''
       if test -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
         fenv source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
@@ -52,21 +55,25 @@ in {
 
       eval (direnv hook fish)
 
-      if test -e /Applications/Emacs.app/Contents/MacOS/Emacs
-        export EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs"
-        alias emacs="$EMACS -nw"
-      end
-
-      if test -e /Applications/Emacs.app/Contents/MacOS/bin/emacsclient
-        alias emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
-      end
-
       # automatically change kitty colors based on time of day
-      if test (date "+%H") -le 15 # TODO how to sync with Emacs?
-          include "$HOME/.config/kitty/modus-operandi.conf"
-      else
-          include "$HOME/.config/kitty/modus-vivendi.conf"
+      if test -n "$KITTY_WINDOW_ID"
+        if test (date "+%H") -le 15 # TODO how to sync with Emacs?
+            lightk
+        else
+            darkk
+        end
       end
+
+      # apparently kitty needs a special ssh command
+      if test "$TERM" = "xterm-kitty"
+        alias ssh="kitty +kitten ssh"
+      end
+
+      # if status --is-interactive
+      #     set PATH $PATH ~/.npm-packages/bin;
+      # end
+
+      # fish_user_paths /usr/local/bin $fish_user_paths
 
       # switch (sunshine -s "@55 12")
       #   case 'day'
@@ -78,10 +85,12 @@ in {
 
     functions = {
      fish_greeting = "";
-     __switch_them = {
-       body = "__fish_default_command_not_found_handler $argv[1]";
-       onEvent = "fish_command_not_found";
-     };
+
+     # __switch_them = {
+     #   body = "__fish_default_command_not_found_handler $argv[1]";
+     #   onEvent = "fish_command_not_found";
+     # };
+
     };
 
     plugins = [
