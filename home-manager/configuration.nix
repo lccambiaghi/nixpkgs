@@ -105,13 +105,15 @@ in {
     ];
 
     sessionVariables = {
-      EDITOR = "emacsclient";
+      EDITOR="emacsclient";
       KUBE_EDITOR="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient";
       LIBRARY_PATH="/usr/bin/gcc";
       CLOJURE_LOAD_PATH="$HOME/git/clojure-clr/bin/4.0/Release/"; # NOTE this needs to be present and compiled
       EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs";
       # TERM="xterm";
-      TERMINFO_DIRS = "${pkgs.kitty.terminfo.outPath}/share/terminfo";
+      # TERMINFO_DIRS="${pkgs.kitty.terminfo.outPath}/share/terminfo";
+      FONTCONFIG_FILE="${pkgs.fontconfig.out}/etc/fonts/fonts.conf";
+      NIX_PATH="nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs:darwin=$HOME/.nix-defexpr/channels/darwin:home-manager=$HOME/.nix-defexpr/channels/home-manager";
       # BROWSER = "firefox";
       # TERMINAL = "alacritty";
     };
@@ -148,7 +150,6 @@ in {
   fonts.fontconfig.enable = true;
 
   news.display = "silent";
-
 
   # TODO use programs {} to group them
   programs.home-manager.enable = true;
@@ -217,6 +218,8 @@ in {
         # fileMode = false;
       };
 
+      signing.signByDefault = true;
+      signing.key = "0F79B4782E5064FE";
       # commit.gpgsign = "true";
       # gpg.program = "gpg2";
 
@@ -265,19 +268,24 @@ in {
     enable = true;
     extraPackages = tpkgs: {
       inherit (tpkgs)
-        # additional
-        # altacv
+        # maybe useless with scheme-full
         capt-of
         catchfile
-        dvipng
+        environ
         framed
         fvextra
-        minted
+        tcolorbox
+        trimspaces
         upquote
-        wrapfig
         xstring
+        # additional
+        dvipng
+        fontspec
+        minted
+        wrapfig
+        xetex
         # base
-        scheme-medium
+        scheme-full
         latexmk ;
     };
   };
@@ -285,7 +293,7 @@ in {
   programs.kitty = {
     enable = true;
     settings = {
-      font_size = 16;
+      font_size = 18;
     };
     extraConfig = ''
       allow_hyperlinks yes
@@ -424,7 +432,8 @@ in {
     #emacsGccDarwin
     exa # ls replacement written in Rust
     fd # find replacement written in Rust
-    font-awesome_5
+    # font-awesome_5
+    font-awesome
     fzf # Fuzzy finder
     # gcc
     git-lfs
@@ -448,7 +457,7 @@ in {
     # libvterm-neovim
     leiningen
     less
-    mdcat # Markdown converter/reader for the CLI
+    # mdcat # Markdown converter/reader for the CLI
     # mono
     # next
     niv # Nix dependency management

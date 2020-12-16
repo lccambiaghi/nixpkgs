@@ -1,10 +1,25 @@
 * Installation
-1. Install ~nix~ daemon
-2. Install ~nix-darwin~
-3. Remove the default ~~/.config/nixpkgs~ and ~git clone https://github.com/lccambiaghi/nixpkgs~
-5. ~./update-dependencies.sh~
-6. ~./switch.sh~
+#+begin_src sh
+# 1. Install nix multi-user
+sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon
+source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 
+# 2. Clone personal Nix configuration
+mkdir ~/.config
+git clone git@github.com:lccambiaghi/nixpkgs.git ~/.config/nixpkgs
+
+# 3. Create required simlinks to use channels managed by Niv
+rm -rf ~/.nix-defexpr ~/.nix-channels
+ln -s ~/.config/nixpkgs/nix/nix-defexpr ~/.nix-defexpr
+
+# 4. Install nix-darwin
+$(nix-build '<darwin>' -A installer)  # nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
+./result/bin/darwin-installer
+
+# 5. Reload configuration
+darwin-rebuild switch -I darwin-config=~/.config/nixpkgs/darwin/configuration.nix
+# $(nix-build '<darwin>' -A system --no-out-link)/sw/bin/darwin-rebuild switch -I darwin-config=~/.config/nixpkgs/darwin/configuration.nix
+#+end_src
 * nix-darwin
 Documentation: https://daiderd.com/nix-darwin/manual/index.html#sec-options
 ** Rebuild switch
@@ -17,8 +32,12 @@ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuratio
 #+begin_src sh
 darwin-rebuild switch --flake ~/.config/darwin
 #+end_src
-* niv
-You add (and pin) channels in ~nix/sources.json~ and then run ~./update-dependencies.sh~
+* niv and channels
+- Instead of using nix-channels, channels are added to nix/sources.json, and nix/nix-defexpr is simlinked to ~/.nix-defexpr.
+- You add (and pin) channels in ~nix/sources.json~ with ~niv add~
+- You update channel to latest commit with =niv update nixpkgs=
+- Change branch with =niv update nixpkgs -b nixos-19.09=
+- Add packages with =niv add stedolan/jq=
 
 * What is important?
 - ~emacs~
@@ -33,3 +52,76 @@ You add (and pin) channels in ~nix/sources.json~ and then run ~./update-dependen
 - ~.ssh/id_rsa~
 - ~.gnupg~
 - R + packages
+* Avoid typing password at each rebuild
+#+begin_src sh
+sudo visudo /private/etc/sudoers
+#+end_src
+
+And write
+#+begin_src sh
+luca ALL=(ALL:ALL) NOPASSWD: /run/current-system/sw/bin/darwin-rebuild
+#+end_src
+* Nix
+- Good intro: https://stephank.nl/p/2020-06-01-a-nix-primer-by-a-newcomer.html
+
+** Fundamentals
+Set:
+#+begin_src nix
+{ "a b" = "c"; count = 2; }
+#+end_src
+
+List:
+#+begin_src nix
+[42 "a b" (3 + 6) [2 3 4] {x = 2;}]
+#+end_src
+
+Lambda:
+#+begin_src nix
+(x: x + x) 21
+# 42
+
+let hi = {name, place}: "Hi ${name} in ${place}!";
+in hi { name = "Michael"; place = "Austria";  }
+#+end_src
+
+Parameter with default value:
+#+begin_src nix
+{ pkgs ? import <nixpkgs> {} }:
+#+end_src
+
+~<nixpkgs>~ refers to the value of the nixpkgs attribute declared in the NIX_PATH environment variable
+
+** Config
+A config takes an attribute as parameter and returns an attribute set
+#+begin_src nix
+{ pkgs }:
+
+{
+  packageOverrides = pkgs: {
+    emacs = pkgs.emacs.override {
+      withGTK2 = false;
+      withGTK3 = false;
+      withXwidgets = false;
+    };
+  };
+
+  allowUnfree = true;
+}
+#+end_src
+** Derivation
+A derivation takes inputs and produces output.
+A derivation is lazy, so it will only be evaluated when it is input to other derivations.
+
+#+begin_src nix
+derivation {
+  name = "hello-world";
+  system = "x86_64-linux";
+  outputs = [ "out" ];  # This is the default, and can be omitted.
+  builder = "${pkgs.bash}/bin/bash";
+  args = [ "-c" "echo 'Hello world!' > $out" ];
+}
+#+end_src
+
+Derviation outputs are stored in the nix store.
+Each derivation's output is defined by an hash which encodes all input derivations.
+If something changes even slightly in the inputs, the hash output will change.

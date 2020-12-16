@@ -1,4 +1,7 @@
-{ config, lib, pkgs, ... }:
+{ config,
+  lib,
+  pkgs ? <nixpkgs>,
+  ... }:
 
 let
   homeDir = builtins.getEnv("HOME");
@@ -28,9 +31,11 @@ in with pkgs.stdenv; with lib; {
   # Nix configuration #
   #####################
 
+  # niv/nix-defexpr channels are symlinked to ~.nix-defexpr
   # nix.nixPath = [
   #   { nixpkgs = "$HOME/.nix-defexpr/channels/nixpkgs"; }
   # ];
+
   # nix.binaryCaches = [
   #   "https://cache.nixos.org/"
   #   "https://iohk.cachix.org"
@@ -44,6 +49,7 @@ in with pkgs.stdenv; with lib; {
   #   "malo.cachix.org-1:fJL4+lpyMs/1cdZ23nPQXArGj8AS7x9U67O8rMkkMIo="
   # ];
 
+  # This is necessary for allowUnfree=true
   nixpkgs.config = import ../config.nix;
 
   # TODO overlays to root
@@ -58,9 +64,8 @@ in with pkgs.stdenv; with lib; {
 
   # nixpkgs.overlays = [ emacs-overlay ];
 
-
   nix.package = pkgs.nix;
-  nix.trustedUsers = [ "root" "luca" "@admin"];
+  nix.trustedUsers = [ "luca" "@admin"];
 
   # TODO
   # nix.nixPath = [

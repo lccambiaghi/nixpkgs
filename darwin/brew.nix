@@ -41,6 +41,7 @@ in
     ];
     taps = [
       "borkdude/brew"
+      # "homebrew/cask-fonts"
       # "crescentrose/sunshine"
     ];
   };
