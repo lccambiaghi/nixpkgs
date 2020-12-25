@@ -73,6 +73,7 @@ let
       flake8
       ipython
       isort
+      # jupyter
       pip
       pyyaml
       # tabulate
@@ -110,12 +111,14 @@ in {
       LIBRARY_PATH="/usr/bin/gcc";
       CLOJURE_LOAD_PATH="$HOME/git/clojure-clr/bin/4.0/Release/"; # NOTE this needs to be present and compiled
       EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs";
-      # TERM="xterm";
+      # TERM="xterm-256color";
       # TERMINFO_DIRS="${pkgs.kitty.terminfo.outPath}/share/terminfo";
-      FONTCONFIG_FILE="${pkgs.fontconfig.out}/etc/fonts/fonts.conf";
+      # FONTCONFIG_FILE="${pkgs.fontconfig.out}/etc/fonts/fonts.conf";
       NIX_PATH="nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs:darwin=$HOME/.nix-defexpr/channels/darwin:home-manager=$HOME/.nix-defexpr/channels/home-manager";
       # BROWSER = "firefox";
       # TERMINAL = "alacritty";
+      # TTFONTS="/System/Library/Fonts//:";
+      OPENTYPEFONTS="$HOME/.nix-profile/share/fonts/opentype//:";
     };
 
     # TODO maybe use xdg.config for all of these?
@@ -161,7 +164,7 @@ in {
 
   programs.direnv = {
       enable = true;
-      # enableNixDirenvIntegration = true;
+      enableFishIntegration = false;
   };
 
   programs.fzf.enable = true;
@@ -243,6 +246,15 @@ in {
     # hashKnownHosts = true;
     # userKnownHostsFile = "${xdg.configHome}/ssh/known_hosts";
 
+    matchBlocks = {
+      "dsvm" = {
+        hostname = "avocado-ds-vm.germanywestcentral.cloudapp.azure.com";
+        port = 443;
+        user = "luca";
+        # identityFile = "$HOME/.ssh/id_rsa.pub";
+      };
+    };
+
   };
 
   # programs.xdg = {
@@ -259,8 +271,6 @@ in {
   #     pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
   #   '';
   # };
-
-  # programs.starship.enable = true;
 
   programs.vim.enable = true;
 
@@ -433,7 +443,7 @@ in {
     exa # ls replacement written in Rust
     fd # find replacement written in Rust
     # font-awesome_5
-    font-awesome
+    font-awesome_4
     fzf # Fuzzy finder
     # gcc
     git-lfs
@@ -459,7 +469,7 @@ in {
     less
     # mdcat # Markdown converter/reader for the CLI
     # mono
-    # next
+    # nyxt
     niv # Nix dependency management
     nixpkgs-fmt
     nodejs # node and npm
