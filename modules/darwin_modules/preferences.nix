@@ -1,7 +1,7 @@
 { ... }:
 
 let
-  homeDir = builtins.getEnv("HOME");
+  homeDir = "/Users/luca";
 
 in {
 

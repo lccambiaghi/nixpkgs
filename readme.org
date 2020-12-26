@@ -1,4 +1,5 @@
 * Installation
+** v1 (thanks https://github.com/malob/nixpkgs)
 #+begin_src sh
 # 1. Install nix multi-user
 sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume --daemon
@@ -19,6 +20,21 @@ $(nix-build '<darwin>' -A installer)  # nix-build https://github.com/LnL7/nix-da
 # 5. Reload configuration
 darwin-rebuild switch -I darwin-config=~/.config/nixpkgs/darwin/configuration.nix
 # $(nix-build '<darwin>' -A system --no-out-link)/sw/bin/darwin-rebuild switch -I darwin-config=~/.config/nixpkgs/darwin/configuration.nix
+#+end_src
+** v2 (thanks https://github.com/kclejeune/system)
+#+begin_src sh
+# 1.
+if [[ $(uname -s) == 'Darwin' ]]; then
+    sh <(curl -L https://nixos.org/nix/install) --daemon --darwin-use-unencrypted-nix-store-volume
+else
+    sh <(curl -L https://nixos.org/nix/install) --daemon
+fi
+
+# 2.
+git clone git@github.com:lccambiaghi/nixpkgs.git ~/.config/nixpkgs
+
+# 3.
+cd ~/.config/nixpkgs && nix develop --command "darwinInstall"
 #+end_src
 * nix-darwin
 Documentation: https://daiderd.com/nix-darwin/manual/index.html#sec-options
