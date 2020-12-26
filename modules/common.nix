@@ -15,7 +15,6 @@ in with pkgs.stdenv; with lib; {
   # nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
 
   nix = {
-    # package = pkgs.nix;
     package = pkgs.nixFlakes;
     extraOptions = ''
       keep-outputs = true
@@ -35,19 +34,16 @@ in with pkgs.stdenv; with lib; {
       "nixpkgs=/etc/${config.environment.etc.nixpkgs.target}"
       "home-manager=/etc/${config.environment.etc.home-manager.target}"
     ];
-    # binaryCaches = [
-    #   "https://cache.nixos.org/"
-    #   "https://iohk.cachix.org"
-    #   "https://hydra.iohk.io"
-    #   "https://malo.cachix.org"
-    # ];
-    # binaryCachePublicKeys = [
-    #   "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-    #   "iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo="
-    #   "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
-    #   "malo.cachix.org-1:fJL4+lpyMs/1cdZ23nPQXArGj8AS7x9U67O8rMkkMIo="
-    # ];
-
+    binaryCaches = [
+      https://cache.nixos.org
+      https://mjlbach.cachix.org
+      https://gccemacs-darwin.cachix.org
+    ];
+    binaryCachePublicKeys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "mjlbach.cachix.org-1:dR0V90mvaPbXuYria5mXvnDtFibKYqYc2gtl9MWSkqI="
+      "gccemacs-darwin.cachix.org-1:E0Q1uCBvxw58kfgoWtlletUjzINF+fEIkWknAKBnPhs="
+    ];
   };
 
   ################

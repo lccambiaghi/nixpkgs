@@ -84,6 +84,10 @@ in
 {
   imports = [ ./modules/core.nix ./modules/dotfiles ./modules/kitty];
 
+  fonts.fontconfig.enable = true;
+
+  news.display = "silent";
+
   home = {
     # only need these if not managed by nix-darwin
     # username = "luca";

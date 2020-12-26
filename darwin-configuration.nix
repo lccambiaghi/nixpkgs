@@ -7,7 +7,7 @@
 
   # environment setup
   environment = {
-    loginShell = pkgs.fish;
+    # loginShell = pkgs.fish;
     pathsToLink = [ "/Applications" ];
     etc = {
       darwin.source = "${inputs.darwin}";
@@ -27,6 +27,7 @@
       LIBRARY_PATH="/usr/bin/gcc";
       CLOJURE_LOAD_PATH="$HOME/git/clojure-clr/bin/4.0/Release/"; # NOTE this needs to be present and compiled
       EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs";
+      SHELL = "/etc/profiles/per-user/luca/bin/fish";
       # TERMINFO_DIRS = "${pkgs.kitty.terminfo.outPath}/share/terminfo";
       # BROWSER = "firefox";
       # OPENTYPEFONTS="$HOME/.nix-profile/share/fonts/opentype//:";

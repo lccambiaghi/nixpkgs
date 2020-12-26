@@ -26,27 +26,22 @@ in
 
   xdg = {
     enable = true;
-    configHome = "${homeDir}/.config";
-    dataHome   = "${homeDir}/.local/share";
-    cacheHome  = "${homeDir}/.cache";
+    # configHome = "${homeDir}/.config";
+    # dataHome   = "${homeDir}/.local/share";
+    # cacheHome  = "${homeDir}/.cache";
     configFile = {
       nixpkgs = {
         source = ./../..;
         recursive = true;
       };
+      # "gnupg/gpg-agent.conf".text = ''
+      #   enable-ssh-support
+      #   default-cache-ttl 86400
+      #   max-cache-ttl 86400
+      #   pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
+      # '';
     };
-    # configFile."gnupg/gpg-agent.conf".text = ''
-    #   enable-ssh-support
-    #   default-cache-ttl 86400
-    #   max-cache-ttl 86400
-    #   pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
-    # '';
   };
-
-  # file.".config/nix/nix.conf".text = ''
-  #   substituters = https://cache.nixos.org https://cache.nixos.org/ https://mjlbach.cachix.org
-  #   trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= mjlbach.cachix.org-1:dR0V90mvaPbXuYria5mXvnDtFibKYqYc2gtl9MWSkqI=
-  # '';
 
   # file.".emacs.d" = {
   #   source = "$HOME/.emacs.d";
