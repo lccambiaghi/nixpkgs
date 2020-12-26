@@ -2,7 +2,7 @@
 let
   isDarwin = pkgs.stdenvNoCC.isDarwin;
   configuration = if isDarwin then
-    "$HOME/.nixpkgs/darwin-configuration.nix"
+    "$HOME/.config/.nixpkgs/darwin-configuration.nix"
   else
     "/etc/nixos/configuration.nix";
 
@@ -23,7 +23,7 @@ let
   '';
 
   darwinBuild = ''
-    ${pkgs.nixFlakes}/bin/nix build ".#darwinConfigurations.luca-macbookpro.config.system.build.toplevel" --experimental-features "flakes nix-command" --show-trace
+    ${pkgs.nixFlakes}/bin/nix build ".#darwinConfigurations.luca-macbookpro.system" --experimental-features "flakes nix-command" --show-trace
   '';
 
   darwinInstall = pkgs.writeShellScriptBin "darwinInstall" ''

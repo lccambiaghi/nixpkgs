@@ -62,7 +62,24 @@
       "inputs": {
         "darwin": "darwin",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "stable": "stable"
+      }
+    },
+    "stable": {
+      "locked": {
+        "lastModified": 1608802800,
+        "narHash": "sha256-QCpx3LHzunHj+PIXt1sSGfTiM+yxWO7YPfLgo6Lh7Nc=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "ca119749d86f484066fae7680af8a44ea1f11ca8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-20.09",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     }
   },

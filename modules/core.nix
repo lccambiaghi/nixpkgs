@@ -1,4 +1,7 @@
 { config, pkgs, ... }:
+let
+  homeDir = "/Users/luca";
+in
 {
   imports = [
     ./shells
@@ -18,6 +21,14 @@
       enable = true;
       enableFishIntegration = false;
     };
+    #   firefox.enable = true;
+    #   # programs.firefox.package = pkgs.Firefox; # custom overlay
+    #   # programs.firefox.extensions =
+    #   #   with pkgs.nur.repos.rycee.firefox-addons; [
+    #   #     ublock-origin
+    #   #     browserpass
+    #   #     vimium
+    #   #   ];
     fzf.enable = true;
     git = {
       enable = true;
@@ -124,18 +135,6 @@
       };
     };
     vim.enable = true;
-    # xdg = {
-    #   enable = true;
-    #   configHome = "${home_directory}/.config";
-    #   dataHome   = "${home_directory}/.local/share";
-    #   cacheHome  = "${home_directory}/.cache";
-    #   configFile."gnupg/gpg-agent.conf".text = ''
-    #     enable-ssh-support
-    #     default-cache-ttl 86400
-    #     max-cache-ttl 86400
-    #     pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
-    #   '';
-    # };
     # vscode = {
     #   enable = true;
     #   package = with pkgs; vscodium;
@@ -148,14 +147,18 @@
     # };
   };
 
-  #   programs.firefox.enable = true;
-  #   # programs.firefox.package = pkgs.Firefox; # custom overlay
-  #   # programs.firefox.extensions =
-  #   #   with pkgs.nur.repos.rycee.firefox-addons; [
-  #   #     ublock-origin
-  #   #     browserpass
-  #   #     vimium
-  #   #   ];
+  xdg = {
+    enable = true;
+    configHome = "${homeDir}/.config";
+    dataHome   = "${homeDir}/.local/share";
+    cacheHome  = "${homeDir}/.cache";
+    # configFile."gnupg/gpg-agent.conf".text = ''
+    #   enable-ssh-support
+    #   default-cache-ttl 86400
+    #   max-cache-ttl 86400
+    #   pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
+    # '';
+  };
 
   #   programs.firefox.profiles =
   #     let defaultSettings = {
@@ -210,7 +213,5 @@
   #         }));
   #       };
   #     };
-
-  xdg.enable = true;
 
 }

@@ -24,12 +24,24 @@ in
     ".config/kitty/macos-launch-services-cmdline".text = "--listen-on unix:/tmp/mykitty";
   };
 
-  # xdg.configFile = {
-  #   nixpkgs = {
-  #     source = ./../..;
-  #     recursive = true;
-  #   };
-  # };
+  xdg = {
+    enable = true;
+    configHome = "${homeDir}/.config";
+    dataHome   = "${homeDir}/.local/share";
+    cacheHome  = "${homeDir}/.cache";
+    configFile = {
+      nixpkgs = {
+        source = ./../..;
+        recursive = true;
+      };
+    };
+    # configFile."gnupg/gpg-agent.conf".text = ''
+    #   enable-ssh-support
+    #   default-cache-ttl 86400
+    #   max-cache-ttl 86400
+    #   pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
+    # '';
+  };
 
   # file.".config/nix/nix.conf".text = ''
   #   substituters = https://cache.nixos.org https://cache.nixos.org/ https://mjlbach.cachix.org

@@ -7,9 +7,11 @@ let
     grep = "grep --color=auto";
     cat = "bat";
     find = "fd";
-    l = "exa";
-    ll = "ls -lh";
-    ls = "exa";
+    l = "${pkgs.exa}/bin/exa";
+    ls = "${pkgs.exa}/bin/exa";
+    la = "${pkgs.exa}/bin/exa -la";
+    ll = "${pkgs.exa}/bin/exa -lh";
+    lt = "${pkgs.exa}/bin/exa --tree";
     k = "kubectl";
     kp = "kubectl get pods";
     kl = "kubectl logs";
@@ -28,7 +30,7 @@ let
     szsh = "source ~/.zshrc";
 
     # Reload home manager and zsh
-    reload = "cd ~/.config/nixpkgs && ./switch.sh && cd - && source ~/.config/fish/config.fish";
+    reload = "cd ~/git/nixpkgs && darwin-rebuild switch --flake . && cd -";
 
     # Nix garbage collection
     garbage = "nix-collect-garbage -d && docker image prune --all --force";
@@ -42,7 +44,7 @@ let
   };
 in {
   # echo "$HOME/.nix-profile/bin/fish" | sudo tee -a /etc/shells
-  # sudo chsh -s "$HOME/.nix-profile/bin/fish" "$USER"
+  # sudo chsh -s "/run/current-system/sw/bin/fish" "$USER"
   programs.fish = {
     enable = true;
     inherit shellAliases;

@@ -89,31 +89,6 @@ in
     # username = "luca";
     # homeDirectory = "/Users/luca";
     stateVersion = "20.09";
-    sessionPath = [
-      "$HOME/.poetry/bin"
-      "$HOME/.emacs.d/bin"
-      "/run/current-system/sw/bin"
-      "$HOME/.nix-profile/bin:$PATH"
-      "/usr/local/bin"
-      # "$HOME/.npm-packages/bin"
-    ];
-    sessionVariables = {
-      EDITOR="emacsclient";
-      KUBE_EDITOR="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient";
-      LIBRARY_PATH="/usr/bin/gcc";
-      CLOJURE_LOAD_PATH="$HOME/git/clojure-clr/bin/4.0/Release/"; # NOTE this needs to be present and compiled
-      EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs";
-      LSCOLORS = "ExFxBxDxCxegedabagacad";
-      # JAVA_HOME = "${pkgs.jdk11}";
-      # TERM="xterm-256color";
-      # TERMINFO_DIRS="${pkgs.kitty.terminfo.outPath}/share/terminfo";
-      # FONTCONFIG_FILE="${pkgs.fontconfig.out}/etc/fonts/fonts.conf";
-      # NIX_PATH="nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs:darwin=$HOME/.nix-defexpr/channels/darwin:home-manager=$HOME/.nix-defexpr/channels/home-manager";
-      # BROWSER = "firefox";
-      # TERMINAL = "alacritty";
-      # TTFONTS="/System/Library/Fonts//:";
-      OPENTYPEFONTS="$HOME/.nix-profile/share/fonts/opentype//:";
-    };
     packages = with pkgs; [
       # adoptopenjdk-bin # Java
       argo
@@ -175,7 +150,6 @@ in
       # pre-commit # Pre-commit CI hook tool
       procs
       protobuf # Protocol Buffers
-      # python37 # Have you upgraded yet???
       # R-with-pkgs
       roboto
       roboto-mono

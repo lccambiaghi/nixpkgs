@@ -11,24 +11,6 @@ in with pkgs.stdenv; with lib; {
   # Nix configuration #
   #####################
 
-  # niv/nix-defexpr channels are symlinked to ~.nix-defexpr
-  # nix.nixPath = [
-  #   { nixpkgs = "$HOME/.nix-defexpr/channels/nixpkgs"; }
-  # ];
-
-  # nix.binaryCaches = [
-  #   "https://cache.nixos.org/"
-  #   "https://iohk.cachix.org"
-  #   "https://hydra.iohk.io"
-  #   "https://malo.cachix.org"
-  # ];
-  # nix.binaryCachePublicKeys = [
-  #   "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-  #   "iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo="
-  #   "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
-  #   "malo.cachix.org-1:fJL4+lpyMs/1cdZ23nPQXArGj8AS7x9U67O8rMkkMIo="
-  # ];
-
   nixpkgs.config = import ../config.nix;
   # nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
 
@@ -53,6 +35,19 @@ in with pkgs.stdenv; with lib; {
       "nixpkgs=/etc/${config.environment.etc.nixpkgs.target}"
       "home-manager=/etc/${config.environment.etc.home-manager.target}"
     ];
+    # binaryCaches = [
+    #   "https://cache.nixos.org/"
+    #   "https://iohk.cachix.org"
+    #   "https://hydra.iohk.io"
+    #   "https://malo.cachix.org"
+    # ];
+    # binaryCachePublicKeys = [
+    #   "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    #   "iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo="
+    #   "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+    #   "malo.cachix.org-1:fJL4+lpyMs/1cdZ23nPQXArGj8AS7x9U67O8rMkkMIo="
+    # ];
+
   };
 
   ################
@@ -143,6 +138,4 @@ in with pkgs.stdenv; with lib; {
     clock_icon         = "";
     dnd_icon           = "";
   };
-
-
 }
