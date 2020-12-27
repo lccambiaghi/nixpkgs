@@ -27,11 +27,13 @@ in
     #   extensions =
     #     with pkgs.nur.repos.rycee.firefox-addons; [
     #       ublock-origin
-    #       browserpass
+    #       # browserpass
     #       vimium
     #     ];
-    #   profiles =
-    #     let defaultSettings = {
+    #   profiles = {
+    #     home = {
+    #       id = 0;
+    #       settings = {
     #           "app.update.auto" = false;
     #           # "browser.startup.homepage" = "https://lobste.rs";
     #           # "browser.search.region" = "GB";
@@ -45,7 +47,7 @@ in
     #           "browser.urlbar.update1" = true;
     #           "distribution.searchplugins.defaultLocale" = "en-GB";
     #           "general.useragent.locale" = "en-GB";
-    #           "identity.fxaccounts.account.device.name" = config.networking.hostName;
+    #           # "identity.fxaccounts.account.device.name" = config.networking.hostName;
     #           "privacy.trackingprotection.enabled" = true;
     #           "privacy.trackingprotection.socialtracking.enabled" = true;
     #           "privacy.trackingprotection.socialtracking.annotate.enabled" = true;
@@ -59,30 +61,14 @@ in
     #           "signon.rememberSignons" = false;
     #           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
     #         };
-    #     in {
-    #       home = {
-    #         id = 0;
-    #         settings = defaultSettings;
-    #         userChrome = (builtins.readFile (pkgs.substituteAll {
-    #           name = "homeUserChrome";
-    #           src = ../conf.d/userChrome.css;
-    #           tabLineColour = "#2aa198";
-    #         }));
-    #       };
-    #       work = {
-    #         id = 1;
-    #         settings = defaultSettings // {
-    #           "browser.startup.homepage" = "about:blank";
-    #           "browser.urlbar.placeholderName" = "Google";
-    #         };
-    #         userChrome = (builtins.readFile (pkgs.substituteAll {
-    #           name = "workUserChrome";
-    #           src = ../conf.d/userChrome.css;
-    #           tabLineColour = "#cb4b16";
-    #         }));
-    #       };
+    #       # userChrome = (builtins.readFile (pkgs.substituteAll {
+    #       #   name = "homeUserChrome";
+    #       #   src = ../conf.d/userChrome.css;
+    #       #   tabLineColour = "#2aa198";
+    #       # }));
     #     };
-    # }
+    #   };
+    # };
     fzf.enable = true;
     git = {
       enable = true;

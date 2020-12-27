@@ -12,7 +12,10 @@ in with pkgs.stdenv; with lib; {
   #####################
 
   nixpkgs.config = import ../config.nix;
-  # nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
+  nixpkgs.overlays = [
+    inputs.nur.overlay
+    # inputs.emacs-overlay.overlay
+  ];
 
   nix = {
     package = pkgs.nixFlakes;

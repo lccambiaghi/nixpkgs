@@ -11,22 +11,22 @@ in
       "borkdude/brew/babashka"
       "kubectx"
       "libvterm"
-      "mas"
-      "mono"
-      "nuget"
-      "parquet-tools"
+      # "mas"
+      # "mono"
+      # "nuget"
+      # "parquet-tools"
       # "crescentrose"/sunshine
     ];
     cask_args.appdir = "/Users/${user_name}/Applications";
     casks = [
-      "authy"
+      # "authy"
       # "altserver"
       # "amethyst"
       # "1password"
       # "iina"
       # "discord"
       # "docker"
-      "dozer"
+      # "dozer"
       # "dropbox"
       # "google-chrome"
       # "keybase" # maybe enable in home-manager
@@ -40,7 +40,7 @@ in
       # "slack"
     ];
     taps = [
-      "borkdude/brew"
+      # "borkdude/brew"
       # "homebrew/cask-fonts"
       # "crescentrose/sunshine"
     ];

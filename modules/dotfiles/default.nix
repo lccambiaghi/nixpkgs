@@ -9,21 +9,18 @@ in
     #   source = ./Brewfile;
     #   target = "Brewfile";
     # };
-    # keras = {
-    #   source = ./keras;
-    #   target = ".keras";
-    #   recursive = true;
-    # };
-    ".clojure/deps.edn".source = ./deps.edn;
-    ".ipython/profile_default/startup/2-pandas.py".source = ./2-pandas.py;
+    clojure = {
+      source = ./clojure;
+      target = ".clojure";
+      recursive = true;
+    };
+    ipython = {
+      source = ./ipython;
+      target = ".ipython";
+      recursive = true;
+    };
     ".npmrc".text = "prefix = ${homeDir}/.npm-packages";
-    # TODO maybe use xdg.config for these?
-    ".config/direnv/direnvrc".source = ./direnvrc;
-    ".config/kitty/modus-operandi.conf".source = ./modus-operandi.conf;
-    ".config/kitty/modus-vivendi.conf".source = ./modus-vivendi.conf;
-    ".config/kitty/macos-launch-services-cmdline".text = "--listen-on unix:/tmp/mykitty";
   };
-
   xdg = {
     enable = true;
     # configHome = "${homeDir}/.config";
@@ -34,6 +31,15 @@ in
         source = ./../..;
         recursive = true;
       };
+      direnv = {
+        source = ./direnv;
+        recursive = true;
+      };
+      kitty = {
+        source = ./kitty;
+        recursive = true;
+      };
+      # ".config/kitty/macos-launch-services-cmdline".text = "--listen-on unix:/tmp/mykitty";
       # "gnupg/gpg-agent.conf".text = ''
       #   enable-ssh-support
       #   default-cache-ttl 86400

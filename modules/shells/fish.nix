@@ -51,6 +51,10 @@ in {
     shellInit = ''
       direnv hook fish | source
       direnv export fish | source
+
+      if test (date "+%H") -le 15 # TODO how to sync with Emacs?
+        set -x BAT_THEME 'ansi-light'
+      end
     '';
     loginShellInit = ''
       if test -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
@@ -65,7 +69,6 @@ in {
       if test -n "$KITTY_WINDOW_ID"
         if test (date "+%H") -le 15 # TODO how to sync with Emacs?
             lightk
-            set -u BAT_THEME ansi-light
         else
             darkk
         end
