@@ -181,6 +181,7 @@ in {
       package.disabled = true;
       # python.format = "via [🐍 ( \($virtualenv\))]($style) ";
       python.disabled = true;
+      nodejs.disabled = true;
     };
   };
 

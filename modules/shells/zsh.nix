@@ -3,16 +3,16 @@
   programs.zsh = {
     # inherit shellAliases;
     enable = true;
-    enableAutosuggestions = true;
-    enableCompletion = true;
-    history.extended = true;
+    # enableAutosuggestions = true;
+    # enableCompletion = true;
+    # history.extended = true;
     # enableSyntaxHighlighting = true;
     # enableBashCompletion = true;
-    envExtra = ''
-      # export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
-      # export PYENV_SHELL="zsh"
-      # export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
-    '';
+    # envExtra = ''
+    #   # export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+    #   # export PYENV_SHELL="zsh"
+    #   # export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+    # '';
     # localVariables = { POWERLEVEL9K_LEFT_PROMPT_ELEMENTS = [ "dir" "vcs" ] ; }
 
     # Called whenever zsh is initialized
@@ -32,26 +32,6 @@
       if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
         . ~/.nix-profile/etc/profile.d/nix.sh
       fi
-
-      # Load environment variables from a file; this approach allows me to not
-      # commit secrets like API keys to Git
-      # if [ -e ~/.env ]; then
-      #   . ~/.env
-      # fi
-
-      # Autocomplete for various utilities
-      # source <(kubectl completion zsh)
-      # source <(gh completion --shell zsh)
-
-      # pyenv
-      # if [ -n "$(which pyenv)" ]; then
-      #   eval "$(pyenv init -)"
-      # fi
-
-      # Start up Docker daemon if not running
-      # if [ $(docker-machine status default) != "Running" ]; then
-      #   docker-machine start default
-      # fi
 
       if [ -f "/Applications/Emacs.app/Contents/MacOS/Emacs" ]; then
         export EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs"

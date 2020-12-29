@@ -15,7 +15,7 @@ in
     };
     direnv = {
       enable = true;
-      enableFishIntegration = false;
+      # enableFishIntegration = false;
     };
     # emacs = {
     #   enable = true;

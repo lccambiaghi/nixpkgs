@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   imports = [
     ./fish.nix
-    # ./zsh.nix
+    ./zsh.nix
   ];
 }
