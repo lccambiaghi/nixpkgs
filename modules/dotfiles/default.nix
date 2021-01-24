@@ -20,6 +20,11 @@ in
       recursive = true;
     };
     ".npmrc".text = "prefix = ${homeDir}/.npm-packages";
+    # NOTE: change profile with echo 'vanilla' > .emacs-profile
+    ".emacs-profiles.el".text = ''
+      (("doom" . ((user-emacs-directory . "~/git/doom-emacs")))
+        ("vanilla" . ((user-emacs-directory . "~/git/vanilla-emacs"))))
+    '';
   };
   xdg = {
     enable = true;

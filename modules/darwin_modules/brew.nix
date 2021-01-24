@@ -30,6 +30,7 @@ in
       # "dropbox"
       # "google-chrome"
       # "keybase" # maybe enable in home-manager
+      "karabiner-elements"
       # "menumeters"
       # "microsoft-azure-storage-explorer"
       # "microsoft-office"

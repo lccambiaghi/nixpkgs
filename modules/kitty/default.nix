@@ -13,7 +13,7 @@
       macos_titlebar_color = "background";
       macos_option_as_alt = "yes";
       scrollback_lines = 10000;
-      shell =  "/etc/profiles/per-user/luca/bin/fish"; # TODO how to avoid hardcoding?
+      shell =  "/etc/profiles/per-user/luca/bin/fish --login"; # TODO how to avoid hardcoding?
     };
     extraConfig = ''
       allow_hyperlinks yes

@@ -2,7 +2,7 @@
 {
   imports = [
     ./modules/darwin_modules
-    ./modules/common.nix
+    ./modules/system.nix
   ];
 
   # environment setup
@@ -18,8 +18,10 @@
       command -v brew > /dev/null || ${pkgs.bash}/bin/bash -c "$(${pkgs.curl}/bin/curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     '';
     systemPath = [
+      "/etc/profiles/per-user/luca/bin" # TODO how to avoid hardcoding?
       "$HOME/.poetry/bin"
-      "$HOME/.emacs.d/bin"
+      # "$HOME/.emacs.d/bin"
+      "$HOME/git/doom-emacs/bin"
     ];
     variables = {
       EDITOR = "emacsclient";
@@ -28,7 +30,6 @@
       CLOJURE_LOAD_PATH="$HOME/git/clojure-clr/bin/4.0/Release/"; # NOTE this needs to be present and compiled
       EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs";
       SHELL = "/etc/profiles/per-user/luca/bin/zsh"; # TODO how to avoid hardcoding?
-      # TERMINFO_DIRS = "${pkgs.kitty.terminfo.outPath}/share/terminfo";
       # BROWSER = "firefox";
       # OPENTYPEFONTS="$HOME/.nix-profile/share/fonts/opentype//:";
     };

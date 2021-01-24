@@ -21,6 +21,23 @@
         "type": "github"
       }
     },
+    "gccemacs-darwin": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1609597160,
+        "narHash": "sha256-B7EETuU/GbuRbfY8PvSmaxNajT/KTKlUbIiXbSpat6I=",
+        "owner": "twlz0ne",
+        "repo": "nix-gccemacs-darwin",
+        "rev": "7804cbb8a44e328db120de253c4ad9df33c023e2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "twlz0ne",
+        "ref": "master",
+        "repo": "nix-gccemacs-darwin",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -76,6 +93,7 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "gccemacs-darwin": "gccemacs-darwin",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nur": "nur",

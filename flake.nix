@@ -12,7 +12,15 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # inputs.emacs-overlay = {
+    # flake-utils.url = "github:numtide/flake-utils";
+    gccemacs-darwin = {
+      type = "github";
+      owner = "twlz0ne";
+      repo = "nix-gccemacs-darwin";
+      ref = "master";
+      flake = false;
+    };
+    # emacs-overlay = {
     #   type = "github";
     #   owner = "mjlbach";
     #   repo = "emacs-overlay";

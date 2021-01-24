@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   # Handly shell command to view the dependency tree of Nix packages
   depends = pkgs.writeScriptBin "depends" ''
@@ -82,7 +82,7 @@ let
 
 in
 {
-  imports = [ ./modules/core.nix ./modules/dotfiles ./modules/kitty];
+  imports = [ ./modules/programs.nix ./modules/dotfiles ./modules/kitty];
 
   fonts.fontconfig.enable = true;
 
@@ -100,6 +100,7 @@ in
       bash # /bin/bash
       bat # cat replacement written in Rust
       cachix
+      # calibre
       clojure
       cmake
       # clang
@@ -108,7 +109,6 @@ in
       direnv # Per-directory environment variables
       docker # World's #1 container tool
       # docker-machine # Docker daemon for macOS
-      #emacsGccDarwin
       exa # ls replacement written in Rust
       fd # find replacement written in Rust
       # font-awesome_5
