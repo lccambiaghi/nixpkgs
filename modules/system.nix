@@ -113,6 +113,7 @@ in with pkgs.stdenv; with lib; {
   # time.timeZone = "Europe/Paris";
 
   services.nix-daemon.enable = true;
+  # Recreate /run/current-system symlink after boot
   # services.activate-system.enable = true;
   # services.gpg-agent.enable = true;
   # services.keybase.enable = true;
@@ -125,7 +126,7 @@ in with pkgs.stdenv; with lib; {
     # position           = "bottom";
     position           = "top";
     clock_format       = "%R";
-    space_icon_strip   = "    ";
+    space_icon_strip   = "    ";
     text_font          = ''"Menlo:Bold:12.0"'';
     icon_font          = ''"FontAwesome:Regular:12.0"'';
     background_color   = "0xff202020";

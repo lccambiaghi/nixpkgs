@@ -75,6 +75,11 @@ in
       lfs.enable = true;
       userName = "Luca Cambiaghi";
       userEmail = "luca.cambiaghi@maersk.com";
+      signing = {
+        key = "2E5064FE";
+        # key = "luca.cambiaghi@me.com";
+        signByDefault = true;
+      };
       # Replaces ~/.gitignore
       ignores = [
         ".cache/"
@@ -116,11 +121,6 @@ in
           # pager = "delta --dark";
           whitespace = "trailing-space,space-before-tab";
           # fileMode = false;
-        };
-        signing = {
-          # key = "0F79B4782E5064FE";
-          key = "luca.cambiaghi@me.com";
-          signByDefault = true;
         };
         # commit.gpgsign = "true";
         # gpg.program = "gpg2";

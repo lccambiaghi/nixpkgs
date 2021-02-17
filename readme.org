@@ -150,3 +150,6 @@ derivation {
 Derviation outputs are stored in the nix store.
 Each derivation's output is defined by an hash which encodes all input derivations.
 If something changes even slightly in the inputs, the hash output will change.
+** Escaping in strings
+- You can use ~'~ to escape double quotes
+- You can use ~''~ to escape dollar

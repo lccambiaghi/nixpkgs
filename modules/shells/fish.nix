@@ -110,6 +110,19 @@ in {
         end
       '';
 
+     vterm_cmd = ''
+        set -l vterm_elisp ()
+        for arg in $argv
+            set -a vterm_elisp (printf '"%s" ' (string replace -a -r '([\\\\"])' '\\\\\\\\$1' $arg))
+        end
+        vterm_printf '51;E'(string join ''' $vterm_elisp)
+      '';
+
+      find_file = ''
+        set -q argv[1]; or set argv[1] "."
+        vterm_cmd find-file (realpath "$argv")
+      '';
+
      # direnv_hook = ''
      #    set -q direnv_eval_on_pwd or set -g direnv_eval_on_pwd true
 

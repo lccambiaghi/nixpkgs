@@ -165,6 +165,7 @@ in
       # texlive.combined.scheme-medium
       # imagemagick
       # thefuck
+      tectonic
       tree # Should be included in macOS but it's not
       tmux
       vscode # My fav text editor if I'm being honest
