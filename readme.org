@@ -44,7 +44,13 @@ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuratio
 #+END_SRC
 ** How does it work?
 - ~darwin/configuration.nix~ is the main entrypoint. It imports ~home-manager~ as module and its config from ~home-manager/configuration.
-** Flake
+** Restart daemon
+#+begin_src sh
+sudo launchctl stop org.nixos.nix-daemon
+sudo launchctl start org.nixos.nix-daemon
+#+end_src
+* Flake
+** build
 #+begin_src sh
 nix build .#darwinConfigurations.test.system
 
@@ -52,10 +58,9 @@ darwin-rebuild build --flake .#darwinconfigurations.simple.system
 
 darwin-rebuild switch --flake .#darwinConfigurations.simple.system --override-input darwin .
 #+end_src
-** Restart daemon
+** Update input
 #+begin_src sh
-sudo launchctl stop org.nixos.nix-daemon
-sudo launchctl start org.nixos.nix-daemon
+nix flake update --update-input nixpkgs
 #+end_src
 * niv and channels
 - Instead of using nix-channels, channels are added to nix/sources.json, and nix/nix-defexpr is simlinked to ~/.nix-defexpr.

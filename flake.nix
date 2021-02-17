@@ -3,13 +3,14 @@
 
   inputs = {
     # nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-20.09-darwin";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-20.09";
     nur.url = "github:nix-community/NUR";
     stable.url = "github:nixos/nixpkgs/nixos-20.09";
     darwin.url = "github:lnl7/nix-darwin/master";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager/release-20.09";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # flake-utils.url = "github:numtide/flake-utils";
