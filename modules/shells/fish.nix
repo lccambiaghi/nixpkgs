@@ -39,6 +39,7 @@ let
     installed = "nix-env --query --installed";
 
     # emacs
+    emacs="/Applications/Emacs.app/Contents/MacOS/Emacs";
     emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient";
     em="emacsclient -n ";
   };

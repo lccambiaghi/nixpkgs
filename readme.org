@@ -1,3 +1,4 @@
+#+STARTUP: content
 * Installation
 ** v1 (thanks https://github.com/malob/nixpkgs)
 #+begin_src sh
