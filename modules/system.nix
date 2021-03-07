@@ -11,11 +11,10 @@ in with pkgs.stdenv; with lib; {
   # Nix configuration #
   #####################
 
-  nixpkgs.config = import ../config.nix;
-  nixpkgs.overlays = [
-    inputs.nur.overlay
+  # nixpkgs.overlays = [
+    # inputs.nur.overlay
     # inputs.emacs-overlay.overlay
-  ];
+  # ];
 
   nix = {
     package = pkgs.nixFlakes;
@@ -70,17 +69,6 @@ in with pkgs.stdenv; with lib; {
       # isHidden = false;
       # createHome = false;
     };
-  };
-
-  ################
-  # home-manager #
-  ################
-
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    backupFileExtension = "backup";
-    users.${defaultUser} = { inputs, pkgs, ... }: { imports = [ ../home.nix ]; };
   };
 
   ########################

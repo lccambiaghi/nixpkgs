@@ -149,31 +149,31 @@ in
         };
       };
     };
-    texlive = {
-      enable = true;
-      extraPackages = tpkgs: {
-        inherit (tpkgs)
-          # maybe useless with scheme-full
-          capt-of
-          catchfile
-          environ
-          framed
-          fvextra
-          tcolorbox
-          trimspaces
-          upquote
-          xstring
-          # additional
-          dvipng
-          fontspec
-          minted
-          wrapfig
-          xetex
-          # base
-          scheme-full
-          latexmk ;
-      };
-    };
+    # texlive = {
+    #   enable = true;
+    #   extraPackages = tpkgs: {
+    #     inherit (tpkgs)
+    #       # maybe useless with scheme-full
+    #       capt-of
+    #       catchfile
+    #       environ
+    #       framed
+    #       fvextra
+    #       tcolorbox
+    #       trimspaces
+    #       upquote
+    #       xstring
+    #       # additional
+    #       dvipng
+    #       fontspec
+    #       minted
+    #       wrapfig
+    #       xetex
+    #       # base
+    #       scheme-full
+    #       latexmk ;
+    #   };
+    # };
     vim.enable = true;
     # vscode = {
     #   enable = true;

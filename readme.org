@@ -159,3 +159,6 @@ If something changes even slightly in the inputs, the hash output will change.
 ** Escaping in strings
 - You can use ~'~ to escape double quotes
 - You can use ~''~ to escape dollar
+* References
+- https://github.com/malob/nixpkgs
+- https://github.com/kclejeune/system

@@ -5,9 +5,15 @@ let
 
 in
 {
+
+  homebrew.enable = true;
+  homebrew.autoUpdate = true;
+  homebrew.cleanup = "zap";
+  homebrew.global.brewfile = true;
+  homebrew.global.noLock = true;
+
   homebrew = {
-    enable = true;
-    formulae = [
+    brews = [
       "borkdude/brew/babashka"
       "kubectx"
       "libvterm"
@@ -17,7 +23,7 @@ in
       # "parquet-tools"
       # "crescentrose"/sunshine
     ];
-    cask_args.appdir = "/Users/${user_name}/Applications";
+    # cask_args.appdir = "/Users/${user_name}/Applications";
     casks = [
       # "authy"
       # "altserver"
@@ -40,10 +46,10 @@ in
       # "qbitorrent"
       # "slack"
     ];
-    taps = [
+    # taps = [
       # "borkdude/brew"
       # "homebrew/cask-fonts"
       # "crescentrose/sunshine"
-    ];
+    # ];
   };
 }

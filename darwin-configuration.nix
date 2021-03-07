@@ -18,7 +18,7 @@
       command -v brew > /dev/null || ${pkgs.bash}/bin/bash -c "$(${pkgs.curl}/bin/curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     '';
     systemPath = [
-      "/etc/profiles/per-user/luca/bin" # TODO how to avoid hardcoding?
+      "/run/current-system/sw/bin/" # TODO how to avoid hardcoding?
       "$HOME/.poetry/bin"
       # "$HOME/.emacs.d/bin"
       "$HOME/git/doom-emacs/bin"
@@ -29,7 +29,7 @@
       LIBRARY_PATH="/usr/bin/gcc";
       CLOJURE_LOAD_PATH="$HOME/git/clojure-clr/bin/4.0/Release/"; # NOTE this needs to be present and compiled
       EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs";
-      SHELL = "/etc/profiles/per-user/luca/bin/zsh"; # TODO how to avoid hardcoding?
+      SHELL = "/run/current-system/sw/bin/zsh"; # TODO how to avoid hardcoding?
       # BROWSER = "firefox";
       # OPENTYPEFONTS="$HOME/.nix-profile/share/fonts/opentype//:";
     };
@@ -37,30 +37,6 @@
   };
 
   nix.nixPath = [ "darwin=/etc/${config.environment.etc.darwin.target}" ];
-
-  # Overlay for temporary fixes to broken packages on nixos-unstable
-  nixpkgs.overlays = [
-    (self: super:
-      let
-        # Import nixpkgs at a specified commit
-        importNixpkgsRev = { rev, sha256 }:
-          import (builtins.fetchTarball {
-            name = "nixpkgs-src-" + rev;
-            url = "https://github.com/NixOS/nixpkgs/archive/" + rev + ".tar.gz";
-            inherit sha256;
-          }) {
-            system = "x86_64-darwin";
-            inherit (config.nixpkgs) config;
-            overlays = [ ];
-          };
-
-        stable = import inputs.stable {
-          system = "x86_64-darwin";
-          inherit (config.nixpkgs) config;
-          overlays = [ ];
-        };
-      in { })
-  ];
 
   programs.fish.enable = true;
   programs.zsh.enable = true;
