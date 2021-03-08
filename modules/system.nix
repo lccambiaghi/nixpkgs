@@ -1,9 +1,6 @@
 { inputs, config, lib, pkgs, ... }:
 
 let
-  homePrefix = "/Users";
-  homeDir = "/Users/luca";
-  defaultUser = "luca";
   userShell = "fish";
 
 in with pkgs.stdenv; with lib; {
@@ -24,7 +21,6 @@ in with pkgs.stdenv; with lib; {
       ${lib.optionalString (config.nix.package == pkgs.nixFlakes)
       "experimental-features = nix-command flakes"}
     '';
-    trustedUsers = [ "${defaultUser}" "root" "@admin" "@wheel" ];
     gc = {
       automatic = true;
       options = "--delete-older-than 30d";
@@ -61,16 +57,6 @@ in with pkgs.stdenv; with lib; {
     shells = [ pkgs.fish pkgs.zsh ];
   };
 
-  users.users = {
-    "${defaultUser}" = {
-      description = "Luca Cambiaghi";
-      home = "${homePrefix}/${defaultUser}";
-      shell = pkgs.${userShell};
-      # isHidden = false;
-      # createHome = false;
-    };
-  };
-
   ########################
   # System configuration #
   ########################
@@ -78,24 +64,14 @@ in with pkgs.stdenv; with lib; {
   # Fonts
   fonts = {
     enableFontDir = true;
-    fonts = with pkgs; [
-      jetbrains-mono
-      iosevka
-      fira-code
-      cantarell-fonts
-      # (nerdfonts.override { fonts = [ "FiraCode" ]; })
-    ];
+    # fonts declared with home-manager
   };
 
   networking = {
-    knownNetworkServices = ["Wi-Fi" "Bluetooth PAN" "Thunderbolt Bridge"];
-    hostName =  "luca-macbookpro";
-    computerName = "luca-macbookpro";
-    localHostName = "luca-macbookpro";
-    # dns = [
-    #   "1.1.1.1"
-    #   "8.8.8.8"
-    # ];
+    dns = [
+      "1.1.1.1"
+      "8.8.8.8"
+    ];
   };
 
   # time.timeZone = "Europe/Paris";

@@ -1,5 +1,5 @@
 #+STARTUP: content
-* Installation
+* Install Nix and switch to this configuration
 ** v1 (thanks https://github.com/malob/nixpkgs)
 #+begin_src sh
 # 1. Install nix multi-user
@@ -22,6 +22,7 @@ $(nix-build '<darwin>' -A installer)  # nix-build https://github.com/LnL7/nix-da
 darwin-rebuild switch -I darwin-config=~/.config/nixpkgs/darwin/configuration.nix
 # $(nix-build '<darwin>' -A system --no-out-link)/sw/bin/darwin-rebuild switch -I darwin-config=~/.config/nixpkgs/darwin/configuration.nix
 #+end_src
+
 ** v2 (thanks https://github.com/kclejeune/system)
 #+begin_src sh
 # 1.
@@ -37,32 +38,37 @@ git clone git@github.com:lccambiaghi/nixpkgs.git ~/.config/nixpkgs
 # 3.
 cd ~/.config/nixpkgs && nix develop --command "darwinInstall"
 #+end_src
+
 * nix-darwin
 Documentation: https://daiderd.com/nix-darwin/manual/index.html#sec-options
-** Rebuild switch
+** Rebuild and switch to a darwin-configuration
 #+BEGIN_SRC sh
 darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
 #+END_SRC
-** How does it work?
-- ~darwin/configuration.nix~ is the main entrypoint. It imports ~home-manager~ as module and its config from ~home-manager/configuration.
+
 ** Restart daemon
 #+begin_src sh
 sudo launchctl stop org.nixos.nix-daemon
 sudo launchctl start org.nixos.nix-daemon
 #+end_src
+
 * Flake
 ** build
 #+begin_src sh
 nix build .#darwinConfigurations.test.system
 
-darwin-rebuild build --flake .#darwinconfigurations.simple.system
+darwin-rebuild build --flake .#luca-macbookpro
+# nix build ".#darwinConfigurations.luca-macbookpro.system"
 
-darwin-rebuild switch --flake .#darwinConfigurations.simple.system --override-input darwin .
+darwin-rebuild switch --flake .#luca-macbookpro
+# ./result/sw/bin/darwin-rebuild switch --flake .#luca-macbookpro
 #+end_src
-** Update input
+
+** Update inputs and update lock file
 #+begin_src sh
 nix flake update --update-input nixpkgs
 #+end_src
+
 * niv and channels
 - Instead of using nix-channels, channels are added to nix/sources.json, and nix/nix-defexpr is simlinked to ~/.nix-defexpr.
 - You add (and pin) channels in ~nix/sources.json~ with ~niv add~
@@ -92,6 +98,7 @@ And write
 #+begin_src sh
 luca ALL=(ALL:ALL) NOPASSWD: /run/current-system/sw/bin/darwin-rebuild
 #+end_src
+
 * Nix
 - Good intro: https://stephank.nl/p/2020-06-01-a-nix-primer-by-a-newcomer.html
 
@@ -139,6 +146,7 @@ A config takes an attribute as parameter and returns an attribute set
   allowUnfree = true;
 }
 #+end_src
+
 ** Derivation
 A derivation takes inputs and produces output.
 A derivation is lazy, so it will only be evaluated when it is input to other derivations.

@@ -100,6 +100,7 @@ in
       bash # /bin/bash
       bat # cat replacement written in Rust
       cachix
+      cantarell-fonts
       # calibre
       clojure
       cmake
@@ -109,10 +110,12 @@ in
       direnv # Per-directory environment variables
       docker # World's #1 container tool
       # docker-machine # Docker daemon for macOS
+      emacs-all-the-icons-fonts
       exa # ls replacement written in Rust
       fd # find replacement written in Rust
       # font-awesome_5
       font-awesome_4
+      fira-code
       fzf # Fuzzy finder
       # gcc
       git-lfs
@@ -148,6 +151,7 @@ in
       # nodePackages.vega-lite
       # nodePackages.vega-cli
       # nuget
+      pandoc
       pinentry_mac # Necessary for GPG
       # python37Packages.poetry
       customPython

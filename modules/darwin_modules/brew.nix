@@ -27,7 +27,22 @@ in
     casks = [
       # "authy"
       # "altserver"
-      # "amethyst"
+      "amethyst"
+      "caffeine"
+      "discord"
+      "docker"
+      "dozer"
+      "google-chrome"
+      "jetbrains-toolbox"
+      "karabiner-elements"
+      "keybase"
+      "microsoft-auto-update"
+      "microsoft-azure-storage-explorer"
+      "microsoft-office"
+      "microsoft-teams"
+      "pycharm-ce"
+      "slack"
+      "visual-studio-code"
       # "1password"
       # "iina"
       # "discord"
@@ -36,7 +51,7 @@ in
       # "dropbox"
       # "google-chrome"
       # "keybase" # maybe enable in home-manager
-      "karabiner-elements"
+      # "karabiner-elements"
       # "menumeters"
       # "microsoft-azure-storage-explorer"
       # "microsoft-office"
@@ -46,10 +61,11 @@ in
       # "qbitorrent"
       # "slack"
     ];
-    # taps = [
-      # "borkdude/brew"
+    taps = [
+      "homebrew/cask"
+      "borkdude/brew"
       # "homebrew/cask-fonts"
       # "crescentrose/sunshine"
-    # ];
+    ];
   };
 }

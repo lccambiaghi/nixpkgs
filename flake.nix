@@ -71,21 +71,55 @@
       ];
 
     in {
-      
-      # My macOS main laptop config
-      darwinConfigurations."luca-macbookpro" = darwin.lib.darwinSystem {
-        modules = nixDarwinCommonModules { user = "luca"; } ++ [
-          {
-            networking = {
-              knownNetworkServices = ["Wi-Fi" "Bluetooth PAN" "Thunderbolt Bridge"];
-              hostName =  "luca-macbookpro";
-              computerName = "luca-macbookpro";
-              localHostName = "luca-macbookpro";
-            };
-          }
-        ];
-        specialArgs = { inherit inputs nixpkgs; };
+      darwinConfigurations = {
+        # My macOS main laptop config
+        luca-macbookpro = darwin.lib.darwinSystem {
+          modules = nixDarwinCommonModules { user = "luca"; } ++ [
+            {
+              networking = {
+                knownNetworkServices = ["Wi-Fi" "Bluetooth PAN" "Thunderbolt Bridge"];
+                hostName =  "luca-macbookpro";
+                computerName = "luca-macbookpro";
+                localHostName = "luca-macbookpro";
+              };
+            }
+          ];
+          specialArgs = { inherit inputs nixpkgs; };
+        };
+
+        # Config with small modifications needed/desired for CI with GitHub workflow
+        githubCI = darwin.lib.darwinSystem {
+          modules = nixDarwinCommonModules { user = "runner"; } ++ [
+            ({ lib, ... }: { homebrew.enable = lib.mkForce false; })
+          ];
+        };
       };
 
-    };
+      # Config for Linux cloud VMs
+      # Build and activate with `nix build .#cloudVM.activationPackage; ./result/activate`
+      cloudVM = home-manager.lib.homeManagerConfiguration {
+        system = "x86_64-linux";
+        homeDirectory = "/home/luca";
+        username = "luca";
+        configuration = {
+          imports = [ homeManagerCommonConfig ];
+          nixpkgs = nixpkgsConfig;
+        };
+      };
+
+      # homeManagerModules = {
+      #   configs.git.aliases = import ./home/configs/git-aliases.nix;
+      #   configs.gh.aliases = import ./home/configs/gh-aliases.nix;
+      #   configs.starship.symbols = import ./home/configs/starship-symbols.nix;
+      #   programs.neovim.extras = import ./home/modules/programs/neovim/extras.nix;
+      #   programs.kitty.extras = import ./home/modules/programs/kitty/extras.nix;
+      # };
+
+    } // # add a devShell to this flake
+    inputs.flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in {
+        devShell = import ./shell.nix { inherit pkgs; };
+      });
 }
