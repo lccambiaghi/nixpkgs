@@ -46,7 +46,7 @@
       # Personal configuration shared between `nix-darwin` and plain `home-manager` configs.
       homeManagerCommonConfig = with self.homeManagerModules; {
         imports = [
-          ./home.nix
+          ./home
           # configs.git.aliases
           # configs.starship.symbols
           # programs.kitty.extras

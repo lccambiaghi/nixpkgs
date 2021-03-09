@@ -1,7 +1,8 @@
 { inputs, config, pkgs, lib, ... }:
 {
   imports = [
-    ./darwin_modules
+    ./brew.nix
+    ./preferences.nix
   ];
 
   #####################

@@ -82,7 +82,7 @@ let
 
 in
 {
-  imports = [ ./modules/programs.nix ./modules/dotfiles ./modules/kitty];
+  imports = [ ./programs.nix ./dotfiles ./kitty];
 
   fonts.fontconfig.enable = true;
 
