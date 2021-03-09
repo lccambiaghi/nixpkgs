@@ -94,7 +94,7 @@ in
     # homeDirectory = "/Users/luca";
     stateVersion = "20.09";
     packages = with pkgs; [
-      # adoptopenjdk-bin # Java
+      adoptopenjdk-bin # Java
       argo
       azure-cli
       bash # /bin/bash

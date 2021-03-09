@@ -1,9 +1,9 @@
-{ inputs, config, lib, pkgs, ... }:
+{ inputs, config, pkgs, lib, ... }:
+{
+  imports = [
+    ./darwin_modules
+  ];
 
-let
-  userShell = "fish";
-
-in with pkgs.stdenv; with lib; {
   #####################
   # Nix configuration #
   #####################
@@ -31,6 +31,7 @@ in with pkgs.stdenv; with lib; {
     nixPath = [
       "nixpkgs=/etc/${config.environment.etc.nixpkgs.target}"
       "home-manager=/etc/${config.environment.etc.home-manager.target}"
+      "darwin=/etc/${config.environment.etc.darwin.target}"
     ];
     binaryCaches = [
       https://cache.nixos.org
@@ -42,19 +43,6 @@ in with pkgs.stdenv; with lib; {
       # "mjlbach.cachix.org-1:dR0V90mvaPbXuYria5mXvnDtFibKYqYc2gtl9MWSkqI="
       # "gccemacs-darwin.cachix.org-1:E0Q1uCBvxw58kfgoWtlletUjzINF+fEIkWknAKBnPhs="
     ];
-  };
-
-  ################
-  # environment #
-  ################
-
-  environment = {
-    etc = {
-      home-manager.source = "${inputs.home-manager}";
-      nixpkgs.source = "${inputs.nixpkgs}";
-    };
-    # list of acceptable shells in /etc/shells
-    shells = [ pkgs.fish pkgs.zsh ];
   };
 
   ########################
@@ -105,4 +93,50 @@ in with pkgs.stdenv; with lib; {
     clock_icon         = "";
     dnd_icon           = "";
   };
+
+  ################
+  # environment #
+  ################
+
+  environment = {
+    etc = {
+      home-manager.source = "${inputs.home-manager}";
+      nixpkgs.source = "${inputs.nixpkgs}";
+      darwin.source = "${inputs.darwin}";
+    };
+    extraInit = ''
+      # install homebrew
+      command -v brew > /dev/null || ${pkgs.bash}/bin/bash -c "$(${pkgs.curl}/bin/curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    '';
+    # loginShell = pkgs.fish;
+    pathsToLink = [ "/Applications" ];
+    shells = [ pkgs.fish pkgs.zsh ];
+    # systemPackages = [ ];
+    systemPath = [
+      "/run/current-system/sw/bin/" # TODO how to avoid hardcoding?
+      "$HOME/.poetry/bin"
+      # "$HOME/.emacs.d/bin"
+      "$HOME/git/doom-emacs/bin"
+    ];
+    variables = {
+      EDITOR = "emacsclient";
+      KUBE_EDITOR="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient";
+      LIBRARY_PATH="/usr/bin/gcc";
+      CLOJURE_LOAD_PATH="$HOME/git/clojure-clr/bin/4.0/Release/"; # NOTE this needs to be present and compiled
+      EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs";
+      SHELL = "${pkgs.zsh}/bin/zsh";
+      # BROWSER = "firefox";
+      # OPENTYPEFONTS="$HOME/.nix-profile/share/fonts/opentype//:";
+    };
+
+  };
+
+  programs.fish.enable = true;
+  programs.zsh.enable = true;
+  programs.bash.enable = true;
+
+  programs.nix-index.enable = true;
+
+  # Used for backwards compatibility, please read the changelog before changing.
+  system.stateVersion = 4;
 }

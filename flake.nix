@@ -56,7 +56,7 @@
       # Modules shared by most `nix-darwin` personal configurations.
       nixDarwinCommonModules = { user }: [
         # Main `nix-darwin` config
-        ./darwin-configuration.nix
+        ./darwin
         # `home-manager` module
         home-manager.darwinModules.home-manager
         {

@@ -5,7 +5,6 @@ let
 
 in
 {
-
   homebrew.enable = true;
   homebrew.autoUpdate = true;
   homebrew.cleanup = "zap";
@@ -17,24 +16,23 @@ in
       "borkdude/brew/babashka"
       "kubectx"
       "libvterm"
+      "libomp"
       # "mas"
       # "mono"
       # "nuget"
       # "parquet-tools"
       # "crescentrose"/sunshine
     ];
-    # cask_args.appdir = "/Users/${user_name}/Applications";
+    # extraConfig = ''
+    #     cask_args appdir: "~/BrewApplications", require_sha: true
+    # '';
     casks = [
       # "authy"
       # "altserver"
       "amethyst"
-      "caffeine"
       "discord"
       "docker"
-      "dozer"
       "google-chrome"
-      "jetbrains-toolbox"
-      "karabiner-elements"
       "keybase"
       "microsoft-auto-update"
       "microsoft-azure-storage-explorer"
@@ -42,7 +40,6 @@ in
       "microsoft-teams"
       "pycharm-ce"
       "slack"
-      "visual-studio-code"
       # "1password"
       # "iina"
       # "discord"

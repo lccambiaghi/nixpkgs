@@ -1,8 +1,8 @@
-{ pkgs ? import <nixpkgs> { } }:
+{ pkgs }:
 let
   isDarwin = pkgs.stdenvNoCC.isDarwin;
   configuration = if isDarwin then
-    "$HOME/.config/.nixpkgs/darwin-configuration.nix"
+    "$HOME/.config/.nixpkgs/darwin/default.nix"
   else
     "/etc/nixos/configuration.nix";
 

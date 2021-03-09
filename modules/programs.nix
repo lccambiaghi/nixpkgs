@@ -1,7 +1,4 @@
 { config, pkgs, ... }:
-let
-  homeDir = "/Users/luca";
-in
 {
   imports = [
     ./shells
@@ -149,31 +146,17 @@ in
         };
       };
     };
-    # texlive = {
-    #   enable = true;
-    #   extraPackages = tpkgs: {
-    #     inherit (tpkgs)
-    #       # maybe useless with scheme-full
-    #       capt-of
-    #       catchfile
-    #       environ
-    #       framed
-    #       fvextra
-    #       tcolorbox
-    #       trimspaces
-    #       upquote
-    #       xstring
-    #       # additional
-    #       dvipng
-    #       fontspec
-    #       minted
-    #       wrapfig
-    #       xetex
-    #       # base
-    #       scheme-full
-    #       latexmk ;
-    #   };
-    # };
+    texlive = {
+      enable = true;
+      extraPackages = tpkgs: {
+        inherit (tpkgs)
+          dvipng
+          # xetex
+          # latexmk 
+          # scheme-full
+          scheme-small;
+      };
+    };
     vim.enable = true;
     # vscode = {
     #   enable = true;
@@ -186,6 +169,5 @@ in
     #   ];
     # };
   };
-
 
 }

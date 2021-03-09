@@ -19,7 +19,7 @@ $(nix-build '<darwin>' -A installer)  # nix-build https://github.com/LnL7/nix-da
 ./result/bin/darwin-installer
 
 # 5. Reload configuration
-darwin-rebuild switch -I darwin-config=~/.config/nixpkgs/darwin/configuration.nix
+darwin-rebuild switch -I darwin-config=~/.config/nixpkgs/darwin/default.nix
 # $(nix-build '<darwin>' -A system --no-out-link)/sw/bin/darwin-rebuild switch -I darwin-config=~/.config/nixpkgs/darwin/configuration.nix
 #+end_src
 
