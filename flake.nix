@@ -1,29 +1,27 @@
+# NOTE: this file is tangled from readme.org
+# DO NOT edit by hand
 {
   description = "Luca Cambiaghi's darwin configuration";
-
   inputs = {
     # Package sets
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixpkgs-stable-darwin.url = "github:nixos/nixpkgs/nixpkgs-20.09-darwin";
     nixos-stable.url = "github:nixos/nixpkgs/nixos-20.09";
-
+  
     # Environment/system management
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
+  
     # Other sources
     fish-done = { url = "github:franciscolourenco/done"; flake = false; };
     flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
     flake-utils.url = "github:numtide/flake-utils";
   };
-
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, flake-utils, ... }:
     let
-      # Some building blocks --------------------------------------------------------------------- {{{
-      # Configuration for `nixpkgs` mostly used in personal configs.
       nixpkgsConfig = with inputs; {
         config = {
           allowUnfree = true;
@@ -42,8 +40,6 @@
           )
         ];
       };
-
-      # Personal configuration shared between `nix-darwin` and plain `home-manager` configs.
       homeManagerCommonConfig = with self.homeManagerModules; {
         imports = [
           ./home
@@ -52,8 +48,6 @@
           # programs.kitty.extras
         ];
       };
-
-      # Modules shared by most `nix-darwin` personal configurations.
       nixDarwinCommonModules = { user }: [
         # Main `nix-darwin` config
         ./darwin
@@ -69,10 +63,8 @@
           home-manager.users.${user} = homeManagerCommonConfig;
         }
       ];
-
     in {
       darwinConfigurations = {
-        # My macOS main laptop config
         luca-macbookpro = darwin.lib.darwinSystem {
           modules = nixDarwinCommonModules { user = "luca"; } ++ [
             {
@@ -86,17 +78,12 @@
           ];
           specialArgs = { inherit inputs nixpkgs; };
         };
-
-        # Config with small modifications needed/desired for CI with GitHub workflow
         githubCI = darwin.lib.darwinSystem {
           modules = nixDarwinCommonModules { user = "runner"; } ++ [
             ({ lib, ... }: { homebrew.enable = lib.mkForce false; })
           ];
         };
       };
-
-      # Config for Linux cloud VMs
-      # Build and activate with `nix build .#cloudVM.activationPackage; ./result/activate`
       cloudVM = home-manager.lib.homeManagerConfiguration {
         system = "x86_64-linux";
         homeDirectory = "/home/luca";
@@ -106,7 +93,6 @@
           nixpkgs = nixpkgsConfig;
         };
       };
-
       # homeManagerModules = {
       #   configs.git.aliases = import ./home/configs/git-aliases.nix;
       #   configs.gh.aliases = import ./home/configs/gh-aliases.nix;
@@ -114,8 +100,7 @@
       #   programs.neovim.extras = import ./home/modules/programs/neovim/extras.nix;
       #   programs.kitty.extras = import ./home/modules/programs/kitty/extras.nix;
       # };
-
-    } // # add a devShell to this flake
+    } //
     inputs.flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
