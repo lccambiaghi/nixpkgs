@@ -5,6 +5,8 @@
 
 #+STARTUP: content
 * flake.nix
+This ~readme~ is better view in HTML format [[https://luca.cambiaghi.me/nixpkgs/readme.html][here]] or through ~org-mode~ (clone the repo and open in ~emacs~).
+
 ** structure
 #+begin_src nix :tangle flake.nix :noweb yes
 # NOTE: this file is tangled from readme.org
