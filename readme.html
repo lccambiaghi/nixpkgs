@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-03-13 Sat 12:35 -->
+<!-- 2021-03-18 Thu 23:43 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Luca's nix configuration</title>
@@ -100,7 +100,7 @@ summary {
   --bg: #100b17;
   --bg-code: #282e46;
   --bg-tb-hd: #282e46;
-  --bg-block: initial;
+  --bg-block: #161129;
   --clr-link: #00bcff;
   --clr-title: #ffffff;
   --clr-todo: #79a8ff;
@@ -159,7 +159,7 @@ body[data-theme='dark'] {
   --bg: #100b17;
   --bg-tb-hd: #282e46;
   --bg-code: #282e46;
-  --bg-block: initial;
+  --bg-block: #161129;
   --clr-link: #00bcff;
   --clr-title: #ffffff;
   --clr-todo: #79a8ff;
@@ -189,421 +189,6 @@ body[data-theme='dark'] {
   --clr-builtin: #f78fe7;
   --bg-string: initial;
   --clr-string: #79a8ff;
-}
-
-
-@media only screen and (max-width: 768px) {
-  #content {
-    width: 100%;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  #content {
-    width: 768px;
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  body {
-    align-items: flex-end;
-  }
-  #content {
-    width: calc(100vw - var(--w-toc) - var(--mg) * 3);
-    margin-right: var(--mg);
-  }
-}
-
-h1 {
-  color: var(--clr-title);
-  text-align: center;
-}
-h2, h3, h4, h5, h6, h7 {
-  font-family: Sans Serif;
-}
-h2 {
-  line-height: 2.5em;
-}
-h2::before {
-  content: "◉ ";
-}
-h3::before {
-  content: "✸ ";
-}
-h4::before {
-  content: "▷ ";
-}
-
-code {
-  color: var(--clr-code);
-  background: var(--bg-code);
-  border-radius: 2px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-pre {
-  padding: 20px;
-  border: 1px solid var(--bc-block);
-  background: var(--bg-block);
-  font-size: 0.9rem;
-  overflow-x: scroll;
-}
-
-pre::-webkit-scrollbar {
-  display: none;
-}
-
-pre {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-
-.todo {
-  color: var(--clr-todo);
-  background: var(--bg-todo);
-}
-
-.done {
-  color: var(--clr-done);
-  background: var(--bg-done);
-}
-
-.timestamp-wrapper {
-  font-size: 0.8rem;
-  color: var(--clr-ts);
-}
-
-table {
-  width: 100%;
-  border: 2px solid var(--bc-tb);
-}
-
-thead {
-  color: var(--clr-tb-hd);
-  background: var(--bg-tb-hd);
-}
-
-td, th {
-  border: thin solid var(--bc-tb);
-}
-
-li {
-  line-height: 2rem;
-}
-
-a {
-  text-decoration: none;
-  color: var(--clr-link);
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-#table-of-contents > h2 {
-  display: none;
-}
-
-#table-of-contents {
-  border: thin solid var(--bc-block);
-  background: var(--bg-block);
-}
-
-#toggle-toc {
-  display: none;
-}
-
-.toc-show {
-  display: block!important;
-}
-
-@media only screen and (max-width: 768px) {
-  #toggle-toc {
-    position: fixed;
-    top: 0;
-    right: 0;
-    cursor: pointer;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-size: 2em;
-    line-height: 2em;
-    display: block;
-  }
-  #table-of-contents {
-    background: var(--bg);
-    display: none;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    overflow-y: scroll;
-  }
-  #table-of-contents a {
-    color: var(--clr);
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  #table-of-contents {
-    font-size: 0.8rem;
-    position: fixed;
-    left: var(--mg);
-    top: var(--mg);
-    bottom: var(--mg);
-    width: var(--w-toc);
-    overflow-y: scroll;
-  }
-}
-
-#table-of-contents::-webkit-scrollbar {
-  display: none;
-}
-
-#table-of-contents {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.MathJax_Display {
-  font-size: 1.25em;
-}
-
-#toggle-theme {
-  border-width: 0;
-  line-height: 4em;
-  padding-left: 1em;
-  padding-right: 1em;
-  background: var(--bg-block);
-  color: var(--clr-code);
-}
-
-#toggle-theme:hover {
-  cursor: pointer;
-}
-
-img {
-  width: 100%;
-}
-
-@media only screen and (max-width: 768px) {
-  #toggle-theme {
-    width: 100%;
-    text-align: center;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  #toggle-theme {
-    position: absolute;
-    top: var(--mg);
-    right: var(--mg);
-    border-radius: 5px;
-  }
-}
-
-.theme-transition {
-  transition: all 0.5s;
-}
-
-.status {
-  width: 100%;
-}
-
-@media only screen and (max-width: 768px) {
-  ul {
-    padding-left: .5em;
-    margin-left: 0;
-  }
-  li {
-    padding-left: 0;
-    margin-left: 0;
-  }
-}
-/*]]>*/-->
-</style>
-<style type="text/css">
-<!--/*--><![CDATA[/*><!--*/
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-}
-
-html {
-	line-height: 1.35;
-	-webkit-text-size-adjust: 100%;
-}
-
-body {
-	margin: 0;
-	font-family:
-		system-ui,
-		-apple-system,
-		'Segoe UI',
-		Roboto,
-		Helvetica,
-		Arial,
-		sans-serif,
-		'Apple Color Emoji',
-		'Segoe UI Emoji';
-}
-
-hr {
-	height: 0;
-	color: inherit;
-}
-
-b,
-strong {
-	font-weight: bolder;
-}
-
-code,
-kbd,
-samp,
-pre {
-	font-family:
-		ui-monospace,
-		SFMono-Regular,
-		Consolas,
-		'Liberation Mono',
-		Menlo,
-		monospace;
-	font-size: 1em;
-}
-
-small {
-	font-size: 80%;
-}
-
-sub,
-sup {
-	font-size: 75%;
-	line-height: 0;
-	position: relative;
-	vertical-align: baseline;
-}
-
-sub {
-	bottom: -0.25em;
-}
-
-sup {
-	top: -0.5em;
-}
-
-table {
-	text-indent: 0;
-	border-color: inherit;
-}
-
-summary {
-	display: list-item;
-}
-
-:root {
-  --bc-tb: #e8dfd1;
-  --bc-block: #505050;
-  --clr: #000000;
-  --clr-tb-hd: #282828;
-  --clr-code: #282828;
-  --bg: #fefcf4;
-  --bg-code: #e8dfd1;
-  --bg-tb-hd: #e8dfd1;
-  --bg-block: initial;
-  --clr-link: #0000c0;
-  --clr-title: #000000;
-  --clr-todo: #2544bb;
-  --bg-todo: initial;
-  --clr-done: #505050;
-  --bg-done: initial;
-  --ts-clr: #5317ac;
-  --mg: 20px;
-  --w-toc: 300px;
-  --bg-keyword: initial;
-  --clr-keyword: #5317ac;
-  --bg-constant: initial;
-  --clr-constant: #0000c0;
-  --bg-comment: initial;
-  --clr-comment: #505050;
-  --bg-comment-delimiter: initial;
-  --clr-comment-delimiter: initial;
-  --bg-function: initial;
-  --clr-function: #721045;
-  --bg-variable: initial;
-  --clr-variable: #00538b;
-  --bg-preprocessor: initial;
-  --clr-preprocessor: #a0132f;
-  --bg-doc: initial;
-  --clr-doc: #2a486a;
-  --bg-builtin: initial;
-  --clr-builtin: #8f0075;
-  --bg-string: initial;
-  --clr-string: #2544bb;
-}
-
-html {
-  font-family: Sans;
-}
-
-body {
-  background: #999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-body[data-theme='light'] {
-  background: var(--bg);
-  color: var(--clr);
-}
-
-body[data-theme='dark'] {
-  background: var(--bg);
-  color: var(--clr);
-  --bc-tb: #e8dfd1;
-  --bc-block: #505050;
-  --clr: #000000;
-  --clr-code: #282828;
-  --clr-tb-hd: #282828;
-  --bg: #fefcf4;
-  --bg-tb-hd: #e8dfd1;
-  --bg-code: #e8dfd1;
-  --bg-block: initial;
-  --clr-link: #0000c0;
-  --clr-title: #000000;
-  --clr-todo: #2544bb;
-  --bg-todo: initial;
-  --clr-done: #505050;
-  --bg-done: initial;
-  --ts-clr: #5317ac;
-  --mg: 20px;
-  --w-toc: 300px;
-  --bg-keyword: initial;
-  --clr-keyword: #5317ac;
-  --bg-constant: initial;
-  --clr-constant: #0000c0;
-  --bg-comment: initial;
-  --clr-comment: #505050;
-  --bg-comment-delimiter: initial;
-  --clr-comment-delimiter: initial;
-  --bg-function: initial;
-  --clr-function: #721045;
-  --bg-variable: initial;
-  --clr-variable: #00538b;
-  --bg-preprocessor: initial;
-  --clr-preprocessor: #a0132f;
-  --bg-doc: initial;
-  --clr-doc: #2a486a;
-  --bg-builtin: initial;
-  --clr-builtin: #8f0075;
-  --bg-string: initial;
-  --clr-string: #2544bb;
 }
 
 
@@ -874,215 +459,124 @@ img {
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org586c85a">1. flake.nix</a>
+<li><a href="#org0c5dc2b">1. flake.nix</a>
 <ul>
-<li><a href="#org169c5d0">1.1. structure</a></li>
-<li><a href="#org86f5456">1.2. inputs</a></li>
-<li><a href="#org83f5e25">1.3. nixpkgs config</a></li>
-<li><a href="#org8f3be87">1.4. home-manager config</a></li>
-<li><a href="#orga9d1c65">1.5. nix-darwin config</a></li>
-<li><a href="#org2d5136d">1.6. luca-macbook-pro</a></li>
-<li><a href="#orgf14fb3a">1.7. github-ci</a></li>
-<li><a href="#org9ba886f">1.8. home-manager-modules</a></li>
-<li><a href="#org000ea24">1.9. cloud-vm</a></li>
-<li><a href="#orgc7a6fc3">1.10. dev-shell</a></li>
+<li><a href="#orgb459a88">1.1. structure</a></li>
+<li><a href="#org5abc0e1">1.2. inputs</a></li>
+<li><a href="#org17c064c">1.3. nixpkgs config</a></li>
+<li><a href="#orge66f4da">1.4. home-manager config</a></li>
+<li><a href="#orgb8c5706">1.5. nix-darwin config</a></li>
+<li><a href="#orgeda15fb">1.6. luca-macbook-pro</a></li>
+<li><a href="#org2f0e48d">1.7. github-ci</a></li>
+<li><a href="#org06c90fe">1.8. home-manager-modules</a></li>
+<li><a href="#org91db2bd">1.9. cloud-vm</a></li>
+<li><a href="#orgea51383">1.10. dev-shell</a></li>
 </ul>
 </li>
-<li><a href="#orgcc55684">2. Practical commands</a>
+<li><a href="#orge2157e9">2. Practical commands</a>
 <ul>
-<li><a href="#orgd784c50">2.1. Install nix (flakes)</a></li>
-<li><a href="#org678507b">2.2. darwin-rebuild</a></li>
-<li><a href="#orgb8f945f">2.3. nix flake update</a></li>
+<li><a href="#orge868043">2.1. Install nix (flakes)</a></li>
+<li><a href="#org2fa6931">2.2. darwin-rebuild</a></li>
+<li><a href="#orgbd19e15">2.3. nix flake update</a></li>
 </ul>
 </li>
-<li><a href="#org78339f9">3. Nix</a>
+<li><a href="#org154afa2">3. Nix</a>
 <ul>
-<li><a href="#org35adfa8">3.1. Fundamentals</a></li>
-<li><a href="#orgf357a97">3.2. Config</a></li>
-<li><a href="#org5888d91">3.3. Derivation</a></li>
-<li><a href="#org3cf041d">3.4. Escaping in strings</a></li>
+<li><a href="#org76eecf2">3.1. Fundamentals</a></li>
+<li><a href="#org897584b">3.2. Config</a></li>
+<li><a href="#org1bc1347">3.3. Derivation</a></li>
+<li><a href="#orgf91e49b">3.4. Escaping in strings</a></li>
 </ul>
 </li>
-<li><a href="#orgc88e1bf">4. References</a></li>
+<li><a href="#org15e9476">4. References</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org586c85a" class="outline-2">
-<h2 id="org586c85a"><span class="section-number-2">1</span> flake.nix</h2>
+<div id="outline-container-org0c5dc2b" class="outline-2">
+<h2 id="org0c5dc2b"><span class="section-number-2">1</span> flake.nix</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This <code>readme</code> is better view in HTML format <a href="https://luca.cambiaghi.me/nixpkgs/readme.html">here</a> or through <code>org-mode</code> (clone the repo and open in <code>emacs</code>).
+You can visit my blog at the same <a href="https://luca.cambiaghi.me">website</a>.
 </p>
 </div>
 
-<div id="outline-container-org169c5d0" class="outline-3">
-<h3 id="org169c5d0"><span class="section-number-3">1.1</span> structure</h3>
+<div id="outline-container-orgb459a88" class="outline-3">
+<h3 id="orgb459a88"><span class="section-number-3">1.1</span> structure</h3>
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
 <pre class="src src-nix"><span style="color: var(--clr-comment-delimiter); background-color: var(--bg-comment-delimiter);"># </span><span style="color: var(--clr-comment); background-color: var(--bg-comment);">NOTE: this file is tangled from readme.org</span>
 <span style="color: var(--clr-comment-delimiter); background-color: var(--bg-comment-delimiter);"># </span><span style="color: var(--clr-comment); background-color: var(--bg-comment);">DO NOT edit by hand</span>
 {
-  <span style="color: #00538b;">description</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"Luca Cambiaghi's darwin configuration"</span>;
-  <span style="color: #00538b;">inputs</span> = {
-    <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># Package sets</span>
-    <span style="color: #00538b;">nixpkgs.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nixos/nixpkgs/nixpkgs-unstable"</span>;
-    <span style="color: #00538b;">nixpkgs-master.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nixos/nixpkgs/master"</span>;
-    <span style="color: #00538b;">nixpkgs-stable-darwin.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nixos/nixpkgs/nixpkgs-20.09-darwin"</span>;
-    <span style="color: #00538b;">nixos-stable.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nixos/nixpkgs/nixos-20.09"</span>;
-  
-    <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># Environment/system management</span>
-    <span style="color: #00538b;">darwin.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:lnl7/nix-darwin"</span>;
-    <span style="color: #00538b;">darwin.inputs.nixpkgs.follows</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"nixpkgs"</span>;
-    <span style="color: #00538b;">home-manager.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nix-community/home-manager"</span>;
-    <span style="color: #00538b;">home-manager.inputs.nixpkgs.follows</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"nixpkgs"</span>;
-  
-    <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># Other sources</span>
-    <span style="color: #00538b;">emacs.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nix-community/emacs-overlay"</span>;
-    <span style="color: #00538b;">fish-done</span> = { <span style="color: #00538b;">url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:franciscolourenco/done"</span>; <span style="color: #00538b;">flake</span> = <span style="color: #8f0075; font-weight: bold;">false</span>; };
-    <span style="color: #00538b;">flake-compat</span> = { <span style="color: #00538b;">url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:edolstra/flake-compat"</span>; <span style="color: #00538b;">flake</span> = <span style="color: #8f0075; font-weight: bold;">false</span>; };
-    <span style="color: #00538b;">flake-utils.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:numtide/flake-utils"</span>;
-  };
-  <span style="color: #00538b;">outputs</span> = inputs@{ self, nixpkgs, darwin, home-manager, flake-utils, ... }:
-    <span style="color: #5317ac; font-weight: bold;">let</span>
-      <span style="color: #00538b;">nixpkgsConfig</span> = <span style="color: #5317ac; font-weight: bold;">with</span> inputs; {
-        <span style="color: #00538b;">config</span> = {
-          <span style="color: #00538b;">allowUnfree</span> = <span style="color: #8f0075; font-weight: bold;">true</span>;
-          <span style="color: #00538b;">allowUnsupportedSystem</span> = <span style="color: #8f0075; font-weight: bold;">true</span>;
-        };
-        <span style="color: #00538b;">overlays</span> = [
-          (
-            final: prev:
-            <span style="color: #5317ac; font-weight: bold;">let</span>
-              <span style="color: #00538b;">system</span> = prev.stdenv.system;
-              <span style="color: #00538b;">nixpkgs-stable</span> = <span style="color: #5317ac; font-weight: bold;">if</span> system == <span style="color: var(--clr-string); background-color: var(--bg-string);">"x86_64-darwin"</span> <span style="color: #5317ac; font-weight: bold;">then</span> nixpkgs-stable-darwin <span style="color: #5317ac; font-weight: bold;">else</span> nixos-stable;
-            <span style="color: #5317ac; font-weight: bold;">in</span> {
-              <span style="color: #00538b;">master</span> = nixpkgs-master.legacyPackages.${system};
-              <span style="color: #00538b;">stable</span> = nixpkgs-stable.legacyPackages.${system};
-            }
-          )
-          emacs.overlay
-        ];
+  <span style="color: #00d3d0;">description</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"Luca Cambiaghi's darwin configuration"</span>;
+  &lt;<span style="color: #00bcff;">&lt;inputs&gt;</span>&gt;
+  <span style="color: #00d3d0;">outputs</span> = inputs@{ self, nixpkgs, darwin, home-manager, flake-utils, ... }:
+    <span style="color: #b6a0ff; font-weight: bold;">let</span>
+      &lt;<span style="color: #00bcff;">&lt;nixpkgs-config&gt;</span>&gt;
+      &lt;<span style="color: #00bcff;">&lt;home-manager-config&gt;</span>&gt;
+      &lt;<span style="color: #00bcff;">&lt;nix-darwin-config&gt;</span>&gt;
+    <span style="color: #b6a0ff; font-weight: bold;">in</span> {
+      <span style="color: #00d3d0;">darwinConfigurations</span> = {
+        &lt;<span style="color: #00bcff;">&lt;luca-macbookpro&gt;</span>&gt;
+        &lt;<span style="color: #00bcff;">&lt;github-ci&gt;</span>&gt;
       };
-      <span style="color: #00538b;">homeManagerCommonConfig</span> = <span style="color: #5317ac; font-weight: bold;">with</span> self.homeManagerModules; {
-        <span style="color: #00538b;">imports</span> = [
-          <span style="color: #0000c0;">./home</span>
-          <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># configs.git.aliases</span>
-          <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># configs.starship.symbols</span>
-          <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># programs.kitty.extras</span>
-        ];
-      };
-      <span style="color: #00538b;">nixDarwinCommonModules</span> = { user }: [
-        <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># Main `nix-darwin` config</span>
-        <span style="color: #0000c0;">./darwin</span>
-        <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># `home-manager` module</span>
-        home-manager.darwinModules.home-manager
-        {
-          <span style="color: #00538b;">nixpkgs</span> = nixpkgsConfig;
-          <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># Hack to support legacy worklows that use `&lt;nixpkgs&gt;` etc.</span>
-          <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># nix.nixPath = { nixpkgs = "$HOME/.config/nixpkgs/nixpkgs.nix"; };</span>
-          <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># `home-manager` config</span>
-          users.users.${user}.<span style="color: #00538b;">home</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"/Users/</span><span style="color: #a0132f;">${</span>user<span style="color: #a0132f;">}</span>";
-          <span style="color: #00538b;">home-manager.useGlobalPkgs</span> = <span style="color: #8f0075; font-weight: bold;">true</span>;
-          home-manager.users.${user} = homeManagerCommonConfig;
-        }
-      ];
-    <span style="color: #5317ac; font-weight: bold;">in</span> {
-      <span style="color: #00538b;">darwinConfigurations</span> = {
-        <span style="color: #00538b;">luca-macbookpro</span> = darwin.lib.darwinSystem {
-          <span style="color: #00538b;">modules</span> = nixDarwinCommonModules { <span style="color: #00538b;">user</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"luca"</span>; } ++ [
-            {
-              <span style="color: #00538b;">networking</span> = {
-                <span style="color: #00538b;">knownNetworkServices</span> = [<span style="color: var(--clr-string); background-color: var(--bg-string);">"Wi-Fi"</span> <span style="color: var(--clr-string); background-color: var(--bg-string);">"Bluetooth PAN"</span> <span style="color: var(--clr-string); background-color: var(--bg-string);">"Thunderbolt Bridge"</span>];
-                <span style="color: #00538b;">hostName</span> =  <span style="color: var(--clr-string); background-color: var(--bg-string);">"luca-macbookpro"</span>;
-                <span style="color: #00538b;">computerName</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"luca-macbookpro"</span>;
-                <span style="color: #00538b;">localHostName</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"luca-macbookpro"</span>;
-              };
-            }
-          ];
-          <span style="color: #00538b;">specialArgs</span> = { <span style="color: #5317ac; font-weight: bold;">inherit</span> inputs nixpkgs; };
-        };
-        <span style="color: #00538b;">githubCI</span> = darwin.lib.darwinSystem {
-          <span style="color: #00538b;">modules</span> = nixDarwinCommonModules { <span style="color: #00538b;">user</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"runner"</span>; } ++ [
-            ({ lib, ... }: { <span style="color: #00538b;">homebrew.enable</span> = lib.mkForce <span style="color: #8f0075; font-weight: bold;">false</span>; })
-          ];
-        };
-      };
-      <span style="color: #00538b;">cloudVM</span> = home-manager.lib.homeManagerConfiguration {
-        <span style="color: #00538b;">system</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"x86_64-linux"</span>;
-        <span style="color: #00538b;">homeDirectory</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"/home/luca"</span>;
-        <span style="color: #00538b;">username</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"luca"</span>;
-        <span style="color: #00538b;">configuration</span> = {
-          <span style="color: #00538b;">imports</span> = [ homeManagerCommonConfig ];
-          <span style="color: #00538b;">nixpkgs</span> = nixpkgsConfig;
-        };
-      };
-      <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># homeManagerModules = {</span>
-      <span style="color: var(--clr-comment); background-color: var(--bg-comment);">#   configs.git.aliases = import ./home/configs/git-aliases.nix;</span>
-      <span style="color: var(--clr-comment); background-color: var(--bg-comment);">#   configs.gh.aliases = import ./home/configs/gh-aliases.nix;</span>
-      <span style="color: var(--clr-comment); background-color: var(--bg-comment);">#   configs.starship.symbols = import ./home/configs/starship-symbols.nix;</span>
-      <span style="color: var(--clr-comment); background-color: var(--bg-comment);">#   programs.neovim.extras = import ./home/modules/programs/neovim/extras.nix;</span>
-      <span style="color: var(--clr-comment); background-color: var(--bg-comment);">#   programs.kitty.extras = import ./home/modules/programs/kitty/extras.nix;</span>
-      <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># };</span>
+      &lt;<span style="color: #00bcff;">&lt;cloud-vm&gt;</span>&gt;
+      &lt;<span style="color: #00bcff;">&lt;home-manager-modules&gt;</span>&gt;
     } //
-    inputs.flake-utils.lib.eachDefaultSystem (system:
-      <span style="color: #5317ac; font-weight: bold;">let</span>
-        <span style="color: #00538b;">pkgs</span> = nixpkgs.legacyPackages.${system};
-      <span style="color: #5317ac; font-weight: bold;">in</span> {
-        <span style="color: #00538b;">devShell</span> = <span style="color: #8f0075; font-weight: bold;">import</span> <span style="color: #0000c0;">./shell.nix</span> { <span style="color: #5317ac; font-weight: bold;">inherit</span> pkgs; };
-      });
+    &lt;<span style="color: #00bcff;">&lt;dev-shell&gt;</span>&gt;
 }
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org86f5456" class="outline-3">
-<h3 id="org86f5456"><span class="section-number-3">1.2</span> inputs</h3>
+<div id="outline-container-org5abc0e1" class="outline-3">
+<h3 id="org5abc0e1"><span class="section-number-3">1.2</span> inputs</h3>
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
-<pre class="src src-nix" id="org995c573"><span style="color: #00538b;">inputs</span> = {
+<pre class="src src-nix" id="org570ace2"><span style="color: #00d3d0;">inputs</span> = {
   <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># Package sets</span>
-  <span style="color: #00538b;">nixpkgs.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nixos/nixpkgs/nixpkgs-unstable"</span>;
-  <span style="color: #00538b;">nixpkgs-master.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nixos/nixpkgs/master"</span>;
-  <span style="color: #00538b;">nixpkgs-stable-darwin.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nixos/nixpkgs/nixpkgs-20.09-darwin"</span>;
-  <span style="color: #00538b;">nixos-stable.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nixos/nixpkgs/nixos-20.09"</span>;
+  <span style="color: #00d3d0;">nixpkgs.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nixos/nixpkgs/nixpkgs-unstable"</span>;
+  <span style="color: #00d3d0;">nixpkgs-master.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nixos/nixpkgs/master"</span>;
+  <span style="color: #00d3d0;">nixpkgs-stable-darwin.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nixos/nixpkgs/nixpkgs-20.09-darwin"</span>;
+  <span style="color: #00d3d0;">nixos-stable.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nixos/nixpkgs/nixos-20.09"</span>;
 
   <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># Environment/system management</span>
-  <span style="color: #00538b;">darwin.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:lnl7/nix-darwin"</span>;
-  <span style="color: #00538b;">darwin.inputs.nixpkgs.follows</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"nixpkgs"</span>;
-  <span style="color: #00538b;">home-manager.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nix-community/home-manager"</span>;
-  <span style="color: #00538b;">home-manager.inputs.nixpkgs.follows</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"nixpkgs"</span>;
+  <span style="color: #00d3d0;">darwin.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:lnl7/nix-darwin"</span>;
+  <span style="color: #00d3d0;">darwin.inputs.nixpkgs.follows</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"nixpkgs"</span>;
+  <span style="color: #00d3d0;">home-manager.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nix-community/home-manager"</span>;
+  <span style="color: #00d3d0;">home-manager.inputs.nixpkgs.follows</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"nixpkgs"</span>;
 
   <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># Other sources</span>
-  <span style="color: #00538b;">emacs.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nix-community/emacs-overlay"</span>;
-  <span style="color: #00538b;">fish-done</span> = { <span style="color: #00538b;">url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:franciscolourenco/done"</span>; <span style="color: #00538b;">flake</span> = <span style="color: #8f0075; font-weight: bold;">false</span>; };
-  <span style="color: #00538b;">flake-compat</span> = { <span style="color: #00538b;">url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:edolstra/flake-compat"</span>; <span style="color: #00538b;">flake</span> = <span style="color: #8f0075; font-weight: bold;">false</span>; };
-  <span style="color: #00538b;">flake-utils.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:numtide/flake-utils"</span>;
+  <span style="color: #00d3d0;">emacs.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nix-community/emacs-overlay"</span>;
+  <span style="color: #00d3d0;">fish-done</span> = { <span style="color: #00d3d0;">url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:franciscolourenco/done"</span>; <span style="color: #00d3d0;">flake</span> = <span style="color: #f78fe7; font-weight: bold;">false</span>; };
+  <span style="color: #00d3d0;">flake-compat</span> = { <span style="color: #00d3d0;">url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:edolstra/flake-compat"</span>; <span style="color: #00d3d0;">flake</span> = <span style="color: #f78fe7; font-weight: bold;">false</span>; };
+  <span style="color: #00d3d0;">flake-utils.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:numtide/flake-utils"</span>;
 };
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org83f5e25" class="outline-3">
-<h3 id="org83f5e25"><span class="section-number-3">1.3</span> nixpkgs config</h3>
+<div id="outline-container-org17c064c" class="outline-3">
+<h3 id="org17c064c"><span class="section-number-3">1.3</span> nixpkgs config</h3>
 <div class="outline-text-3" id="text-1-3">
 <div class="org-src-container">
-<pre class="src src-nix" id="orgf1cd83f"><span style="color: #00538b;">nixpkgsConfig</span> = <span style="color: #5317ac; font-weight: bold;">with</span> inputs; {
-  <span style="color: #00538b;">config</span> = {
-    <span style="color: #00538b;">allowUnfree</span> = <span style="color: #8f0075; font-weight: bold;">true</span>;
-    <span style="color: #00538b;">allowUnsupportedSystem</span> = <span style="color: #8f0075; font-weight: bold;">true</span>;
+<pre class="src src-nix" id="org12a8da9"><span style="color: #00d3d0;">nixpkgsConfig</span> = <span style="color: #b6a0ff; font-weight: bold;">with</span> inputs; {
+  <span style="color: #00d3d0;">config</span> = {
+    <span style="color: #00d3d0;">allowUnfree</span> = <span style="color: #f78fe7; font-weight: bold;">true</span>;
+    <span style="color: #00d3d0;">allowUnsupportedSystem</span> = <span style="color: #f78fe7; font-weight: bold;">true</span>;
   };
-  <span style="color: #00538b;">overlays</span> = [
+  <span style="color: #00d3d0;">overlays</span> = [
     (
       final: prev:
-      <span style="color: #5317ac; font-weight: bold;">let</span>
-        <span style="color: #00538b;">system</span> = prev.stdenv.system;
-        <span style="color: #00538b;">nixpkgs-stable</span> = <span style="color: #5317ac; font-weight: bold;">if</span> system == <span style="color: var(--clr-string); background-color: var(--bg-string);">"x86_64-darwin"</span> <span style="color: #5317ac; font-weight: bold;">then</span> nixpkgs-stable-darwin <span style="color: #5317ac; font-weight: bold;">else</span> nixos-stable;
-      <span style="color: #5317ac; font-weight: bold;">in</span> {
-        <span style="color: #00538b;">master</span> = nixpkgs-master.legacyPackages.${system};
-        <span style="color: #00538b;">stable</span> = nixpkgs-stable.legacyPackages.${system};
+      <span style="color: #b6a0ff; font-weight: bold;">let</span>
+        <span style="color: #00d3d0;">system</span> = prev.stdenv.system;
+        <span style="color: #00d3d0;">nixpkgs-stable</span> = <span style="color: #b6a0ff; font-weight: bold;">if</span> system == <span style="color: var(--clr-string); background-color: var(--bg-string);">"x86_64-darwin"</span> <span style="color: #b6a0ff; font-weight: bold;">then</span> nixpkgs-stable-darwin <span style="color: #b6a0ff; font-weight: bold;">else</span> nixos-stable;
+      <span style="color: #b6a0ff; font-weight: bold;">in</span> {
+        <span style="color: #00d3d0;">master</span> = nixpkgs-master.legacyPackages.${system};
+        <span style="color: #00d3d0;">stable</span> = nixpkgs-stable.legacyPackages.${system};
       }
     )
     emacs.overlay
@@ -1093,13 +587,13 @@ This <code>readme</code> is better view in HTML format <a href="https://luca.cam
 </div>
 </div>
 
-<div id="outline-container-org8f3be87" class="outline-3">
-<h3 id="org8f3be87"><span class="section-number-3">1.4</span> home-manager config</h3>
+<div id="outline-container-orge66f4da" class="outline-3">
+<h3 id="orge66f4da"><span class="section-number-3">1.4</span> home-manager config</h3>
 <div class="outline-text-3" id="text-1-4">
 <div class="org-src-container">
-<pre class="src src-nix" id="org72df886"><span style="color: #00538b;">homeManagerCommonConfig</span> = <span style="color: #5317ac; font-weight: bold;">with</span> self.homeManagerModules; {
-  <span style="color: #00538b;">imports</span> = [
-    <span style="color: #0000c0;">./home</span>
+<pre class="src src-nix" id="org83dda02"><span style="color: #00d3d0;">homeManagerCommonConfig</span> = <span style="color: #b6a0ff; font-weight: bold;">with</span> self.homeManagerModules; {
+  <span style="color: #00d3d0;">imports</span> = [
+    <span style="color: #00bcff;">./home</span>
     <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># configs.git.aliases</span>
     <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># configs.starship.symbols</span>
     <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># programs.kitty.extras</span>
@@ -1110,22 +604,22 @@ This <code>readme</code> is better view in HTML format <a href="https://luca.cam
 </div>
 </div>
 
-<div id="outline-container-orga9d1c65" class="outline-3">
-<h3 id="orga9d1c65"><span class="section-number-3">1.5</span> nix-darwin config</h3>
+<div id="outline-container-orgb8c5706" class="outline-3">
+<h3 id="orgb8c5706"><span class="section-number-3">1.5</span> nix-darwin config</h3>
 <div class="outline-text-3" id="text-1-5">
 <div class="org-src-container">
-<pre class="src src-nix" id="org06800bf"><span style="color: #00538b;">nixDarwinCommonModules</span> = { user }: [
+<pre class="src src-nix" id="orgef22e72"><span style="color: #00d3d0;">nixDarwinCommonModules</span> = { user }: [
   <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># Main `nix-darwin` config</span>
-  <span style="color: #0000c0;">./darwin</span>
+  <span style="color: #00bcff;">./darwin</span>
   <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># `home-manager` module</span>
   home-manager.darwinModules.home-manager
   {
-    <span style="color: #00538b;">nixpkgs</span> = nixpkgsConfig;
+    <span style="color: #00d3d0;">nixpkgs</span> = nixpkgsConfig;
     <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># Hack to support legacy worklows that use `&lt;nixpkgs&gt;` etc.</span>
     <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># nix.nixPath = { nixpkgs = "$HOME/.config/nixpkgs/nixpkgs.nix"; };</span>
     <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># `home-manager` config</span>
-    users.users.${user}.<span style="color: #00538b;">home</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"/Users/</span><span style="color: #a0132f;">${</span>user<span style="color: #a0132f;">}</span>";
-    <span style="color: #00538b;">home-manager.useGlobalPkgs</span> = <span style="color: #8f0075; font-weight: bold;">true</span>;
+    users.users.${user}.<span style="color: #00d3d0;">home</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"/Users/</span><span style="color: #ff9977;">${</span>user<span style="color: #ff9977;">}</span>";
+    <span style="color: #00d3d0;">home-manager.useGlobalPkgs</span> = <span style="color: #f78fe7; font-weight: bold;">true</span>;
     home-manager.users.${user} = homeManagerCommonConfig;
   }
 ];
@@ -1134,35 +628,35 @@ This <code>readme</code> is better view in HTML format <a href="https://luca.cam
 </div>
 </div>
 
-<div id="outline-container-org2d5136d" class="outline-3">
-<h3 id="org2d5136d"><span class="section-number-3">1.6</span> luca-macbook-pro</h3>
+<div id="outline-container-orgeda15fb" class="outline-3">
+<h3 id="orgeda15fb"><span class="section-number-3">1.6</span> luca-macbook-pro</h3>
 <div class="outline-text-3" id="text-1-6">
 <div class="org-src-container">
-<pre class="src src-nix" id="org07e8c50"><span style="color: #00538b;">luca-macbookpro</span> = darwin.lib.darwinSystem {
-  <span style="color: #00538b;">modules</span> = nixDarwinCommonModules { <span style="color: #00538b;">user</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"luca"</span>; } ++ [
+<pre class="src src-nix" id="orgef5b335"><span style="color: #00d3d0;">luca-macbookpro</span> = darwin.lib.darwinSystem {
+  <span style="color: #00d3d0;">modules</span> = nixDarwinCommonModules { <span style="color: #00d3d0;">user</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"luca"</span>; } ++ [
     {
-      <span style="color: #00538b;">networking</span> = {
-        <span style="color: #00538b;">knownNetworkServices</span> = [<span style="color: var(--clr-string); background-color: var(--bg-string);">"Wi-Fi"</span> <span style="color: var(--clr-string); background-color: var(--bg-string);">"Bluetooth PAN"</span> <span style="color: var(--clr-string); background-color: var(--bg-string);">"Thunderbolt Bridge"</span>];
-        <span style="color: #00538b;">hostName</span> =  <span style="color: var(--clr-string); background-color: var(--bg-string);">"luca-macbookpro"</span>;
-        <span style="color: #00538b;">computerName</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"luca-macbookpro"</span>;
-        <span style="color: #00538b;">localHostName</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"luca-macbookpro"</span>;
+      <span style="color: #00d3d0;">networking</span> = {
+        <span style="color: #00d3d0;">knownNetworkServices</span> = [<span style="color: var(--clr-string); background-color: var(--bg-string);">"Wi-Fi"</span> <span style="color: var(--clr-string); background-color: var(--bg-string);">"Bluetooth PAN"</span> <span style="color: var(--clr-string); background-color: var(--bg-string);">"Thunderbolt Bridge"</span>];
+        <span style="color: #00d3d0;">hostName</span> =  <span style="color: var(--clr-string); background-color: var(--bg-string);">"luca-macbookpro"</span>;
+        <span style="color: #00d3d0;">computerName</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"luca-macbookpro"</span>;
+        <span style="color: #00d3d0;">localHostName</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"luca-macbookpro"</span>;
       };
     }
   ];
-  <span style="color: #00538b;">specialArgs</span> = { <span style="color: #5317ac; font-weight: bold;">inherit</span> inputs nixpkgs; };
+  <span style="color: #00d3d0;">specialArgs</span> = { <span style="color: #b6a0ff; font-weight: bold;">inherit</span> inputs nixpkgs; };
 };
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgf14fb3a" class="outline-3">
-<h3 id="orgf14fb3a"><span class="section-number-3">1.7</span> github-ci</h3>
+<div id="outline-container-org2f0e48d" class="outline-3">
+<h3 id="org2f0e48d"><span class="section-number-3">1.7</span> github-ci</h3>
 <div class="outline-text-3" id="text-1-7">
 <div class="org-src-container">
-<pre class="src src-nix" id="orgbca489a"><span style="color: #00538b;">githubCI</span> = darwin.lib.darwinSystem {
-  <span style="color: #00538b;">modules</span> = nixDarwinCommonModules { <span style="color: #00538b;">user</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"runner"</span>; } ++ [
-    ({ lib, ... }: { <span style="color: #00538b;">homebrew.enable</span> = lib.mkForce <span style="color: #8f0075; font-weight: bold;">false</span>; })
+<pre class="src src-nix" id="org3c6a5de"><span style="color: #00d3d0;">githubCI</span> = darwin.lib.darwinSystem {
+  <span style="color: #00d3d0;">modules</span> = nixDarwinCommonModules { <span style="color: #00d3d0;">user</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"runner"</span>; } ++ [
+    ({ lib, ... }: { <span style="color: #00d3d0;">homebrew.enable</span> = lib.mkForce <span style="color: #f78fe7; font-weight: bold;">false</span>; })
   ];
 };
 </pre>
@@ -1170,11 +664,11 @@ This <code>readme</code> is better view in HTML format <a href="https://luca.cam
 </div>
 </div>
 
-<div id="outline-container-org9ba886f" class="outline-3">
-<h3 id="org9ba886f"><span class="section-number-3">1.8</span> home-manager-modules</h3>
+<div id="outline-container-org06c90fe" class="outline-3">
+<h3 id="org06c90fe"><span class="section-number-3">1.8</span> home-manager-modules</h3>
 <div class="outline-text-3" id="text-1-8">
 <div class="org-src-container">
-<pre class="src src-nix" id="org5365bfc"><span style="color: var(--clr-comment-delimiter); background-color: var(--bg-comment-delimiter);"># </span><span style="color: var(--clr-comment); background-color: var(--bg-comment);">homeManagerModules = {</span>
+<pre class="src src-nix" id="orga41be44"><span style="color: var(--clr-comment-delimiter); background-color: var(--bg-comment-delimiter);"># </span><span style="color: var(--clr-comment); background-color: var(--bg-comment);">homeManagerModules = {</span>
 <span style="color: var(--clr-comment-delimiter); background-color: var(--bg-comment-delimiter);">#   </span><span style="color: var(--clr-comment); background-color: var(--bg-comment);">configs.git.aliases = import ./home/configs/git-aliases.nix;</span>
 <span style="color: var(--clr-comment-delimiter); background-color: var(--bg-comment-delimiter);">#   </span><span style="color: var(--clr-comment); background-color: var(--bg-comment);">configs.gh.aliases = import ./home/configs/gh-aliases.nix;</span>
 <span style="color: var(--clr-comment-delimiter); background-color: var(--bg-comment-delimiter);">#   </span><span style="color: var(--clr-comment); background-color: var(--bg-comment);">configs.starship.symbols = import ./home/configs/starship-symbols.nix;</span>
@@ -1186,20 +680,20 @@ This <code>readme</code> is better view in HTML format <a href="https://luca.cam
 </div>
 </div>
 
-<div id="outline-container-org000ea24" class="outline-3">
-<h3 id="org000ea24"><span class="section-number-3">1.9</span> cloud-vm</h3>
+<div id="outline-container-org91db2bd" class="outline-3">
+<h3 id="org91db2bd"><span class="section-number-3">1.9</span> cloud-vm</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 Build and activate with <code>nix build .#cloudVM.activationPackage; ./result/activate</code>
 </p>
 <div class="org-src-container">
-<pre class="src src-nix" id="orge176c85"><span style="color: #00538b;">cloudVM</span> = home-manager.lib.homeManagerConfiguration {
-  <span style="color: #00538b;">system</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"x86_64-linux"</span>;
-  <span style="color: #00538b;">homeDirectory</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"/home/luca"</span>;
-  <span style="color: #00538b;">username</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"luca"</span>;
-  <span style="color: #00538b;">configuration</span> = {
-    <span style="color: #00538b;">imports</span> = [ homeManagerCommonConfig ];
-    <span style="color: #00538b;">nixpkgs</span> = nixpkgsConfig;
+<pre class="src src-nix" id="orgfff343f"><span style="color: #00d3d0;">cloudVM</span> = home-manager.lib.homeManagerConfiguration {
+  <span style="color: #00d3d0;">system</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"x86_64-linux"</span>;
+  <span style="color: #00d3d0;">homeDirectory</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"/home/luca"</span>;
+  <span style="color: #00d3d0;">username</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"luca"</span>;
+  <span style="color: #00d3d0;">configuration</span> = {
+    <span style="color: #00d3d0;">imports</span> = [ homeManagerCommonConfig ];
+    <span style="color: #00d3d0;">nixpkgs</span> = nixpkgsConfig;
   };
 };
 </pre>
@@ -1207,15 +701,15 @@ Build and activate with <code>nix build .#cloudVM.activationPackage; ./result/ac
 </div>
 </div>
 
-<div id="outline-container-orgc7a6fc3" class="outline-3">
-<h3 id="orgc7a6fc3"><span class="section-number-3">1.10</span> dev-shell</h3>
+<div id="outline-container-orgea51383" class="outline-3">
+<h3 id="orgea51383"><span class="section-number-3">1.10</span> dev-shell</h3>
 <div class="outline-text-3" id="text-1-10">
 <div class="org-src-container">
-<pre class="src src-nix" id="org4957d64">inputs.flake-utils.lib.eachDefaultSystem (system:
-  <span style="color: #5317ac; font-weight: bold;">let</span>
-    <span style="color: #00538b;">pkgs</span> = nixpkgs.legacyPackages.${system};
-  <span style="color: #5317ac; font-weight: bold;">in</span> {
-    <span style="color: #00538b;">devShell</span> = <span style="color: #8f0075; font-weight: bold;">import</span> <span style="color: #0000c0;">./shell.nix</span> { <span style="color: #5317ac; font-weight: bold;">inherit</span> pkgs; };
+<pre class="src src-nix" id="org94d3c37">inputs.flake-utils.lib.eachDefaultSystem (system:
+  <span style="color: #b6a0ff; font-weight: bold;">let</span>
+    <span style="color: #00d3d0;">pkgs</span> = nixpkgs.legacyPackages.${system};
+  <span style="color: #b6a0ff; font-weight: bold;">in</span> {
+    <span style="color: #00d3d0;">devShell</span> = <span style="color: #f78fe7; font-weight: bold;">import</span> <span style="color: #00bcff;">./shell.nix</span> { <span style="color: #b6a0ff; font-weight: bold;">inherit</span> pkgs; };
   });
 </pre>
 </div>
@@ -1223,12 +717,12 @@ Build and activate with <code>nix build .#cloudVM.activationPackage; ./result/ac
 </div>
 </div>
 
-<div id="outline-container-orgcc55684" class="outline-2">
-<h2 id="orgcc55684"><span class="section-number-2">2</span> Practical commands</h2>
+<div id="outline-container-orge2157e9" class="outline-2">
+<h2 id="orge2157e9"><span class="section-number-2">2</span> Practical commands</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgd784c50" class="outline-3">
-<h3 id="orgd784c50"><span class="section-number-3">2.1</span> Install nix (flakes)</h3>
+<div id="outline-container-orge868043" class="outline-3">
+<h3 id="orge868043"><span class="section-number-3">2.1</span> Install nix (flakes)</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 thanks <a href="https://github.com/kclejeune/system">https://github.com/kclejeune/system</a>
@@ -1252,8 +746,8 @@ git clone git@github.com:lccambiaghi/nixpkgs.git ~/git/nixpkgs
 </div>
 </div>
 
-<div id="outline-container-org678507b" class="outline-3">
-<h3 id="org678507b"><span class="section-number-3">2.2</span> darwin-rebuild</h3>
+<div id="outline-container-org2fa6931" class="outline-3">
+<h3 id="org2fa6931"><span class="section-number-3">2.2</span> darwin-rebuild</h3>
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 <pre class="src src-sh">darwin-rebuild build --flake .#luca-macbookpro
@@ -1265,8 +759,8 @@ darwin-rebuild switch --flake .#luca-macbookpro
 </div>
 </div>
 
-<div id="outline-container-orgb8f945f" class="outline-3">
-<h3 id="orgb8f945f"><span class="section-number-3">2.3</span> nix flake update</h3>
+<div id="outline-container-orgbd19e15" class="outline-3">
+<h3 id="orgbd19e15"><span class="section-number-3">2.3</span> nix flake update</h3>
 <div class="outline-text-3" id="text-2-3">
 <div class="org-src-container">
 <pre class="src src-sh">nix flake update --update-input nixpkgs
@@ -1276,22 +770,22 @@ darwin-rebuild switch --flake .#luca-macbookpro
 </div>
 </div>
 
-<div id="outline-container-org78339f9" class="outline-2">
-<h2 id="org78339f9"><span class="section-number-2">3</span> Nix</h2>
+<div id="outline-container-org154afa2" class="outline-2">
+<h2 id="org154afa2"><span class="section-number-2">3</span> Nix</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>Good intro: <a href="https://stephank.nl/p/2020-06-01-a-nix-primer-by-a-newcomer.html">https://stephank.nl/p/2020-06-01-a-nix-primer-by-a-newcomer.html</a></li>
 </ul>
 </div>
 
-<div id="outline-container-org35adfa8" class="outline-3">
-<h3 id="org35adfa8"><span class="section-number-3">3.1</span> Fundamentals</h3>
+<div id="outline-container-org76eecf2" class="outline-3">
+<h3 id="org76eecf2"><span class="section-number-3">3.1</span> Fundamentals</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Set:
 </p>
 <div class="org-src-container">
-<pre class="src src-nix">{ <span style="color: var(--clr-string); background-color: var(--bg-string);">"a b"</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"c"</span>; <span style="color: #00538b;">count</span> = 2; }
+<pre class="src src-nix">{ <span style="color: var(--clr-string); background-color: var(--bg-string);">"a b"</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"c"</span>; <span style="color: #00d3d0;">count</span> = 2; }
 </pre>
 </div>
 
@@ -1299,7 +793,7 @@ Set:
 List:
 </p>
 <div class="org-src-container">
-<pre class="src src-nix">[42 <span style="color: var(--clr-string); background-color: var(--bg-string);">"a b"</span> (3 + 6) [2 3 4] {<span style="color: #00538b;">x</span> = 2;}]
+<pre class="src src-nix">[42 <span style="color: var(--clr-string); background-color: var(--bg-string);">"a b"</span> (3 + 6) [2 3 4] {<span style="color: #00d3d0;">x</span> = 2;}]
 </pre>
 </div>
 
@@ -1310,8 +804,8 @@ Lambda:
 <pre class="src src-nix">(x: x + x) 21
 <span style="color: var(--clr-comment-delimiter); background-color: var(--bg-comment-delimiter);"># </span><span style="color: var(--clr-comment); background-color: var(--bg-comment);">42</span>
 
-<span style="color: #5317ac; font-weight: bold;">let</span> <span style="color: #00538b;">hi</span> = {name, place}: <span style="color: var(--clr-string); background-color: var(--bg-string);">"Hi </span><span style="color: #a0132f;">${</span>name<span style="color: #a0132f;">}</span><span style="color: var(--clr-string); background-color: var(--bg-string);"> in </span><span style="color: #a0132f;">${</span>place<span style="color: #a0132f;">}</span><span style="color: var(--clr-string); background-color: var(--bg-string);">!"</span>;
-<span style="color: #5317ac; font-weight: bold;">in</span> hi { <span style="color: #00538b;">name</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"Michael"</span>; <span style="color: #00538b;">place</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"Austria"</span>;  }
+<span style="color: #b6a0ff; font-weight: bold;">let</span> <span style="color: #00d3d0;">hi</span> = {name, place}: <span style="color: var(--clr-string); background-color: var(--bg-string);">"Hi </span><span style="color: #ff9977;">${</span>name<span style="color: #ff9977;">}</span><span style="color: var(--clr-string); background-color: var(--bg-string);"> in </span><span style="color: #ff9977;">${</span>place<span style="color: #ff9977;">}</span><span style="color: var(--clr-string); background-color: var(--bg-string);">!"</span>;
+<span style="color: #b6a0ff; font-weight: bold;">in</span> hi { <span style="color: #00d3d0;">name</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"Michael"</span>; <span style="color: #00d3d0;">place</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"Austria"</span>;  }
 </pre>
 </div>
 
@@ -1319,7 +813,7 @@ Lambda:
 Parameter with default value:
 </p>
 <div class="org-src-container">
-<pre class="src src-nix">{ pkgs ? <span style="color: #8f0075; font-weight: bold;">import</span> <span style="color: #0000c0;">&lt;nixpkgs&gt;</span> {} }:
+<pre class="src src-nix">{ pkgs ? <span style="color: #f78fe7; font-weight: bold;">import</span> <span style="color: #00bcff;">&lt;nixpkgs&gt;</span> {} }:
 </pre>
 </div>
 
@@ -1329,8 +823,8 @@ Parameter with default value:
 </div>
 </div>
 
-<div id="outline-container-orgf357a97" class="outline-3">
-<h3 id="orgf357a97"><span class="section-number-3">3.2</span> Config</h3>
+<div id="outline-container-org897584b" class="outline-3">
+<h3 id="org897584b"><span class="section-number-3">3.2</span> Config</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 A config takes an attribute as parameter and returns an attribute set
@@ -1339,23 +833,23 @@ A config takes an attribute as parameter and returns an attribute set
 <pre class="src src-nix">{ pkgs }:
 
 {
-  <span style="color: #00538b;">packageOverrides</span> = pkgs: {
-    <span style="color: #00538b;">emacs</span> = pkgs.emacs.override {
-      <span style="color: #00538b;">withGTK2</span> = <span style="color: #8f0075; font-weight: bold;">false</span>;
-      <span style="color: #00538b;">withGTK3</span> = <span style="color: #8f0075; font-weight: bold;">false</span>;
-      <span style="color: #00538b;">withXwidgets</span> = <span style="color: #8f0075; font-weight: bold;">false</span>;
+  <span style="color: #00d3d0;">packageOverrides</span> = pkgs: {
+    <span style="color: #00d3d0;">emacs</span> = pkgs.emacs.override {
+      <span style="color: #00d3d0;">withGTK2</span> = <span style="color: #f78fe7; font-weight: bold;">false</span>;
+      <span style="color: #00d3d0;">withGTK3</span> = <span style="color: #f78fe7; font-weight: bold;">false</span>;
+      <span style="color: #00d3d0;">withXwidgets</span> = <span style="color: #f78fe7; font-weight: bold;">false</span>;
     };
   };
 
-  <span style="color: #00538b;">allowUnfree</span> = <span style="color: #8f0075; font-weight: bold;">true</span>;
+  <span style="color: #00d3d0;">allowUnfree</span> = <span style="color: #f78fe7; font-weight: bold;">true</span>;
 }
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org5888d91" class="outline-3">
-<h3 id="org5888d91"><span class="section-number-3">3.3</span> Derivation</h3>
+<div id="outline-container-org1bc1347" class="outline-3">
+<h3 id="org1bc1347"><span class="section-number-3">3.3</span> Derivation</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 A derivation takes inputs and produces output.
@@ -1363,12 +857,12 @@ A derivation is lazy, so it will only be evaluated when it is input to other der
 </p>
 
 <div class="org-src-container">
-<pre class="src src-nix"><span style="color: #8f0075; font-weight: bold;">derivation</span> {
-  <span style="color: #00538b;">name</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"hello-world"</span>;
-  <span style="color: #00538b;">system</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"x86_64-linux"</span>;
-  <span style="color: #00538b;">outputs</span> = [ <span style="color: var(--clr-string); background-color: var(--bg-string);">"out"</span> ];  <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># This is the default, and can be omitted.</span>
-  <span style="color: #00538b;">builder</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"</span><span style="color: #a0132f;">${</span>pkgs.bash<span style="color: #a0132f;">}</span><span style="color: var(--clr-string); background-color: var(--bg-string);">/bin/bash"</span>;
-  <span style="color: #00538b;">args</span> = [ <span style="color: var(--clr-string); background-color: var(--bg-string);">"-c"</span> <span style="color: var(--clr-string); background-color: var(--bg-string);">"echo 'Hello world!' &gt; $out"</span> ];
+<pre class="src src-nix"><span style="color: #f78fe7; font-weight: bold;">derivation</span> {
+  <span style="color: #00d3d0;">name</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"hello-world"</span>;
+  <span style="color: #00d3d0;">system</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"x86_64-linux"</span>;
+  <span style="color: #00d3d0;">outputs</span> = [ <span style="color: var(--clr-string); background-color: var(--bg-string);">"out"</span> ];  <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># This is the default, and can be omitted.</span>
+  <span style="color: #00d3d0;">builder</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"</span><span style="color: #ff9977;">${</span>pkgs.bash<span style="color: #ff9977;">}</span><span style="color: var(--clr-string); background-color: var(--bg-string);">/bin/bash"</span>;
+  <span style="color: #00d3d0;">args</span> = [ <span style="color: var(--clr-string); background-color: var(--bg-string);">"-c"</span> <span style="color: var(--clr-string); background-color: var(--bg-string);">"echo 'Hello world!' &gt; $out"</span> ];
 }
 </pre>
 </div>
@@ -1380,8 +874,8 @@ If something changes even slightly in the inputs, the hash output will change.
 </p>
 </div>
 </div>
-<div id="outline-container-org3cf041d" class="outline-3">
-<h3 id="org3cf041d"><span class="section-number-3">3.4</span> Escaping in strings</h3>
+<div id="outline-container-orgf91e49b" class="outline-3">
+<h3 id="orgf91e49b"><span class="section-number-3">3.4</span> Escaping in strings</h3>
 <div class="outline-text-3" id="text-3-4">
 <ul class="org-ul">
 <li>You can use <code>'</code> to escape double quotes</li>
@@ -1390,8 +884,8 @@ If something changes even slightly in the inputs, the hash output will change.
 </div>
 </div>
 </div>
-<div id="outline-container-orgc88e1bf" class="outline-2">
-<h2 id="orgc88e1bf"><span class="section-number-2">4</span> References</h2>
+<div id="outline-container-org15e9476" class="outline-2">
+<h2 id="org15e9476"><span class="section-number-2">4</span> References</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li><a href="https://github.com/malob/nixpkgs">https://github.com/malob/nixpkgs</a></li>

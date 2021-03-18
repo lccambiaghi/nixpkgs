@@ -2,13 +2,13 @@
 #+STARTUP: content
 #+HTML_HEAD: <script>var clicky_site_ids = clicky_site_ids || []; clicky_site_ids.push(101260027);</script>
 #+HTML_HEAD: <script async src="//static.getclicky.com/js"></script>
-
 #+STARTUP: content
+
 * flake.nix
 This ~readme~ is better view in HTML format [[https://luca.cambiaghi.me/nixpkgs/readme.html][here]] or through ~org-mode~ (clone the repo and open in ~emacs~).
 
 ** structure
-#+begin_src nix :tangle flake.nix :noweb yes
+#+begin_src nix :tangle flake.nix :noweb tangle
 # NOTE: this file is tangled from readme.org
 # DO NOT edit by hand
 {
@@ -48,6 +48,7 @@ inputs = {
   home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
   # Other sources
+  emacs.url = "github:nix-community/emacs-overlay";
   fish-done = { url = "github:franciscolourenco/done"; flake = false; };
   flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
   flake-utils.url = "github:numtide/flake-utils";
@@ -73,6 +74,7 @@ nixpkgsConfig = with inputs; {
         stable = nixpkgs-stable.legacyPackages.${system};
       }
     )
+    emacs.overlay
   ];
 };
 #+end_src
