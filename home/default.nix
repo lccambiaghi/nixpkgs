@@ -135,13 +135,12 @@ in
       # kubectx # kubectl context switching
       kustomize
       lorri # Easy Nix shell
-      libtool
+      # libtool
       # libvterm-neovim
       leiningen
       less
       # mdcat # Markdown converter/reader for the CLI
       # mono
-      # nyxt
       niv # Nix dependency management
       nixpkgs-fmt
       nodejs # node and npm
@@ -151,6 +150,7 @@ in
       # nodePackages.vega-lite
       # nodePackages.vega-cli
       # nuget
+      # nyxt
       pandoc
       pinentry_mac # Necessary for GPG
       # python37Packages.poetry

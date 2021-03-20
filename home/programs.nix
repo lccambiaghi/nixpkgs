@@ -16,7 +16,8 @@
     };
     # emacs = {
     #   enable = true;
-    #   package = if pkgs.stdenv.isDarwin then pkgs.emacsGcc else pkgs.emacsPgtkGcc;
+    #   # package = if pkgs.stdenv.isDarwin then pkgs.emacsGcc else pkgs.emacsPgtkGcc;
+    #   package = if pkgs.stdenv.isDarwin then pkgs.emacsMacport else pkgs.emacsPgtkGcc;
     # };
     # firefox = {
     #   enable = true;

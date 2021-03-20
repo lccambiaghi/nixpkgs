@@ -16,6 +16,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   
     # Other sources
+    emacs.url = "github:nix-community/emacs-overlay";
     fish-done = { url = "github:franciscolourenco/done"; flake = false; };
     flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
     flake-utils.url = "github:numtide/flake-utils";
@@ -38,6 +39,7 @@
               stable = nixpkgs-stable.legacyPackages.${system};
             }
           )
+          emacs.overlay
         ];
       };
       homeManagerCommonConfig = with self.homeManagerModules; {

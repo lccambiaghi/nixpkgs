@@ -6,7 +6,7 @@ let
 in
 {
   homebrew.enable = true;
-  homebrew.autoUpdate = true;
+  homebrew.autoUpdate = false;
   homebrew.cleanup = "zap";
   homebrew.global.brewfile = true;
   homebrew.global.noLock = true;
@@ -15,8 +15,15 @@ in
     brews = [
       "borkdude/brew/babashka"
       "kubectx"
-      "libvterm"
+      # "libvterm"
+      "libtool" # required for vterm
       "libomp"
+      # required for zmq
+      "automake"
+      "autogen"
+      "autoconf"
+      "pkg-config"
+      "shtool"
       # "mas"
       # "mono"
       # "nuget"

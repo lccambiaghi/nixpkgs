@@ -4,10 +4,28 @@
 #+HTML_HEAD: <script async src="//static.getclicky.com/js"></script>
 #+STARTUP: content
 
-* flake.nix
-This ~readme~ is better view in HTML format [[https://luca.cambiaghi.me/nixpkgs/readme.html][here]] or through ~org-mode~ (clone the repo and open in ~emacs~).
+* Introduction
+** This repository
+This repository contains my system configuration.
+The main objective is to have a portable and reproducible system in order to for example bootstrap a new system in a quick and automated way.
+The ideal is to share packages and configuration across different operating systems.
+At the moment I only use a ~macOS~ system but I am prepared for the day I will switch to ~nixOS~
 
-** structure
+Tools:
+- ~nix~ as a package manager
+  + In particular, an experimental feature called ~flake~ to achieve complete reproducibility
+- ~home-manager~ to configure packages and dotfiles
+- ~nix-darwin~ to configure macOS systems (e.g. it has a great ~brew~ module)
+
+** This file
+This file (~readme.org~) is used to generate (the correct term is ~tangle~) my ~flake.nix~ file, where I specify the inputs and outputs of my system configuration.
+The tangled ~flake.nix~ file imports other ~.nix~ files (e.g. ~darwin/default.nix~).
+
+This file is better viewed in HTML format [[https://luca.cambiaghi.me/nixpkgs/readme.html][here]] or through ~org-mode~ (clone the repo and open in ~emacs~).
+You can visit my blog at the same [[https://luca.cambiaghi.me][website]].
+
+* flake.nix
+** file structure
 #+begin_src nix :tangle flake.nix :noweb tangle
 # NOTE: this file is tangled from readme.org
 # DO NOT edit by hand

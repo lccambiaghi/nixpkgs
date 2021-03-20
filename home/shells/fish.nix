@@ -26,6 +26,9 @@ let
     hms = "home-manager switch";
     cljclr="mono $CLOJURE_LOAD_PATH/Clojure.Main.exe";
 
+    pipde = "poetry run pip install debugpy";
+    pipdt = "poetry run pip install dtale";
+
     # Reload zsh
     szsh = "source ~/.zshrc";
 
