@@ -13,8 +13,13 @@ let
     ll = "${pkgs.exa}/bin/exa -lh";
     lt = "${pkgs.exa}/bin/exa --tree";
     k = "kubectl";
+    ke = "kubectl edit";
+    kx = "kubectl exec -ti ";
     kp = "kubectl get pods";
+    kj = "kubectl get jobs";
+    kc = "kubectl get cronjobs";
     kl = "kubectl logs";
+    klf = "kubectl logs -f ";
     wkp= "watch -n 1 kubectl get pods";
     kpr= "kubectl get pods --field-selector status.phase=Running";
     wkpr= "watch -n 1 kubectl get pods --field-selector status.phase=Running";

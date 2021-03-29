@@ -103,6 +103,7 @@ in
       cantarell-fonts
       # calibre
       clojure
+      stable.clojure-lsp
       cmake
       # clang
       conftest
@@ -156,7 +157,7 @@ in
       # python37Packages.poetry
       customPython
       # pre-commit # Pre-commit CI hook tool
-      procs
+      stable.procs
       protobuf # Protocol Buffers
       # R-with-pkgs
       roboto
