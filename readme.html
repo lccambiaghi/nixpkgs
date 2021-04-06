@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-03-20 Sat 15:54 -->
+<!-- 2021-04-06 Tue 09:43 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Luca's nix configuration</title>
@@ -11,421 +11,6 @@
 <meta name="generator" content="Org Mode" />
 <script>var clicky_site_ids = clicky_site_ids || []; clicky_site_ids.push(101260027);</script>
 <script async src="//static.getclicky.com/js"></script>
-<style type="text/css">
-<!--/*--><![CDATA[/*><!--*/
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-}
-
-html {
-	line-height: 1.35;
-	-webkit-text-size-adjust: 100%;
-}
-
-body {
-	margin: 0;
-	font-family:
-		system-ui,
-		-apple-system,
-		'Segoe UI',
-		Roboto,
-		Helvetica,
-		Arial,
-		sans-serif,
-		'Apple Color Emoji',
-		'Segoe UI Emoji';
-}
-
-hr {
-	height: 0;
-	color: inherit;
-}
-
-b,
-strong {
-	font-weight: bolder;
-}
-
-code,
-kbd,
-samp,
-pre {
-	font-family:
-		ui-monospace,
-		SFMono-Regular,
-		Consolas,
-		'Liberation Mono',
-		Menlo,
-		monospace;
-	font-size: 1em;
-}
-
-small {
-	font-size: 80%;
-}
-
-sub,
-sup {
-	font-size: 75%;
-	line-height: 0;
-	position: relative;
-	vertical-align: baseline;
-}
-
-sub {
-	bottom: -0.25em;
-}
-
-sup {
-	top: -0.5em;
-}
-
-table {
-	text-indent: 0;
-	border-color: inherit;
-}
-
-summary {
-	display: list-item;
-}
-
-:root {
-  --bc-tb: #282e46;
-  --bc-block: #a8a8a8;
-  --clr: #ffffff;
-  --clr-tb-hd: #e0e6f0;
-  --clr-code: #e0e6f0;
-  --bg: #100b17;
-  --bg-code: #282e46;
-  --bg-tb-hd: #282e46;
-  --bg-block: #161129;
-  --clr-link: #00bcff;
-  --clr-title: #ffffff;
-  --clr-todo: #79a8ff;
-  --bg-todo: initial;
-  --clr-done: #a8a8a8;
-  --bg-done: initial;
-  --ts-clr: #b6a0ff;
-  --mg: 20px;
-  --w-toc: 300px;
-  --bg-keyword: initial;
-  --clr-keyword: #b6a0ff;
-  --bg-constant: initial;
-  --clr-constant: #00bcff;
-  --bg-comment: initial;
-  --clr-comment: #a8a8a8;
-  --bg-comment-delimiter: initial;
-  --clr-comment-delimiter: initial;
-  --bg-function: initial;
-  --clr-function: #feacd0;
-  --bg-variable: initial;
-  --clr-variable: #00d3d0;
-  --bg-preprocessor: initial;
-  --clr-preprocessor: #ff9977;
-  --bg-doc: initial;
-  --clr-doc: #b0d6f5;
-  --bg-builtin: initial;
-  --clr-builtin: #f78fe7;
-  --bg-string: initial;
-  --clr-string: #79a8ff;
-}
-
-html {
-  font-family: Sans;
-}
-
-body {
-  background: #999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-body[data-theme='light'] {
-  background: var(--bg);
-  color: var(--clr);
-}
-
-body[data-theme='dark'] {
-  background: var(--bg);
-  color: var(--clr);
-  --bc-tb: #282e46;
-  --bc-block: #a8a8a8;
-  --clr: #ffffff;
-  --clr-code: #e0e6f0;
-  --clr-tb-hd: #e0e6f0;
-  --bg: #100b17;
-  --bg-tb-hd: #282e46;
-  --bg-code: #282e46;
-  --bg-block: #161129;
-  --clr-link: #00bcff;
-  --clr-title: #ffffff;
-  --clr-todo: #79a8ff;
-  --bg-todo: initial;
-  --clr-done: #a8a8a8;
-  --bg-done: initial;
-  --ts-clr: #b6a0ff;
-  --mg: 20px;
-  --w-toc: 300px;
-  --bg-keyword: initial;
-  --clr-keyword: #b6a0ff;
-  --bg-constant: initial;
-  --clr-constant: #00bcff;
-  --bg-comment: initial;
-  --clr-comment: #a8a8a8;
-  --bg-comment-delimiter: initial;
-  --clr-comment-delimiter: initial;
-  --bg-function: initial;
-  --clr-function: #feacd0;
-  --bg-variable: initial;
-  --clr-variable: #00d3d0;
-  --bg-preprocessor: initial;
-  --clr-preprocessor: #ff9977;
-  --bg-doc: initial;
-  --clr-doc: #b0d6f5;
-  --bg-builtin: initial;
-  --clr-builtin: #f78fe7;
-  --bg-string: initial;
-  --clr-string: #79a8ff;
-}
-
-
-@media only screen and (max-width: 768px) {
-  #content {
-    width: 100%;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  #content {
-    width: 768px;
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  body {
-    align-items: flex-end;
-  }
-  #content {
-    width: calc(100vw - var(--w-toc) - var(--mg) * 3);
-    margin-right: var(--mg);
-  }
-}
-
-h1 {
-  color: var(--clr-title);
-  text-align: center;
-}
-h2, h3, h4, h5, h6, h7 {
-  font-family: Sans Serif;
-}
-h2 {
-  line-height: 2.5em;
-}
-h2::before {
-  content: "◉ ";
-}
-h3::before {
-  content: "✸ ";
-}
-h4::before {
-  content: "▷ ";
-}
-
-code {
-  color: var(--clr-code);
-  background: var(--bg-code);
-  border-radius: 2px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-pre {
-  padding: 20px;
-  border: 1px solid var(--bc-block);
-  background: var(--bg-block);
-  font-size: 0.9rem;
-  overflow-x: scroll;
-}
-
-pre::-webkit-scrollbar {
-  display: none;
-}
-
-pre {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-
-.todo {
-  color: var(--clr-todo);
-  background: var(--bg-todo);
-}
-
-.done {
-  color: var(--clr-done);
-  background: var(--bg-done);
-}
-
-.timestamp-wrapper {
-  font-size: 0.8rem;
-  color: var(--clr-ts);
-}
-
-table {
-  width: 100%;
-  border: 2px solid var(--bc-tb);
-}
-
-thead {
-  color: var(--clr-tb-hd);
-  background: var(--bg-tb-hd);
-}
-
-td, th {
-  border: thin solid var(--bc-tb);
-}
-
-li {
-  line-height: 2rem;
-}
-
-a {
-  text-decoration: none;
-  color: var(--clr-link);
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-#table-of-contents > h2 {
-  display: none;
-}
-
-#table-of-contents {
-  border: thin solid var(--bc-block);
-  background: var(--bg-block);
-}
-
-#toggle-toc {
-  display: none;
-}
-
-.toc-show {
-  display: block!important;
-}
-
-@media only screen and (max-width: 768px) {
-  #toggle-toc {
-    position: fixed;
-    top: 0;
-    right: 0;
-    cursor: pointer;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-size: 2em;
-    line-height: 2em;
-    display: block;
-  }
-  #table-of-contents {
-    background: var(--bg);
-    display: none;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    overflow-y: scroll;
-  }
-  #table-of-contents a {
-    color: var(--clr);
-  }
-}
-
-@media only screen and (min-width: 1024px) {
-  #table-of-contents {
-    font-size: 0.8rem;
-    position: fixed;
-    left: var(--mg);
-    top: var(--mg);
-    bottom: var(--mg);
-    width: var(--w-toc);
-    overflow-y: scroll;
-  }
-}
-
-#table-of-contents::-webkit-scrollbar {
-  display: none;
-}
-
-#table-of-contents {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.MathJax_Display {
-  font-size: 1.25em;
-}
-
-#toggle-theme {
-  border-width: 0;
-  line-height: 4em;
-  padding-left: 1em;
-  padding-right: 1em;
-  background: var(--bg-block);
-  color: var(--clr-code);
-}
-
-#toggle-theme:hover {
-  cursor: pointer;
-}
-
-img {
-  width: 100%;
-}
-
-@media only screen and (max-width: 768px) {
-  #toggle-theme {
-    width: 100%;
-    text-align: center;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  #toggle-theme {
-    position: absolute;
-    top: var(--mg);
-    right: var(--mg);
-    border-radius: 5px;
-  }
-}
-
-.theme-transition {
-  transition: all 0.5s;
-}
-
-.status {
-  width: 100%;
-}
-
-@media only screen and (max-width: 768px) {
-  ul {
-    padding-left: .5em;
-    margin-left: 0;
-  }
-  li {
-    padding-left: 0;
-    margin-left: 0;
-  }
-}
-/*]]>*/-->
-</style>
 <style type="text/css">
 <!--/*--><![CDATA[/*><!--*/
 *,
@@ -874,52 +459,52 @@ img {
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgd0761ff">1. Introduction</a>
+<li><a href="#orgd4513c0">1. Introduction</a>
 <ul>
-<li><a href="#org8d557a7">1.1. This repository</a></li>
-<li><a href="#orgf8daa30">1.2. This file</a></li>
+<li><a href="#org7fc8aa2">1.1. This repository</a></li>
+<li><a href="#orga4702ce">1.2. This file</a></li>
 </ul>
 </li>
-<li><a href="#orgf089764">2. flake.nix</a>
+<li><a href="#org8b605fc">2. flake.nix</a>
 <ul>
-<li><a href="#org5156798">2.1. file structure</a></li>
-<li><a href="#org0b517e5">2.2. inputs</a></li>
-<li><a href="#org5af9489">2.3. nixpkgs config</a></li>
-<li><a href="#org5a7dbd9">2.4. home-manager config</a></li>
-<li><a href="#org2598aee">2.5. nix-darwin config</a></li>
-<li><a href="#orge2d27f4">2.6. luca-macbook-pro</a></li>
-<li><a href="#orgc77dbbb">2.7. github-ci</a></li>
-<li><a href="#orgf8328de">2.8. home-manager-modules</a></li>
-<li><a href="#org174bb38">2.9. cloud-vm</a></li>
-<li><a href="#org6f1f0be">2.10. dev-shell</a></li>
+<li><a href="#orgbaa6409">2.1. file structure</a></li>
+<li><a href="#org0ba74d5">2.2. inputs</a></li>
+<li><a href="#orgb0f9c19">2.3. nixpkgs config</a></li>
+<li><a href="#org5f16504">2.4. home-manager config</a></li>
+<li><a href="#orgca1c2e9">2.5. nix-darwin config</a></li>
+<li><a href="#org7a6a2ae">2.6. luca-macbook-pro</a></li>
+<li><a href="#org049d7c2">2.7. github-ci</a></li>
+<li><a href="#org4a44c6a">2.8. home-manager-modules</a></li>
+<li><a href="#orge724646">2.9. cloud-vm</a></li>
+<li><a href="#org81bfda8">2.10. dev-shell</a></li>
 </ul>
 </li>
-<li><a href="#org57f770f">3. Practical commands</a>
+<li><a href="#orged9a9fc">3. Practical commands</a>
 <ul>
-<li><a href="#org8848064">3.1. Install nix (flakes)</a></li>
-<li><a href="#org1bf65c5">3.2. darwin-rebuild</a></li>
-<li><a href="#org528434d">3.3. nix flake update</a></li>
+<li><a href="#orgc15d42e">3.1. Install nix (flakes)</a></li>
+<li><a href="#org4845e09">3.2. darwin-rebuild</a></li>
+<li><a href="#org36b4ccd">3.3. nix flake update</a></li>
 </ul>
 </li>
-<li><a href="#org0331db5">4. Nix</a>
+<li><a href="#org95bde99">4. Nix</a>
 <ul>
-<li><a href="#org1795b5e">4.1. Fundamentals</a></li>
-<li><a href="#orgd284139">4.2. Config</a></li>
-<li><a href="#org306f42b">4.3. Derivation</a></li>
-<li><a href="#org339e548">4.4. Escaping in strings</a></li>
+<li><a href="#orged56bdd">4.1. Fundamentals</a></li>
+<li><a href="#orgdad79f8">4.2. Config</a></li>
+<li><a href="#orgdeab895">4.3. Derivation</a></li>
+<li><a href="#orgbbbd153">4.4. Escaping in strings</a></li>
 </ul>
 </li>
-<li><a href="#orga266bc6">5. References</a></li>
+<li><a href="#org695c173">5. References</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgd0761ff" class="outline-2">
-<h2 id="orgd0761ff"><span class="section-number-2">1</span> Introduction</h2>
+<div id="outline-container-orgd4513c0" class="outline-2">
+<h2 id="orgd4513c0"><span class="section-number-2">1</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org8d557a7" class="outline-3">
-<h3 id="org8d557a7"><span class="section-number-3">1.1</span> This repository</h3>
+<div id="outline-container-org7fc8aa2" class="outline-3">
+<h3 id="org7fc8aa2"><span class="section-number-3">1.1</span> This repository</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 This repository contains my system configuration.
@@ -942,8 +527,8 @@ Tools:
 </div>
 </div>
 
-<div id="outline-container-orgf8daa30" class="outline-3">
-<h3 id="orgf8daa30"><span class="section-number-3">1.2</span> This file</h3>
+<div id="outline-container-orga4702ce" class="outline-3">
+<h3 id="orga4702ce"><span class="section-number-3">1.2</span> This file</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 This file (<code>readme.org</code>) is used to generate (the correct term is <code>tangle</code>) my <code>flake.nix</code> file, where I specify the inputs and outputs of my system configuration.
@@ -958,12 +543,12 @@ You can visit my blog at the same <a href="https://luca.cambiaghi.me">website</a
 </div>
 </div>
 
-<div id="outline-container-orgf089764" class="outline-2">
-<h2 id="orgf089764"><span class="section-number-2">2</span> flake.nix</h2>
+<div id="outline-container-org8b605fc" class="outline-2">
+<h2 id="org8b605fc"><span class="section-number-2">2</span> flake.nix</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org5156798" class="outline-3">
-<h3 id="org5156798"><span class="section-number-3">2.1</span> file structure</h3>
+<div id="outline-container-orgbaa6409" class="outline-3">
+<h3 id="orgbaa6409"><span class="section-number-3">2.1</span> file structure</h3>
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 <pre class="src src-nix"><span style="color: var(--clr-comment-delimiter); background-color: var(--bg-comment-delimiter);"># </span><span style="color: var(--clr-comment); background-color: var(--bg-comment);">NOTE: this file is tangled from readme.org</span>
@@ -991,11 +576,11 @@ You can visit my blog at the same <a href="https://luca.cambiaghi.me">website</a
 </div>
 </div>
 
-<div id="outline-container-org0b517e5" class="outline-3">
-<h3 id="org0b517e5"><span class="section-number-3">2.2</span> inputs</h3>
+<div id="outline-container-org0ba74d5" class="outline-3">
+<h3 id="org0ba74d5"><span class="section-number-3">2.2</span> inputs</h3>
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
-<pre class="src src-nix" id="orgabbcc49"><span style="color: #00538b;">inputs</span> = {
+<pre class="src src-nix" id="orgcf906a9"><span style="color: #00538b;">inputs</span> = {
   <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># Package sets</span>
   <span style="color: #00538b;">nixpkgs.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nixos/nixpkgs/nixpkgs-unstable"</span>;
   <span style="color: #00538b;">nixpkgs-master.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nixos/nixpkgs/master"</span>;
@@ -1003,7 +588,8 @@ You can visit my blog at the same <a href="https://luca.cambiaghi.me">website</a
   <span style="color: #00538b;">nixos-stable.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nixos/nixpkgs/nixos-20.09"</span>;
 
   <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># Environment/system management</span>
-  <span style="color: #00538b;">darwin.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:lnl7/nix-darwin"</span>;
+  <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># darwin.url = "github:lnl7/nix-darwin";</span>
+  <span style="color: #00538b;">darwin.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:hardselius/nix-darwin"</span>;
   <span style="color: #00538b;">darwin.inputs.nixpkgs.follows</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"nixpkgs"</span>;
   <span style="color: #00538b;">home-manager.url</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"github:nix-community/home-manager"</span>;
   <span style="color: #00538b;">home-manager.inputs.nixpkgs.follows</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"nixpkgs"</span>;
@@ -1019,11 +605,16 @@ You can visit my blog at the same <a href="https://luca.cambiaghi.me">website</a
 </div>
 </div>
 
-<div id="outline-container-org5af9489" class="outline-3">
-<h3 id="org5af9489"><span class="section-number-3">2.3</span> nixpkgs config</h3>
+<div id="outline-container-orgb0f9c19" class="outline-3">
+<h3 id="orgb0f9c19"><span class="section-number-3">2.3</span> nixpkgs config</h3>
 <div class="outline-text-3" id="text-2-3">
+<p>
+The trick in the <code>overlays</code> variable allows us to use the stable version of problematic
+packages. You can just use <code>stable.pkg</code> instead of <code>pkg</code> in <code>home/default.nix</code>
+</p>
+
 <div class="org-src-container">
-<pre class="src src-nix" id="orga005c6d"><span style="color: #00538b;">nixpkgsConfig</span> = <span style="color: #5317ac; font-weight: bold;">with</span> inputs; {
+<pre class="src src-nix" id="org314f561"><span style="color: #00538b;">nixpkgsConfig</span> = <span style="color: #5317ac; font-weight: bold;">with</span> inputs; {
   <span style="color: #00538b;">config</span> = {
     <span style="color: #00538b;">allowUnfree</span> = <span style="color: #8f0075; font-weight: bold;">true</span>;
     <span style="color: #00538b;">allowUnsupportedSystem</span> = <span style="color: #8f0075; font-weight: bold;">true</span>;
@@ -1047,11 +638,11 @@ You can visit my blog at the same <a href="https://luca.cambiaghi.me">website</a
 </div>
 </div>
 
-<div id="outline-container-org5a7dbd9" class="outline-3">
-<h3 id="org5a7dbd9"><span class="section-number-3">2.4</span> home-manager config</h3>
+<div id="outline-container-org5f16504" class="outline-3">
+<h3 id="org5f16504"><span class="section-number-3">2.4</span> home-manager config</h3>
 <div class="outline-text-3" id="text-2-4">
 <div class="org-src-container">
-<pre class="src src-nix" id="orgb073a5a"><span style="color: #00538b;">homeManagerCommonConfig</span> = <span style="color: #5317ac; font-weight: bold;">with</span> self.homeManagerModules; {
+<pre class="src src-nix" id="orgf24e08c"><span style="color: #00538b;">homeManagerCommonConfig</span> = <span style="color: #5317ac; font-weight: bold;">with</span> self.homeManagerModules; {
   <span style="color: #00538b;">imports</span> = [
     <span style="color: #0000c0;">./home</span>
     <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># configs.git.aliases</span>
@@ -1064,11 +655,11 @@ You can visit my blog at the same <a href="https://luca.cambiaghi.me">website</a
 </div>
 </div>
 
-<div id="outline-container-org2598aee" class="outline-3">
-<h3 id="org2598aee"><span class="section-number-3">2.5</span> nix-darwin config</h3>
+<div id="outline-container-orgca1c2e9" class="outline-3">
+<h3 id="orgca1c2e9"><span class="section-number-3">2.5</span> nix-darwin config</h3>
 <div class="outline-text-3" id="text-2-5">
 <div class="org-src-container">
-<pre class="src src-nix" id="orgcea6e8f"><span style="color: #00538b;">nixDarwinCommonModules</span> = { user }: [
+<pre class="src src-nix" id="org247959e"><span style="color: #00538b;">nixDarwinCommonModules</span> = { user }: [
   <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># Main `nix-darwin` config</span>
   <span style="color: #0000c0;">./darwin</span>
   <span style="color: var(--clr-comment); background-color: var(--bg-comment);"># `home-manager` module</span>
@@ -1088,11 +679,11 @@ You can visit my blog at the same <a href="https://luca.cambiaghi.me">website</a
 </div>
 </div>
 
-<div id="outline-container-orge2d27f4" class="outline-3">
-<h3 id="orge2d27f4"><span class="section-number-3">2.6</span> luca-macbook-pro</h3>
+<div id="outline-container-org7a6a2ae" class="outline-3">
+<h3 id="org7a6a2ae"><span class="section-number-3">2.6</span> luca-macbook-pro</h3>
 <div class="outline-text-3" id="text-2-6">
 <div class="org-src-container">
-<pre class="src src-nix" id="org0711a05"><span style="color: #00538b;">luca-macbookpro</span> = darwin.lib.darwinSystem {
+<pre class="src src-nix" id="org364dddf"><span style="color: #00538b;">luca-macbookpro</span> = darwin.lib.darwinSystem {
   <span style="color: #00538b;">modules</span> = nixDarwinCommonModules { <span style="color: #00538b;">user</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"luca"</span>; } ++ [
     {
       <span style="color: #00538b;">networking</span> = {
@@ -1110,11 +701,11 @@ You can visit my blog at the same <a href="https://luca.cambiaghi.me">website</a
 </div>
 </div>
 
-<div id="outline-container-orgc77dbbb" class="outline-3">
-<h3 id="orgc77dbbb"><span class="section-number-3">2.7</span> github-ci</h3>
+<div id="outline-container-org049d7c2" class="outline-3">
+<h3 id="org049d7c2"><span class="section-number-3">2.7</span> github-ci</h3>
 <div class="outline-text-3" id="text-2-7">
 <div class="org-src-container">
-<pre class="src src-nix" id="orgc377f52"><span style="color: #00538b;">githubCI</span> = darwin.lib.darwinSystem {
+<pre class="src src-nix" id="org580ea5b"><span style="color: #00538b;">githubCI</span> = darwin.lib.darwinSystem {
   <span style="color: #00538b;">modules</span> = nixDarwinCommonModules { <span style="color: #00538b;">user</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"runner"</span>; } ++ [
     ({ lib, ... }: { <span style="color: #00538b;">homebrew.enable</span> = lib.mkForce <span style="color: #8f0075; font-weight: bold;">false</span>; })
   ];
@@ -1124,11 +715,11 @@ You can visit my blog at the same <a href="https://luca.cambiaghi.me">website</a
 </div>
 </div>
 
-<div id="outline-container-orgf8328de" class="outline-3">
-<h3 id="orgf8328de"><span class="section-number-3">2.8</span> home-manager-modules</h3>
+<div id="outline-container-org4a44c6a" class="outline-3">
+<h3 id="org4a44c6a"><span class="section-number-3">2.8</span> home-manager-modules</h3>
 <div class="outline-text-3" id="text-2-8">
 <div class="org-src-container">
-<pre class="src src-nix" id="org486d13b"><span style="color: var(--clr-comment-delimiter); background-color: var(--bg-comment-delimiter);"># </span><span style="color: var(--clr-comment); background-color: var(--bg-comment);">homeManagerModules = {</span>
+<pre class="src src-nix" id="org8537120"><span style="color: var(--clr-comment-delimiter); background-color: var(--bg-comment-delimiter);"># </span><span style="color: var(--clr-comment); background-color: var(--bg-comment);">homeManagerModules = {</span>
 <span style="color: var(--clr-comment-delimiter); background-color: var(--bg-comment-delimiter);">#   </span><span style="color: var(--clr-comment); background-color: var(--bg-comment);">configs.git.aliases = import ./home/configs/git-aliases.nix;</span>
 <span style="color: var(--clr-comment-delimiter); background-color: var(--bg-comment-delimiter);">#   </span><span style="color: var(--clr-comment); background-color: var(--bg-comment);">configs.gh.aliases = import ./home/configs/gh-aliases.nix;</span>
 <span style="color: var(--clr-comment-delimiter); background-color: var(--bg-comment-delimiter);">#   </span><span style="color: var(--clr-comment); background-color: var(--bg-comment);">configs.starship.symbols = import ./home/configs/starship-symbols.nix;</span>
@@ -1140,14 +731,14 @@ You can visit my blog at the same <a href="https://luca.cambiaghi.me">website</a
 </div>
 </div>
 
-<div id="outline-container-org174bb38" class="outline-3">
-<h3 id="org174bb38"><span class="section-number-3">2.9</span> cloud-vm</h3>
+<div id="outline-container-orge724646" class="outline-3">
+<h3 id="orge724646"><span class="section-number-3">2.9</span> cloud-vm</h3>
 <div class="outline-text-3" id="text-2-9">
 <p>
 Build and activate with <code>nix build .#cloudVM.activationPackage; ./result/activate</code>
 </p>
 <div class="org-src-container">
-<pre class="src src-nix" id="org9c00995"><span style="color: #00538b;">cloudVM</span> = home-manager.lib.homeManagerConfiguration {
+<pre class="src src-nix" id="orgf245209"><span style="color: #00538b;">cloudVM</span> = home-manager.lib.homeManagerConfiguration {
   <span style="color: #00538b;">system</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"x86_64-linux"</span>;
   <span style="color: #00538b;">homeDirectory</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"/home/luca"</span>;
   <span style="color: #00538b;">username</span> = <span style="color: var(--clr-string); background-color: var(--bg-string);">"luca"</span>;
@@ -1161,11 +752,11 @@ Build and activate with <code>nix build .#cloudVM.activationPackage; ./result/ac
 </div>
 </div>
 
-<div id="outline-container-org6f1f0be" class="outline-3">
-<h3 id="org6f1f0be"><span class="section-number-3">2.10</span> dev-shell</h3>
+<div id="outline-container-org81bfda8" class="outline-3">
+<h3 id="org81bfda8"><span class="section-number-3">2.10</span> dev-shell</h3>
 <div class="outline-text-3" id="text-2-10">
 <div class="org-src-container">
-<pre class="src src-nix" id="orgea7797e">inputs.flake-utils.lib.eachDefaultSystem (system:
+<pre class="src src-nix" id="org90855ce">inputs.flake-utils.lib.eachDefaultSystem (system:
   <span style="color: #5317ac; font-weight: bold;">let</span>
     <span style="color: #00538b;">pkgs</span> = nixpkgs.legacyPackages.${system};
   <span style="color: #5317ac; font-weight: bold;">in</span> {
@@ -1177,12 +768,12 @@ Build and activate with <code>nix build .#cloudVM.activationPackage; ./result/ac
 </div>
 </div>
 
-<div id="outline-container-org57f770f" class="outline-2">
-<h2 id="org57f770f"><span class="section-number-2">3</span> Practical commands</h2>
+<div id="outline-container-orged9a9fc" class="outline-2">
+<h2 id="orged9a9fc"><span class="section-number-2">3</span> Practical commands</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org8848064" class="outline-3">
-<h3 id="org8848064"><span class="section-number-3">3.1</span> Install nix (flakes)</h3>
+<div id="outline-container-orgc15d42e" class="outline-3">
+<h3 id="orgc15d42e"><span class="section-number-3">3.1</span> Install nix (flakes)</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 thanks <a href="https://github.com/kclejeune/system">https://github.com/kclejeune/system</a>
@@ -1206,8 +797,8 @@ git clone git@github.com:lccambiaghi/nixpkgs.git ~/git/nixpkgs
 </div>
 </div>
 
-<div id="outline-container-org1bf65c5" class="outline-3">
-<h3 id="org1bf65c5"><span class="section-number-3">3.2</span> darwin-rebuild</h3>
+<div id="outline-container-org4845e09" class="outline-3">
+<h3 id="org4845e09"><span class="section-number-3">3.2</span> darwin-rebuild</h3>
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 <pre class="src src-sh">darwin-rebuild build --flake .#luca-macbookpro
@@ -1219,8 +810,8 @@ darwin-rebuild switch --flake .#luca-macbookpro
 </div>
 </div>
 
-<div id="outline-container-org528434d" class="outline-3">
-<h3 id="org528434d"><span class="section-number-3">3.3</span> nix flake update</h3>
+<div id="outline-container-org36b4ccd" class="outline-3">
+<h3 id="org36b4ccd"><span class="section-number-3">3.3</span> nix flake update</h3>
 <div class="outline-text-3" id="text-3-3">
 <div class="org-src-container">
 <pre class="src src-sh">nix flake update --update-input nixpkgs
@@ -1230,16 +821,16 @@ darwin-rebuild switch --flake .#luca-macbookpro
 </div>
 </div>
 
-<div id="outline-container-org0331db5" class="outline-2">
-<h2 id="org0331db5"><span class="section-number-2">4</span> Nix</h2>
+<div id="outline-container-org95bde99" class="outline-2">
+<h2 id="org95bde99"><span class="section-number-2">4</span> Nix</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li>Good intro: <a href="https://stephank.nl/p/2020-06-01-a-nix-primer-by-a-newcomer.html">https://stephank.nl/p/2020-06-01-a-nix-primer-by-a-newcomer.html</a></li>
 </ul>
 </div>
 
-<div id="outline-container-org1795b5e" class="outline-3">
-<h3 id="org1795b5e"><span class="section-number-3">4.1</span> Fundamentals</h3>
+<div id="outline-container-orged56bdd" class="outline-3">
+<h3 id="orged56bdd"><span class="section-number-3">4.1</span> Fundamentals</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Set:
@@ -1283,8 +874,8 @@ Parameter with default value:
 </div>
 </div>
 
-<div id="outline-container-orgd284139" class="outline-3">
-<h3 id="orgd284139"><span class="section-number-3">4.2</span> Config</h3>
+<div id="outline-container-orgdad79f8" class="outline-3">
+<h3 id="orgdad79f8"><span class="section-number-3">4.2</span> Config</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 A config takes an attribute as parameter and returns an attribute set
@@ -1308,8 +899,8 @@ A config takes an attribute as parameter and returns an attribute set
 </div>
 </div>
 
-<div id="outline-container-org306f42b" class="outline-3">
-<h3 id="org306f42b"><span class="section-number-3">4.3</span> Derivation</h3>
+<div id="outline-container-orgdeab895" class="outline-3">
+<h3 id="orgdeab895"><span class="section-number-3">4.3</span> Derivation</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 A derivation takes inputs and produces output.
@@ -1334,8 +925,8 @@ If something changes even slightly in the inputs, the hash output will change.
 </p>
 </div>
 </div>
-<div id="outline-container-org339e548" class="outline-3">
-<h3 id="org339e548"><span class="section-number-3">4.4</span> Escaping in strings</h3>
+<div id="outline-container-orgbbbd153" class="outline-3">
+<h3 id="orgbbbd153"><span class="section-number-3">4.4</span> Escaping in strings</h3>
 <div class="outline-text-3" id="text-4-4">
 <ul class="org-ul">
 <li>You can use <code>'</code> to escape double quotes</li>
@@ -1344,8 +935,8 @@ If something changes even slightly in the inputs, the hash output will change.
 </div>
 </div>
 </div>
-<div id="outline-container-orga266bc6" class="outline-2">
-<h2 id="orga266bc6"><span class="section-number-2">5</span> References</h2>
+<div id="outline-container-org695c173" class="outline-2">
+<h2 id="org695c173"><span class="section-number-2">5</span> References</h2>
 <div class="outline-text-2" id="text-5">
 <ul class="org-ul">
 <li><a href="https://github.com/malob/nixpkgs">https://github.com/malob/nixpkgs</a></li>
