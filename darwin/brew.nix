@@ -68,8 +68,12 @@ in
     taps = [
       "homebrew/cask"
       "borkdude/brew"
-      # "homebrew/cask-fonts"
-      # "crescentrose/sunshine"
+      "railwaycat/emacsmacport"
     ];
+    extraConfig = ''
+        cask_args appdir: "~/Applications", require_sha: true
+        # brew "railwaycat/emacsmacport/emacs-mac", args: ["with-modules", "with-mac-metal" "with-no-title-bars"]
+        brew "railwaycat/emacsmacport/emacs-mac", args: ["with-modules", "with-mac-metal"]
+    '';
   };
 }

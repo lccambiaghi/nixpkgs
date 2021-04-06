@@ -154,7 +154,7 @@ in
       # nyxt
       pandoc
       pinentry_mac # Necessary for GPG
-      # python37Packages.poetry
+      python37Packages.poetry
       customPython
       # pre-commit # Pre-commit CI hook tool
       stable.procs

@@ -117,6 +117,7 @@
     # systemPackages = [ ];
     systemPath = [
       "/run/current-system/sw/bin/" # TODO how to avoid hardcoding?
+      "$HOME/.npm-packages/bin"
       "$HOME/.poetry/bin"
       # "$HOME/.emacs.d/bin"
       "$HOME/git/doom-emacs/bin"

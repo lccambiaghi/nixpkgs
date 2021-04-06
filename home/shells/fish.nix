@@ -28,7 +28,6 @@ let
     kdl= "kubectl delete ";
     kds= "kubectl describe ";
     pj= "python $HOME/bin/pretty_json.py";
-    hms = "home-manager switch";
     cljclr="mono $CLOJURE_LOAD_PATH/Clojure.Main.exe";
 
     pipde = "poetry run pip install debugpy";
@@ -41,15 +40,15 @@ let
     reload = "cd ~/git/nixpkgs && darwin-rebuild switch --flake . && cd -";
 
     # Nix garbage collection
-    garbage = "nix-collect-garbage -d && docker image prune --all --force";
+    garbage = "sudo nix-collect-garbage -d && docker image prune --all --force";
 
     # See which Nix packages are installed
     installed = "nix-env --query --installed";
 
     # emacs
-    emacs="/Applications/Emacs.app/Contents/MacOS/Emacs";
-    emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient";
-    em="emacsclient -n ";
+    # emacs="/Applications/Emacs.app/Contents/MacOS/Emacs";
+    # emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient";
+    em="emacsclient -a \"\" -n";
   };
 in {
   # echo "$HOME/.nix-profile/bin/fish" | sudo tee -a /etc/shells
@@ -60,23 +59,12 @@ in {
     shellInit = ''
       direnv hook fish | source
       direnv export fish | source
-
-      if test (date "+%H") -le 15 # TODO how to sync with Emacs?
-        set -x BAT_THEME 'ansi-light'
-      end
     '';
     loginShellInit = ''
-      if test -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-        fenv source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-      end
-
-      if test -e /nix/var/nix/profiles/default/etc/profile.d/nix.sh
-        fenv source /nix/var/nix/profiles/default/etc/profile.d/nix.sh
-      end
-
       # automatically change kitty colors based on time of day
       if test -n "$KITTY_WINDOW_ID"
-        if test (date "+%H") -le 15 # TODO how to sync with Emacs?
+      # TODO "defaults read -g AppleInterfaceStyle" is better
+        if test (date "+%H") -le 18
             lightk
         else
             darkk
@@ -94,13 +82,6 @@ in {
 
       # erase with set --erase --universal fish_user_paths if you screw up
       # fish_user_paths /usr/local/bin $fish_user_paths
-
-      # switch (sunshine -s "@55 12")
-      #   case 'day'
-      #      lightk
-      #   case 'night'
-      #     darkk
-      # end
       '';
 
     functions = {
