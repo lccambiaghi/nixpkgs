@@ -124,7 +124,7 @@
     ];
     variables = {
       EDITOR = "emacsclient";
-      KUBE_EDITOR="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient";
+      KUBE_EDITOR="emacsclient";
       LC_ALL="en_US.UTF-8";
       LIBRARY_PATH="/usr/bin/gcc";
       CLOJURE_LOAD_PATH="$HOME/git/clojure-clr/bin/4.0/Release/"; # NOTE this needs to be present and compiled

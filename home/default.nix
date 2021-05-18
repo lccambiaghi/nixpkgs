@@ -103,6 +103,7 @@ in
       cantarell-fonts
       # calibre
       clojure
+      cocoapods
       stable.clojure-lsp
       cmake
       # clang
@@ -142,6 +143,7 @@ in
       less
       # mdcat # Markdown converter/reader for the CLI
       # mono
+      mosh
       niv # Nix dependency management
       nixpkgs-fmt
       nodejs # node and npm
@@ -180,6 +182,7 @@ in
       xsv # CSV file parsing utility
       yarn # Node.js package manager
       youtube-dl # Download videos
+      zlib
       # zsh-powerlevel10k
     ] ++ scripts;
   };

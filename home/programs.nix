@@ -129,6 +129,7 @@
         pull.rebase = "false";
       };
     };
+    # gpgconf --kill gpg-agent to restart agent
     gpg.enable = true;
     htop = {
       enable = true;

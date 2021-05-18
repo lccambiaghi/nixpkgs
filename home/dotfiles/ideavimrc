@@ -14,9 +14,12 @@ set argtextobj         " via selects argument
 set ReplaceWithRegister
 set highlightedyank
 set NERDTree
+set which-key
 
 """ Plugin settings -------------------------
 let g:argtextobj_pairs="[:],(:),<:>"
+" disable the which-key timeout option
+set notimeout
 
 """ Common settings -------------------------
 set showmode
@@ -34,6 +37,7 @@ set ideastatusicon=gray
 """ Mappings --------------------------------
 """ https://github.com/fdietze/dotfiles/blob/master/.ideavimrc
 """ From https://github.com/danidiaz/miscellany/blob/master/windows/.ideavimrc
+""" Take inspiration from https://github.com/MarcoIeni/intellimacs/blob/main/docs/KEYBINDINGS.org
 
 map <C-o> <Action>(Back)
 map <C-i> <Action>(Forward)
@@ -45,6 +49,10 @@ map <leader>dd <Action>(Debug)
 map <leader>db <Action>(ToggleLineBreakpoint)
 map <leader>ds <Action>(Stop)
 map <leader>dc <Action>(ResumeProgram)
+map <leader>dt <Action>(PythonOrDebugConsole)
+map <leader>dn <Action>(StepIntoMyCode)
+
+map <leader>ee <Action>(ExecuteLineInPythonConsole)
 
 map <leader>ff <Action>(SelectInProjectView)
 map <Leader>fs <Action>(SaveAll)
@@ -53,12 +61,18 @@ map <leader>ga <Action>(Annotate)
 map <leader>gl <Action>(Vcs.ShowTabbedFileHistory)
 
 map <Leader>gd <Action>(GoToImplementation)
-map <leader>gd <Action>(FindUsages)
+map <leader>gD <Action>(FindUsages)
 
 map g; <Action>(JumpToLastChange)
 map g, <Action>(JumpToNextChange)
 
-map <leader>n <Action>(StepIntoMyCode)
+"map <leader>ji <Action>(TurnEditModeOn)
+"map <leader>I <Action>(TurnEditModeOn)
+map <leader>jd <Action>(DebugCell)
+map <leader>js <Action>(SplitCell)
+map <leader>jr <Action>(RestartKernel)
+map <leader>ju <Action>(UndoDeleteCell)
+map <leader>jm <Action>(MergeCellBelow)
 
 nnoremap <leader>pf :action GotoFile<CR>
 nnoremap <leader>pp :action ActivateProjectToolWindow<CR>
@@ -104,8 +118,6 @@ nnoremap <leader>y :action PasteMultiple<CR>
 map Y y$
 
 map <leader>z <Action>(ToggleDistractionFreeMode)
-
-map <leader>' <Action>(PythonOrDebugConsole)
 
 nnoremap ]e :action GotoNextError<cr>
 nnoremap [e :action GotoPreviousError<cr>

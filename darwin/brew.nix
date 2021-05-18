@@ -29,6 +29,12 @@ in
       # "nuget"
       # "parquet-tools"
       # "crescentrose"/sunshine
+      ##### cross compilation 
+      "ldid"
+      "docbook-xsl"
+      "po4a"
+      "gnu-sed"
+      "ncurses"
     ];
     # extraConfig = ''
     #     cask_args appdir: "~/BrewApplications", require_sha: true
@@ -68,12 +74,11 @@ in
     taps = [
       "homebrew/cask"
       "borkdude/brew"
-      "railwaycat/emacsmacport"
+      # "railwaycat/emacsmacport"
     ];
     extraConfig = ''
         cask_args appdir: "~/Applications", require_sha: true
         # brew "railwaycat/emacsmacport/emacs-mac", args: ["with-modules", "with-mac-metal" "with-no-title-bars"]
-        brew "railwaycat/emacsmacport/emacs-mac", args: ["with-modules", "with-mac-metal"]
     '';
   };
 }

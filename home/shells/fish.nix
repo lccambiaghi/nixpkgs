@@ -6,12 +6,20 @@ let
     # Aliases for commonly used tools
     grep = "grep --color=auto";
     cat = "bat";
+
+    # first Create Command-line Launcher
+    ds="/usr/local/bin/dataspell";
+
+    vmstart="az vm start -g rgpazewpmlit-forecasting-tooling-001 -n avocado-ds-vm";
+
     find = "fd";
+
     l = "${pkgs.exa}/bin/exa";
     ls = "${pkgs.exa}/bin/exa";
     la = "${pkgs.exa}/bin/exa -la";
     ll = "${pkgs.exa}/bin/exa -lh";
     lt = "${pkgs.exa}/bin/exa --tree";
+
     k = "kubectl";
     ke = "kubectl edit";
     kx = "kubectl exec -ti ";
@@ -28,6 +36,7 @@ let
     kdl= "kubectl delete ";
     kds= "kubectl describe ";
     pj= "python $HOME/bin/pretty_json.py";
+
     cljclr="mono $CLOJURE_LOAD_PATH/Clojure.Main.exe";
 
     pipde = "poetry run pip install debugpy";
@@ -144,12 +153,46 @@ in {
     settings = {
       character.success_symbol = "[~>](bold green)"; # "[λ](bold green)";
       character.error_symbol= "[~>](bold red)";
+      directory.fish_style_pwd_dir_length = 1; # turn on fish directory truncation
+      directory.truncation_length = 2; # number of directories not to truncate
       scan_timeout = 10;
-      # kubernetes.disabled = false;
+      # git_status.format = "";
+      git_status.disabled = true;
+      kubernetes.disabled = false;
+      kubernetes.format = "on [⛵ $context \($namespace\)](dimmed green) ";
+      kubernetes.context_aliases = {
+        "core-dev-west-1" = "dev";
+      };
       package.disabled = true;
       # python.format = "via [🐍 ( \($virtualenv\))]($style) ";
       python.disabled = true;
       nodejs.disabled = true;
+      java.disabled = true;
+      format = lib.concatStrings [
+        "$username"
+        "$hostname"
+        "$directory"
+        "$git_branch"
+        "$git_commit"
+        "$git_status"
+        "$kubernetes"
+        "$hg_branch"
+        "$docker_context"
+        "$package"
+        "$cmake"
+        "$python"
+        "$nix_shell"
+        "$memory_usage"
+        "$custom"
+        "$cmd_duration"
+        "$line_break"
+        "$jobs"
+        "$battery"
+        "$time"
+        "$status"
+        "$shell"
+        "$character"
+      ];
     };
   };
 
