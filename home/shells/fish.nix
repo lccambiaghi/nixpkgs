@@ -42,16 +42,13 @@ let
     pipde = "poetry run pip install debugpy";
     pipdt = "poetry run pip install dtale";
 
-    # Reload zsh
-    szsh = "source ~/.zshrc";
-
     # Reload home manager and zsh
-    reload = "cd ~/git/nixpkgs && darwin-rebuild switch --flake . && cd -";
+    reload = "cd ~/git/nixpkgs && darwin-rebuild switch --flake .#luca-macbookpro && cd -";
 
     # Nix garbage collection
     garbage = "sudo nix-collect-garbage -d && docker image prune --all --force";
 
-    # See which Nix packages are installed
+    # See which Nix packages are installed with nix-env
     installed = "nix-env --query --installed";
 
     # emacs
