@@ -13,4 +13,4 @@ jobs:
       with:
         github_token: ${{ secrets.ORG_KNIT_PAT }}
         branch: gh-pages
-        config: https://github.com/lccambiaghi/vanilla-emacs
+        config: https://github.com/lccambiaghi/vanilla-emacs.git
