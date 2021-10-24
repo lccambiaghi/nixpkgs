@@ -10,8 +10,7 @@
     nixos-stable.url = "github:nixos/nixpkgs/nixos-20.09";
   
     # Environment/system management
-    # darwin.url = "github:lnl7/nix-darwin";
-    darwin.url = "github:hardselius/nix-darwin";
+    darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -68,14 +67,16 @@
       ];
     in {
       darwinConfigurations = {
-        luca-macbookpro = darwin.lib.darwinSystem {
-          modules = nixDarwinCommonModules { user = "luca"; } ++ [
+        # main macbook configuration
+        macbookpro = darwin.lib.darwinSystem {
+          system = "x86_64-darwin";
+          modules = nixDarwinCommonModules { user = "cambiaghiluca"; } ++ [
             {
               networking = {
                 knownNetworkServices = ["Wi-Fi" "Bluetooth PAN" "Thunderbolt Bridge"];
-                hostName =  "luca-macbookpro";
-                computerName = "luca-macbookpro";
-                localHostName = "luca-macbookpro";
+                # hostName =  "luca-macbookpro";
+                # computerName = "luca-macbookpro";
+                # localHostName = "luca-macbookpro";
               };
             }
           ];

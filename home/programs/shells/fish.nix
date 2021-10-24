@@ -43,7 +43,7 @@ let
     pipdt = "poetry run pip install dtale";
 
     # Reload home manager and zsh
-    reload = "cd ~/git/nixpkgs && darwin-rebuild switch --flake .#luca-macbookpro && cd -";
+    reload = "cd ~/git/nixpkgs && darwin-rebuild switch --flake .#macbookpro && cd -";
 
     # Nix garbage collection
     garbage = "sudo nix-collect-garbage -d && docker image prune --all --force";

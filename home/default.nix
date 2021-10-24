@@ -18,28 +18,14 @@ let
     nix-symlink-apps-macos
   ];
 
-  customPython = pkgs.python37.buildEnv.override {
-    extraLibs = with pkgs.python37Packages; [
-      black
-      # debugpy
-      flake8
-      ipython
-      isort
-      # jupyter
-      pip
-      pyyaml
-      # tabulate
-    ];
-  };
-
-  # R-with-pkgs = pkgs.rWrapper.override{ packages = with pkgs.rPackages; [
-  #   IRkernel
-  #   ISLR
-  # ]; };
-
 in
 {
-  imports = [ ./programs.nix ./dotfiles ./kitty];
+  imports = [ 
+    ./dotfiles 
+    ./programs
+    # ./python
+    # ./R
+  ];
 
   fonts.fontconfig.enable = true;
 
@@ -48,65 +34,50 @@ in
   home = {
     stateVersion = "20.09";
     packages = with pkgs; [
-      adoptopenjdk-bin # Java
-      argo
-      azure-cli
+      # argo
+      # azure-cli
       bash # /bin/bash
       bat # cat replacement written in Rust
-      cachix
+      # cachix
       cantarell-fonts
-      clojure
-      cocoapods
-      stable.clojure-lsp
-      cmake
-      # clang
-      conftest
-      curl
-      docker # World's #1 container tool
-      # docker-machine # Docker daemon for macOS
-      emacs-all-the-icons-fonts
+      # cocoapods
+      # cmake
+      # conftest
+      # curl
+      # docker # World's #1 container tool
+      # emacs-all-the-icons-fonts
       exa # ls replacement written in Rust
       fd # find replacement written in Rust
-      # font-awesome_5
-      font-awesome_4
+      # font-awesome_4
       fira-code
-      gitAndTools.gh
-      gitAndTools.git-crypt
-      gnupg # gpg
-      kubectl # Kubernetes CLI tool
+      # gitAndTools.gh
+      # gitAndTools.git-crypt
+      # gnupg # gpg
+      # kubectl # Kubernetes CLI tool
       # kubectx # kubectl context switching
       # lorri # Easy Nix shell
-      mosh
-      niv # Nix dependency management
-      nixpkgs-fmt
-      nodejs # node and npm
-      # nodePackages.mermaid-cli # TODO
-      nodePackages.pyright
-      nodePackages.prettier
-      # nodePackages.vega-lite
-      # nodePackages.vega-cli
-      # nyxt
-      pandoc
-      pinentry_mac # Necessary for GPG
-      python37Packages.poetry
-      customPython
+      # mosh
+      # niv # Nix dependency management
+      # nixpkgs-fmt
+      # nodejs # node and npm
+      # nodePackages.pyright
+      # nodePackages.prettier
+      # pandoc
+      # pinentry_mac # Necessary for GPG
       # pre-commit # Pre-commit CI hook tool
-      stable.procs
-      protobuf # Protocol Buffers
-      # R-with-pkgs
-      roboto
-      roboto-mono
-      ripgrep # grep replacement written in Rust
-      rsync
-      sqlite
-      tectonic  # latex 
-      tree # Should be included in macOS but it's not
-      tmux
-      watch
-      # webkitgtk
-      wget
-      yarn # Node.js package manager
-      youtube-dl # Download videos
+      # stable.procs
+      # protobuf # Protocol Buffers
+      # roboto
+      # roboto-mono
+      # ripgrep # grep replacement written in Rust
+      # rsync
+      # sqlite
+      # tree # Should be included in macOS but it's not
+      # tmux
+      # watch
+      # wget
+      # yarn # Node.js package manager
+      # youtube-dl # Download videos
     ] ++ scripts;
   };
 }

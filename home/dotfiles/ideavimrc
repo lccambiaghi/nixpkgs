@@ -1,134 +1,20 @@
-""" Map leader to space ---------------------
-let mapleader = " "
+source ~/.intellimacs/spacemacs.vim
 
-""" Plugins  --------------------------------
-""" https://github.com/JetBrains/ideavim/wiki/Emulated-plugins
-set surround
-" alt+n to select next
-" g<A+n> to select all?
-set multiple-cursors
-set commentary
-set easymotion         " /ss for easymotion
-set textobj-entire     " vae selects buffer
-set argtextobj         " via selects argument
-set ReplaceWithRegister
-set highlightedyank
-set NERDTree
-set which-key
+" (Optional) Enable other Intellimacs modules
+source ~/.intellimacs/extra.vim
+source ~/.intellimacs/major.vim
+source ~/.intellimacs/hybrid.vim
 
-""" Plugin settings -------------------------
-let g:argtextobj_pairs="[:],(:),<:>"
-" disable the which-key timeout option
-set notimeout
+" (Optional) Enable which-key plugin
+source ~/.intellimacs/which-key.vim
 
-""" Common settings -------------------------
-set showmode
-set so=5
-set nu
-set scrolloff=5 sidescrolloff=10  " keep some lines before and after the cursor visible
-set incsearch                     " show search results while typing
-set clipboard=unnamedplus,unnamed,ideaput " integrate with system clipboard
+" (Optional) My own vim commands
+nnoremap Y y$
 
-""" Idea specific settings ------------------
-set ideajoin
-set ideastatusicon=gray
-"set idearefactormode=keep
+" (Optional) Comma for major mode
+nmap , <leader>m
+vmap , <leader>m
 
-""" Mappings --------------------------------
-""" https://github.com/fdietze/dotfiles/blob/master/.ideavimrc
-""" From https://github.com/danidiaz/miscellany/blob/master/windows/.ideavimrc
-""" Take inspiration from https://github.com/MarcoIeni/intellimacs/blob/main/docs/KEYBINDINGS.org
-
-map <C-o> <Action>(Back)
-map <C-i> <Action>(Forward)
-
-map <Leader>cd <Action>(Debug)
-map <Leader>cr <Action>(ChooseRunConfiguration)
-
-map <leader>dd <Action>(Debug)
-map <leader>db <Action>(ToggleLineBreakpoint)
-map <leader>ds <Action>(Stop)
-map <leader>dc <Action>(ResumeProgram)
-map <leader>dt <Action>(PythonOrDebugConsole)
-map <leader>dn <Action>(StepIntoMyCode)
-
-map <leader>ee <Action>(ExecuteLineInPythonConsole)
-
-map <leader>ff <Action>(SelectInProjectView)
-map <Leader>fs <Action>(SaveAll)
-
-map <leader>ga <Action>(Annotate)
-map <leader>gl <Action>(Vcs.ShowTabbedFileHistory)
-
-map <Leader>gd <Action>(GoToImplementation)
-map <leader>gD <Action>(FindUsages)
-
-map g; <Action>(JumpToLastChange)
-map g, <Action>(JumpToNextChange)
-
-"map <leader>ji <Action>(TurnEditModeOn)
-"map <leader>I <Action>(TurnEditModeOn)
-map <leader>jd <Action>(DebugCell)
-map <leader>js <Action>(SplitCell)
-map <leader>jr <Action>(RestartKernel)
-map <leader>ju <Action>(UndoDeleteCell)
-map <leader>jm <Action>(MergeCellBelow)
-
-nnoremap <leader>pf :action GotoFile<CR>
-nnoremap <leader>pp :action ActivateProjectToolWindow<CR>
-nnoremap <leader>pt :action ActivateTerminalToolWindow<CR>
-
-nmap <leader>ri :action Inline<CR>
-nmap <leader>rn :action RenameElement<CR>
-nnoremap <leader>rr :action Refactorings.QuickListPopupAction<CR>
-nmap <leader>rev :action IntroduceVariable<CR>
-vmap <leader>rev :action IntroduceVariable<CR>
-nmap <leader>rem :action ExtractMethod<CR>
-nnoremap <leader>rf :action RenameFile<CR>
-nmap <leader>rm :action Move<CR>
-nmap <leader>ro :action OptimizeImports<CR>
-nmap <leader>rG :action Generate<CR>
-
-map <Leader><Space> <Action>(SearchEverywhere)
-nnoremap <leader>sa :action GotoAction<CR>
-nnoremap <leader>sc :action GotoClass<CR>
-nnoremap <Leader>se :action ShowErrorDescription<CR>
-nnoremap <Leader>si :action GotoImplementation<CR>
-nnoremap <leader>sv :action GotoSymbol<CR>
-map <leader>so <Action>(FileStructurePopup)
-nnoremap <leader>ss :action FindInPath<CR>
-nnoremap <leader>sr :action ReplaceInPath<CR>
-
-" Test and Run
-nnoremap <leader>tg :action GotoTest<CR>
-nnoremap <leader>tt :action RunClass<CR>
-nnoremap <leader>tr :action Rerun<CR>
-nnoremap <leader>tf :action RerunFailedTests<CR>
-
-" source ideavim config
-nnoremap <leader>. :source ~/.ideavimrc<CR>
-
-map <Leader>wo <Action>(JumpToLastWindow)
-map <leader>ws :split<cr>
-map <leader>wv :vsplit<cr>
-map <Leader>wm <Action>(HideAllWindows)
-
-nnoremap <leader>y :action PasteMultiple<CR>
-
-map Y y$
-
-map <leader>z <Action>(ToggleDistractionFreeMode)
-
-nnoremap ]e :action GotoNextError<cr>
-nnoremap [e :action GotoPreviousError<cr>
-nnoremap ]h :action VcsShowNextChangeMarker<cr>
-nnoremap [h :action VcsShowPrevChangeMarker<cr>
-
-" clear search highlighting
-nnoremap <leader>/ :nohls<return><esc>
-
-nmap + :action EditorIncreaseFontSize<CR>
-nmap - :action EditorDecreaseFontSize<CR>
-"nmap <leader>= :action EditorResetFontSize<CR>
-
-nmap <leader>=  :action ReformatCode<CR>
+" (Optional) Add/edit actions
+nnoremap <leader>gl    :action Vcs.Show.Log<CR>
+vnoremap <leader>gl    :action Vcs.Show.Log<CR>
