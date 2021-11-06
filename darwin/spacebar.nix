@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   services.spacebar.enable = true;
   services.spacebar.package = pkgs.spacebar;

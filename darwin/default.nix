@@ -3,7 +3,7 @@
   imports = [
     ./brew.nix
     ./preferences.nix
-    # ./spacebar.nix
+    ./spacebar.nix
   ];
 
   #####################

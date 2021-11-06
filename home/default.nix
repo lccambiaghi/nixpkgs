@@ -64,7 +64,7 @@ in
       # nodePackages.prettier
       # pandoc
       # pinentry_mac # Necessary for GPG
-      # pre-commit # Pre-commit CI hook tool
+      pre-commit # Pre-commit CI hook tool
       # stable.procs
       # protobuf # Protocol Buffers
       # roboto

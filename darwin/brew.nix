@@ -29,6 +29,7 @@ in
       # "nuget"
       # "parquet-tools"
       # "crescentrose"/sunshine
+      "unixodbc"
       ##### cross compilation 
       # "ldid"
       # "docbook-xsl"
@@ -36,9 +37,6 @@ in
       # "gnu-sed"
       # "ncurses"
     ];
-    # extraConfig = ''
-    #     cask_args appdir: "~/BrewApplications", require_sha: true
-    # '';
     casks = [
       # "authy"
       # "altserver"
@@ -66,12 +64,13 @@ in
     ];
     taps = [
       "homebrew/cask"
+      "d12frosted/emacs-plus"
       # "borkdude/brew"
       # "railwaycat/emacsmacport"
     ];
     # extraConfig = ''
     #     cask_args appdir: "~/Applications", require_sha: true
-    #     # brew "railwaycat/emacsmacport/emacs-mac", args: ["with-modules", "with-mac-metal" "with-no-title-bars"]
+    #     brew "d12frosted/homebrew-emacs-plus/emacs-plus@28", args: ["with-xwidgets", "with-native-comp" "with-no-title-bar"]
     # '';
   };
 }
