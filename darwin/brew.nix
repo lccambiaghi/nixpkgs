@@ -40,10 +40,12 @@ in
     casks = [
       # "authy"
       # "altserver"
+      "1password6"
       "amethyst"
-      # "discord"
       "docker"
+      # "emacs-app-good"
       "firefox"
+      # "discord"
       # "google-chrome"
       # "keybase"
       # "microsoft-auto-update"
@@ -52,7 +54,6 @@ in
       # "microsoft-teams"
       # "pycharm-ce"
       # "slack"
-      # "1password"
       # "iina"
       # "discord"
       # "docker"
@@ -64,13 +65,15 @@ in
     ];
     taps = [
       "homebrew/cask"
+      "homebrew/cask-versions"
       "d12frosted/emacs-plus"
+      # "jimeh/emacs-builds"
       # "borkdude/brew"
       # "railwaycat/emacsmacport"
     ];
-    # extraConfig = ''
-    #     cask_args appdir: "~/Applications", require_sha: true
-    #     brew "d12frosted/homebrew-emacs-plus/emacs-plus@28", args: ["with-xwidgets", "with-native-comp" "with-no-title-bar"]
-    # '';
+    extraConfig = ''
+        brew "d12frosted/homebrew-emacs-plus/emacs-plus@28", args: ["with-xwidgets", "with-native-comp", "with-no-titlebar"]
+    '';
+    # cask_args appdir: "~/Applications", require_sha: true
   };
 }

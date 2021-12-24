@@ -23,6 +23,27 @@ The tangled ~flake.nix~ file imports other ~.nix~ files (e.g. ~darwin/default.ni
 
 This file is better viewed in HTML format [[https://luca.cambiaghi.me/nixpkgs/readme.html][here]] or through ~org-mode~ (clone the repo and open in ~emacs~).
 You can visit my blog at the same [[https://luca.cambiaghi.me][website]].
+** Manual steps
+First build:
+#+begin_src shell
+nix --extra-experimental-features "nix-command flakes" build .#darwinConfigurations.macbookpro.system
+./result/sw/bin/darwin-rebuild switch —flake .#macbookpro
+#+end_src
+
+If something goes wrong with synthetic volume:
+#+begin_src shell
+echo -e "run\tprivate/var/run" | sudo tee -a /etc/synthetic.conf >/dev/null
+/System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -t
+#+end_src
+
+Some files to backup:
+#+begin_src shell
+sudo mv /etc/nix/nix.conf /etc/nix/nix.conf.bak
+sudo mv /etc/shells /etc/shells.bak
+mv ~/.zshrc ~/.zshrc.bak
+#+end_src
+
+To use touch id for sudo (e.g. every time you reload configuration) follow this link: https://www.imore.com/how-use-sudo-your-mac-touch-id
 
 * flake.nix
 ** file structure
@@ -60,8 +81,7 @@ inputs = {
   nixos-stable.url = "github:nixos/nixpkgs/nixos-20.09";
 
   # Environment/system management
-  # darwin.url = "github:lnl7/nix-darwin";
-  darwin.url = "github:hardselius/nix-darwin";
+  darwin.url = "github:lnl7/nix-darwin";
   darwin.inputs.nixpkgs.follows = "nixpkgs";
   home-manager.url = "github:nix-community/home-manager";
   home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -137,14 +157,16 @@ nixDarwinCommonModules = { user }: [
 ** luca-macbook-pro
 #+NAME: luca-macbookpro
 #+begin_src nix
-luca-macbookpro = darwin.lib.darwinSystem {
-  modules = nixDarwinCommonModules { user = "luca"; } ++ [
+# main macbook configuration
+macbookpro = darwin.lib.darwinSystem {
+  system = "x86_64-darwin";
+  modules = nixDarwinCommonModules { user = "cambiaghiluca"; } ++ [
     {
       networking = {
         knownNetworkServices = ["Wi-Fi" "Bluetooth PAN" "Thunderbolt Bridge"];
-        hostName =  "luca-macbookpro";
-        computerName = "luca-macbookpro";
-        localHostName = "luca-macbookpro";
+        # hostName =  "luca-macbookpro";
+        # computerName = "luca-macbookpro";
+        # localHostName = "luca-macbookpro";
       };
     }
   ];
@@ -232,74 +254,6 @@ darwin-rebuild switch --flake .#luca-macbookpro
 nix flake update --update-input nixpkgs
 #+end_src
 
-* Nix
-- Good intro: https://stephank.nl/p/2020-06-01-a-nix-primer-by-a-newcomer.html
-
-** Fundamentals
-Set:
-#+begin_src nix
-{ "a b" = "c"; count = 2; }
-#+end_src
-
-List:
-#+begin_src nix
-[42 "a b" (3 + 6) [2 3 4] {x = 2;}]
-#+end_src
-
-Lambda:
-#+begin_src nix
-(x: x + x) 21
-# 42
-
-let hi = {name, place}: "Hi ${name} in ${place}!";
-in hi { name = "Michael"; place = "Austria";  }
-#+end_src
-
-Parameter with default value:
-#+begin_src nix
-{ pkgs ? import <nixpkgs> {} }:
-#+end_src
-
-~<nixpkgs>~ refers to the value of the nixpkgs attribute declared in the NIX_PATH environment variable
-
-** Config
-A config takes an attribute as parameter and returns an attribute set
-#+begin_src nix
-{ pkgs }:
-
-{
-  packageOverrides = pkgs: {
-    emacs = pkgs.emacs.override {
-      withGTK2 = false;
-      withGTK3 = false;
-      withXwidgets = false;
-    };
-  };
-
-  allowUnfree = true;
-}
-#+end_src
-
-** Derivation
-A derivation takes inputs and produces output.
-A derivation is lazy, so it will only be evaluated when it is input to other derivations.
-
-#+begin_src nix
-derivation {
-  name = "hello-world";
-  system = "x86_64-linux";
-  outputs = [ "out" ];  # This is the default, and can be omitted.
-  builder = "${pkgs.bash}/bin/bash";
-  args = [ "-c" "echo 'Hello world!' > $out" ];
-}
-#+end_src
-
-Derviation outputs are stored in the nix store.
-Each derivation's output is defined by an hash which encodes all input derivations.
-If something changes even slightly in the inputs, the hash output will change.
-** Escaping in strings
-- You can use ~'~ to escape double quotes
-- You can use ~''~ to escape dollar
 * References
 - https://github.com/malob/nixpkgs
 - https://github.com/kclejeune/system
@@ -309,5 +263,4 @@ If something changes even slightly in the inputs, the hash output will change.
 * COMMENT Local variables
 # Local Variables:
 # eval: (add-hook 'after-save-hook (lambda ()(org-babel-tangle)) nil t)
-# company-backends: (company-dabbrev-code company-files company-keywords)
 # End:

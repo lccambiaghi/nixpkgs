@@ -1,5 +1,6 @@
+{ config, pkgs, ... }:
 {
-    program.texlive = {
+    programs.texlive = {
       enable = true;
       extraPackages = tpkgs: {
         inherit (tpkgs)
@@ -11,8 +12,8 @@
       };
     };
 
-    # home.packages = with pkgs; [
-    #   tectonic
-    # ];
+    home.packages = with pkgs; [
+      tectonic
+    ];
 
 }

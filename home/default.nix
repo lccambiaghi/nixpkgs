@@ -39,9 +39,9 @@ in
       bash # /bin/bash
       bat # cat replacement written in Rust
       # cachix
-      cantarell-fonts
+      # cantarell-fonts
       # cocoapods
-      # cmake
+      cmake
       # conftest
       # curl
       # docker # World's #1 container tool
@@ -59,7 +59,7 @@ in
       # mosh
       # niv # Nix dependency management
       # nixpkgs-fmt
-      # nodejs # node and npm
+      nodejs # node and npm
       # nodePackages.pyright
       # nodePackages.prettier
       # pandoc
@@ -69,8 +69,9 @@ in
       # protobuf # Protocol Buffers
       # roboto
       # roboto-mono
-      # ripgrep # grep replacement written in Rust
+      ripgrep # grep replacement written in Rust
       # rsync
+      # source-code-pro
       # sqlite
       # tree # Should be included in macOS but it's not
       # tmux

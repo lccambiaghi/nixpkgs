@@ -2,7 +2,7 @@
 {
   imports = [
     # ./kitty
-    # ./latex
+    ./latex
     ./shells
   ];
 
