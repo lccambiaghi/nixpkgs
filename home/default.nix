@@ -32,7 +32,7 @@ in
   news.display = "silent";
 
   home = {
-    stateVersion = "20.09";
+    #stateVersion = "20.09";
     packages = with pkgs; [
       # argo
       # azure-cli
@@ -48,7 +48,7 @@ in
       # emacs-all-the-icons-fonts
       exa # ls replacement written in Rust
       fd # find replacement written in Rust
-      # font-awesome_4
+      # font-awesome
       fira-code
       # gitAndTools.gh
       # gitAndTools.git-crypt
