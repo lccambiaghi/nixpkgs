@@ -43,7 +43,11 @@ sudo mv /etc/shells /etc/shells.bak
 mv ~/.zshrc ~/.zshrc.bak
 #+end_src
 
-To use touch id for sudo (e.g. every time you reload configuration) follow this link: https://www.imore.com/how-use-sudo-your-mac-touch-id
+Misc TODOs:
+- To use touch id for sudo (e.g. every time you reload configuration) follow this link: https://www.imore.com/how-use-sudo-your-mac-touch-id (open file with ~sudo vim~)
+- Install FontAwesome
+- Configure Amethyst shortcuts (throw windows) and turn off "focus follows mouse"
+- Configure macOS ctrl to be caps
 
 * flake.nix
 ** file structure
@@ -128,7 +132,7 @@ nixpkgsConfig = {
 #+NAME: home-manager-config
 #+begin_src nix
 homeManagerCommonConfig = {
-  imports = attrValues self.homeManagerModules ++ [
+  imports = with self.homeManagerModules; [
     ./home
     { home.stateVersion = "22.05"; }
     # configs.git.aliases
@@ -141,7 +145,7 @@ homeManagerCommonConfig = {
 ** nix-darwin config
 #+NAME: nix-darwin-config
 #+begin_src nix
-nixDarwinCommonModules = attrValues self.darwinModules ++ [
+nixDarwinCommonModules = [
   # Main `nix-darwin` config
   ./darwin
   # `home-manager` module
@@ -149,7 +153,7 @@ nixDarwinCommonModules = attrValues self.darwinModules ++ [
   (
     { config, lib, pkgs, ... }:
     let
-      inherit (config.users) primaryUser;
+      primaryUser = "cambiaghiluca";
     in
       {
         nixpkgs = nixpkgsConfig;
@@ -170,7 +174,7 @@ nixDarwinCommonModules = attrValues self.darwinModules ++ [
 # Mininal configurations to bootstrap systems
 bootstrap-x86 = makeOverridable darwinSystem {
   system = "x86_64-darwin";
-  modules = [ ./darwin/bootstrap.nix { nixpkgs = nixpkgsConfig; } ];
+  modules = [ ./darwin/bootstrap { nixpkgs = nixpkgsConfig; } ];
 };
 #+end_src
 
@@ -184,11 +188,11 @@ bootstrap-arm = bootstrap-x86.override { system = "aarch64-darwin"; };
 #+NAME: macbook-pro
 #+begin_src nix
 # main macbook configuration
-macbookpro = darwin.lib.darwinSystem {
+macbookpro = makeOverridable darwinSystem {
   system = "x86_64-darwin";
   modules = nixDarwinCommonModules ++ [
     {
-      users.primaryUser = "cambiaghiluca";
+      # users.primaryUser = "cambiaghiluca";
       networking = {
         knownNetworkServices = ["Wi-Fi" "Bluetooth PAN" "Thunderbolt Bridge"];
         # hostName =  "luca-macbookpro";
@@ -205,20 +209,7 @@ macbookpro = darwin.lib.darwinSystem {
 #+NAME: macbook-pro-m1
 #+begin_src nix
 # My new Apple Silicon macOS laptop config
-macbookpro-m1 = darwinSystem {
-  system = "aarch64-darwin";
-  modules = nixDarwinCommonModules ++ [
-    {
-      users.primaryUser = "cambiaghiluca";
-      networking = {
-        knownNetworkServices = ["Wi-Fi" "Bluetooth PAN" "Thunderbolt Bridge"];
-        # hostName =  "luca-macbookpro";
-        # computerName = "luca-macbookpro";
-        # localHostName = "luca-macbookpro";
-      };
-    }
-  ];
-};
+macbookpro-m1 = macbookpro.override { system = "aarch64-darwin"; };
 #+end_src
 
 ** github-ci

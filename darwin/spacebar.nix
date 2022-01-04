@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
-  services.spacebar.enable = true;
+  services.spacebar.enable = false;
+  # you can restart spacebar with launchctl kickstart -k "gui/${UID}/org.nixos.spacebar"
   services.spacebar.package = pkgs.spacebar;
   services.spacebar.config = {
     debug_output       = "on";

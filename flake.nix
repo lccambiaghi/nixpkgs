@@ -40,7 +40,7 @@
         );
       };
       homeManagerCommonConfig = {
-        imports = attrValues self.homeManagerModules ++ [
+        imports = with self.homeManagerModules; [
           ./home
           { home.stateVersion = "22.05"; }
           # configs.git.aliases
@@ -48,7 +48,7 @@
           # programs.kitty.extras
         ];
       };
-      nixDarwinCommonModules = attrValues self.darwinModules ++ [
+      nixDarwinCommonModules = [
         # Main `nix-darwin` config
         ./darwin
         # `home-manager` module
@@ -56,7 +56,7 @@
         (
           { config, lib, pkgs, ... }:
           let
-            inherit (config.users) primaryUser;
+            primaryUser = "cambiaghiluca";
           in
             {
               nixpkgs = nixpkgsConfig;
@@ -74,15 +74,15 @@
         # Mininal configurations to bootstrap systems
         bootstrap-x86 = makeOverridable darwinSystem {
           system = "x86_64-darwin";
-          modules = [ ./darwin/bootstrap.nix { nixpkgs = nixpkgsConfig; } ];
+          modules = [ ./darwin/bootstrap { nixpkgs = nixpkgsConfig; } ];
         };
         bootstrap-arm = bootstrap-x86.override { system = "aarch64-darwin"; };
         # main macbook configuration
-        macbookpro = darwin.lib.darwinSystem {
+        macbookpro = makeOverridable darwinSystem {
           system = "x86_64-darwin";
           modules = nixDarwinCommonModules ++ [
             {
-              users.primaryUser = "cambiaghiluca";
+              # users.primaryUser = "cambiaghiluca";
               networking = {
                 knownNetworkServices = ["Wi-Fi" "Bluetooth PAN" "Thunderbolt Bridge"];
                 # hostName =  "luca-macbookpro";
@@ -94,20 +94,7 @@
           specialArgs = { inherit inputs nixpkgs; };
         };
         # My new Apple Silicon macOS laptop config
-        macbookpro-m1 = darwinSystem {
-          system = "aarch64-darwin";
-          modules = nixDarwinCommonModules ++ [
-            {
-              users.primaryUser = "cambiaghiluca";
-              networking = {
-                knownNetworkServices = ["Wi-Fi" "Bluetooth PAN" "Thunderbolt Bridge"];
-                # hostName =  "luca-macbookpro";
-                # computerName = "luca-macbookpro";
-                # localHostName = "luca-macbookpro";
-              };
-            }
-          ];
-        };
+        macbookpro-m1 = macbookpro.override { system = "aarch64-darwin"; };
         githubCI = darwin.lib.darwinSystem {
           modules = nixDarwinCommonModules { user = "runner"; } ++ [
             ({ lib, ... }: { homebrew.enable = lib.mkForce false; })
