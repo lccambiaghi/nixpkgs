@@ -7,7 +7,7 @@
     # position           = "bottom";
     position           = "top";
     clock_format       = "%R";
-    space_icon_strip   = "    ";
+    space_icon_strip   = "    "; ;;     
     text_font          = ''"Menlo:Bold:12.0"'';
     icon_font          = ''"FontAwesome:Regular:12.0"'';
     background_color   = "0xff202020";
