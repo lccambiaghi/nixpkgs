@@ -16,6 +16,9 @@ in {
     # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
     defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
+    # show dock on both displays
+    defaults write com.apple.Dock appswitcher-all-displays -bool true
+
     # Show the ~/Library folder
     chflags nohidden ~/Library
 
@@ -84,7 +87,8 @@ in {
       NSAutomaticCapitalizationEnabled     = false;
       NSAutomaticSpellingCorrectionEnabled = false;
       NSAutomaticPeriodSubstitutionEnabled = false;
-      _HIHideMenuBar                       = true;
+      # auto hide menu bar on top
+      _HIHideMenuBar                       = false;
       NSNavPanelExpandedStateForSaveMode = true;
       NSNavPanelExpandedStateForSaveMode2 = true;
       # Enable full keyboard access for all controls

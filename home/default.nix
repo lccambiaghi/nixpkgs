@@ -35,6 +35,8 @@ in
     #stateVersion = "20.09";
     packages = with pkgs; [
       # argo
+      # automake
+      # autoconf
       # azure-cli
       bash # /bin/bash
       bat # cat replacement written in Rust
@@ -76,8 +78,8 @@ in
       # tree # Should be included in macOS but it's not
       # tmux
       # watch
-      # wget
-      # yarn # Node.js package manager
+      wget
+      yarn # Node.js package manager
       # youtube-dl # Download videos
     ] ++ scripts;
   };
