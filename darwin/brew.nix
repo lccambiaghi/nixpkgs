@@ -19,9 +19,9 @@ in
       # "libtool" # required for vterm
       # "libomp"
       # required for zmq
-      # "automake"
-      # "autogen"
-      # "autoconf"
+      "automake"
+      "autogen"
+      "autoconf"
       # "pkg-config"
       # "shtool"
       # "mas"
@@ -29,6 +29,7 @@ in
       # "nuget"
       # "parquet-tools"
       # "crescentrose"/sunshine
+      "qemu"
       "unixodbc"
       ##### cross compilation 
       # "ldid"
@@ -42,6 +43,7 @@ in
       # "altserver"
       "1password6"
       "amethyst"
+      # "dash"
       "docker"
       # "emacs-app-good"
       "firefox"
@@ -53,7 +55,7 @@ in
       # "microsoft-office"
       "microsoft-teams"
       # "pycharm-ce"
-      "pycharm"
+      # "pycharm"
       # "slack"
       # "iina"
       # "discord"

@@ -23,11 +23,6 @@
 
       bindkey -e
 
-      # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-      if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
-        source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
-      fi
-
       # Nix setup (environment variables, etc.)
       if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
         . ~/.nix-profile/etc/profile.d/nix.sh
@@ -42,30 +37,15 @@
         alias emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
       fi
 
-      # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
     '';
 
     oh-my-zsh = {
-      enable = true;
+      enable = false;
       plugins = [
         "git"
         "common-aliases"
      ];
     };
 
-    plugins = [
-      {
-        name = "powerlevel10k";
-        src = pkgs.zsh-powerlevel10k;
-        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-        # src = pkgs.fetchFromGitHub {
-        #   owner = "zsh-users";
-        #   repo = "zsh-autosuggestions";
-        #   rev = "v0.4.0";
-        #   sha256 = "0z6i9wjjklb4lvr7zjhbphibsyx51psv50gm07mbb0kj9058j6kc";
-        # };
-      }
-    ];
   };
 }

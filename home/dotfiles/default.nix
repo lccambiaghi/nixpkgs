@@ -36,8 +36,10 @@ exclude_end: "# End Exclude Linting"
     '';
     # NOTE: change profile with echo 'vanilla' > .emacs-profile
     ".emacs-profiles.el".text = ''
-      (("doom" . ((user-emacs-directory . "~/git/doom-emacs")))
-        ("vanilla" . ((user-emacs-directory . "~/git/vanilla-emacs"))))
+      (("default" . ((user-emacs-directory . "~/.emacs.default")))
+        ("rational" . ((user-emacs-directory . "~/git/rational-emacs")
+                       (env . (("RATIONAL_EMACS_HOME" . "~/git/rational-emacs")))))
+      )
     '';
   };
   xdg = {

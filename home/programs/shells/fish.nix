@@ -146,7 +146,7 @@ in {
 
   programs.starship = {
     enable = true;
-    enableZshIntegration = false;
+    enableZshIntegration = true;
     settings = {
       character.success_symbol = "[~>](bold green)"; # "[λ](bold green)";
       character.error_symbol= "[~>](bold red)";
