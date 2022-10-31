@@ -5,13 +5,15 @@ let
 
 in
 {
-  homebrew.enable = true;
-  homebrew.autoUpdate = false;
-  homebrew.cleanup = "zap";
-  homebrew.global.brewfile = true;
-  homebrew.global.noLock = true;
-
   homebrew = {
+    enable = true;
+    # onActivation.autoUpdate = false;
+    onActivation.cleanup = "zap";
+    global.brewfile = true;
+    # TODO: newer brew for ARM uses "/opt/homebrew/bin"
+    brewPrefix = "/usr/local/bin";
+    # homebrew.global.noLock = true;
+
     brews = [
       # "borkdude/brew/babashka"
       # "kubectx"
@@ -22,6 +24,7 @@ in
       "automake"
       "autogen"
       "autoconf"
+      # "clojure"
       # "pkg-config"
       # "shtool"
       # "mas"
@@ -29,7 +32,12 @@ in
       # "nuget"
       # "parquet-tools"
       # "crescentrose"/sunshine
+      "libomp"
+      "openssl"
+      "openssl@1.1"
       "qemu"
+      # "msodbcsql17"
+      # "mssql-tools"
       "unixodbc"
       ##### cross compilation 
       # "ldid"
@@ -41,10 +49,12 @@ in
     casks = [
       # "authy"
       # "altserver"
-      "1password6"
+      # "1password"
+      # "1password6"
       "amethyst"
       # "dash"
       "docker"
+      # "microsoft-edge"
       # "emacs-app-good"
       "firefox"
       # "discord"
@@ -56,7 +66,9 @@ in
       "microsoft-teams"
       # "pycharm-ce"
       # "pycharm"
+      "raycast"
       # "slack"
+      "stats"
       # "iina"
       # "discord"
       # "docker"
@@ -65,11 +77,15 @@ in
       # "menumeters"
       # "microsoft-azure-storage-explorer"
       # "private-internet-access"
+      # "unity"
+      # "zulu" # ARM version of Java
     ];
     taps = [
+      "clojure/tools"
       "homebrew/cask"
       "homebrew/cask-versions"
       "d12frosted/emacs-plus"
+      "microsoft/mssql-release"
       # "jimeh/emacs-builds"
       # "borkdude/brew"
       # "railwaycat/emacsmacport"

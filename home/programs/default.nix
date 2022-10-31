@@ -72,18 +72,34 @@
     htop = {
       enable = true;
     };
+    # java = {
+    #   enable = true;
+    # };
     ssh = {
       enable = true;
+      extraConfig = ''
+Host *
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/id_ed25519
+
+Host *
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/id_ed25519_prod
+      ''; 
       # hashKnownHosts = true;
       # userKnownHostsFile = "${xdg.configHome}/ssh/known_hosts";
-      # matchBlocks = {
-      #   "dsvm" = {
-      #     hostname = "avocado-ds-vm.germanywestcentral.cloudapp.azure.com";
-      #     port = 443;
-      #     user = "luca";
-      #     # identityFile = "$HOME/.ssh/id_rsa.pub";
-      #   };
-      # };
+      matchBlocks = {
+        "w3vm" = {
+          hostname = "34.77.133.239";
+          # port = 443;
+          user = "cambiaghi.luca";
+          # identityFile = "$HOME/.ssh/id_rsa.pub";
+        };
+        "prodw3vm" = {
+          hostname = "34.77.133.239";
+          user = "prod";
+        };
+      };
     };
     vim.enable = true;
     # vscode = {
