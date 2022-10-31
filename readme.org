@@ -228,7 +228,8 @@ thanks https://github.com/kclejeune/system
 #+begin_src sh
 # 1.
 if [[ $(uname -s) == 'Darwin' ]]; then
-    sh <(curl -L https://nixos.org/nix/install) --daemon --darwin-use-unencrypted-nix-store-volume
+    # sh <(curl -L https://nixos.org/nix/install) --daemon --darwin-use-unencrypted-nix-store-volume
+    sh <(curl -L https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20210126_f15f0b8/install) --daemon --darwin-use-unencrypted-nix-store-volume
 else
     sh <(curl -L https://nixos.org/nix/install) --daemon
 fi
