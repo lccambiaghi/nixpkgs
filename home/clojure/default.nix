@@ -1,10 +1,11 @@
-{
+{ pkgs, ... }:
 
+{
     home.packages = with pkgs; [
-      adoptopenjdk-bin # Java
+      # adoptopenjdk-bin # Java
       clojure
-      clojure-lsp
+      # clojure-lsp
       # nodePackages.vega-lite
       # nodePackages.vega-cli
-    ]
+    ];
 }

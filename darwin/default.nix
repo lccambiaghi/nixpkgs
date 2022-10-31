@@ -16,36 +16,38 @@
   # ];
 
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixStable;
     extraOptions = ''
       keep-outputs = true
       keep-derivations = true
-      ${lib.optionalString (config.nix.package == pkgs.nixFlakes)
+      ${lib.optionalString (config.nix.package == pkgs.nixStable)
       "experimental-features = nix-command flakes"}
     '';
     gc = {
       automatic = true;
       options = "--delete-older-than 30d";
     };
-    buildCores = 8;
-    maxJobs = 8;
+    settings = {
+      max-jobs = 8;
+      cores = 8;
+      substituters = [
+        https://cache.nixos.org
+        https://nix-community.cachix.org
+        # https://mjlbach.cachix.org
+        # https://gccemacs-darwin.cachix.org
+      ];
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        # "mjlbach.cachix.org-1:dR0V90mvaPbXuYria5mXvnDtFibKYqYc2gtl9MWSkqI="
+        # "gccemacs-darwin.cachix.org-1:E0Q1uCBvxw58kfgoWtlletUjzINF+fEIkWknAKBnPhs="
+      ];
+    };
     readOnlyStore = true;
     nixPath = [
       "nixpkgs=/etc/${config.environment.etc.nixpkgs.target}"
       "home-manager=/etc/${config.environment.etc.home-manager.target}"
       "darwin=/etc/${config.environment.etc.darwin.target}"
-    ];
-    binaryCaches = [
-      https://cache.nixos.org
-      https://nix-community.cachix.org
-      # https://mjlbach.cachix.org
-      # https://gccemacs-darwin.cachix.org
-    ];
-    binaryCachePublicKeys = [
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      # "mjlbach.cachix.org-1:dR0V90mvaPbXuYria5mXvnDtFibKYqYc2gtl9MWSkqI="
-      # "gccemacs-darwin.cachix.org-1:E0Q1uCBvxw58kfgoWtlletUjzINF+fEIkWknAKBnPhs="
     ];
   };
 
@@ -55,7 +57,7 @@
 
   # Fonts
   fonts = {
-    enableFontDir = true;
+    fontDir.enable = true;
     # fonts declared with home-manager
   };
 

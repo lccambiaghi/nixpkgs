@@ -24,6 +24,7 @@ in
     ./dotfiles 
     ./programs
     # ./python
+    ./clojure
     # ./R
   ];
 
@@ -66,6 +67,7 @@ in
       # nodePackages.prettier
       # pandoc
       # pinentry_mac # Necessary for GPG
+      poetry
       pre-commit # Pre-commit CI hook tool
       # stable.procs
       # protobuf # Protocol Buffers
