@@ -75,6 +75,7 @@ in
       # roboto-mono
       ripgrep # grep replacement written in Rust
       # rsync
+      # rustup
       # source-code-pro
       # sqlite
       # tree # Should be included in macOS but it's not

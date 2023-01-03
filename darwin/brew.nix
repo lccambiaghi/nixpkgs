@@ -1,17 +1,19 @@
-{ ... }:
+{ config, ... }:
 
 let
   user_name = "luca";
 
 in
 {
+  environment.shellInit = ''
+    eval "$(${config.homebrew.brewPrefix}/brew shellenv)"
+  '';
+
   homebrew = {
     enable = true;
     # onActivation.autoUpdate = false;
     onActivation.cleanup = "zap";
     global.brewfile = true;
-    # TODO: newer brew for ARM uses "/opt/homebrew/bin"
-    brewPrefix = "/usr/local/bin";
     # homebrew.global.noLock = true;
 
     brews = [
@@ -54,6 +56,7 @@ in
       "amethyst"
       # "dash"
       "docker"
+      "dozer"
       # "microsoft-edge"
       # "emacs-app-good"
       "firefox"
@@ -91,7 +94,7 @@ in
       # "railwaycat/emacsmacport"
     ];
     extraConfig = ''
-        brew "d12frosted/homebrew-emacs-plus/emacs-plus@28", args: ["with-xwidgets", "with-native-comp", "with-no-titlebar"]
+        brew "d12frosted/homebrew-emacs-plus/emacs-plus@29", args: ["with-xwidgets", "with-native-comp"]
     '';
     # cask_args appdir: "~/Applications", require_sha: true
   };

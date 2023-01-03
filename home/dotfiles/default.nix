@@ -39,6 +39,8 @@ exclude_end: "# End Exclude Linting"
       (("default" . ((user-emacs-directory . "~/.emacs.default")))
         ("rational" . ((user-emacs-directory . "~/git/rational-emacs")
                        (env . (("RATIONAL_EMACS_HOME" . "~/git/rational-emacs")))))
+        ("crafted" . ((user-emacs-directory . "~/git/crafted-emacs")
+                (env . (("CRAFTED_EMACS_HOME" . "~/git/crafted-emacs/personal")))))
       )
     '';
   };

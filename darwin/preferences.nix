@@ -6,9 +6,6 @@ let
 in {
 
   system.activationScripts.postActivation.text = ''
-    # Enable HiDPI display modes (requires restart)
-    sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
-
     # Stop iTunes from responding to the keyboard media keys
     launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2>/dev/null
 
@@ -50,11 +47,6 @@ in {
       orientation = "left";
     };
 
-    loginwindow = {
-      GuestEnabled         = false;
-      DisableConsoleAccess = true;
-    };
-
     screencapture.location = "${homeDir}/Desktop";
 
     finder = {
@@ -63,9 +55,6 @@ in {
       FXEnableExtensionChangeWarning = false;
     };
 
-
-    LaunchServices.LSQuarantine = false;
-
     trackpad = {
       Clicking = true;
       TrackpadThreeFingerDrag = true;
@@ -73,7 +62,6 @@ in {
     };
 
     NSGlobalDomain = {
-      # "com.apple.trackpad.scaling"         = "3.0";
       AppleFontSmoothing = 1;
       ApplePressAndHoldEnabled = true;
       AppleKeyboardUIMode = 3;
@@ -89,10 +77,6 @@ in {
       NSAutomaticPeriodSubstitutionEnabled = false;
       # auto hide menu bar on top
       _HIHideMenuBar                       = false;
-      NSNavPanelExpandedStateForSaveMode = true;
-      NSNavPanelExpandedStateForSaveMode2 = true;
-      # Enable full keyboard access for all controls
-      # (e.g. enable Tab in modal dialogs)
     };
 
     alf = {

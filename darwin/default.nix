@@ -90,7 +90,7 @@
     };
     extraInit = ''
       # install homebrew
-      command -v brew > /dev/null || ${pkgs.bash}/bin/bash -c "$(${pkgs.curl}/bin/curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+      command -v brew > /dev/null || ${pkgs.bash}/bin/bash -c "$(${pkgs.curl}/bin/curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     '';
     # loginShell = pkgs.fish;
     pathsToLink = [ "/Applications" ];
@@ -101,7 +101,8 @@
       "$HOME/.npm-packages/bin"
       "$HOME/.poetry/bin"
       # "$HOME/.emacs.d/bin"
-      "$HOME/git/doom-emacs/bin"
+      # "$HOME/git/doom-emacs/bin"
+      "/opt/homebrew/bin"
     ];
     variables = {
       EDITOR = "emacsclient";

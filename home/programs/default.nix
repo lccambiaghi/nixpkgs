@@ -90,13 +90,13 @@ Host *
       # userKnownHostsFile = "${xdg.configHome}/ssh/known_hosts";
       matchBlocks = {
         "w3vm" = {
-          hostname = "34.77.133.239";
+          hostname = "35.187.84.239";
           # port = 443;
           user = "cambiaghi.luca";
           # identityFile = "$HOME/.ssh/id_rsa.pub";
         };
         "prodw3vm" = {
-          hostname = "34.77.133.239";
+          hostname = "35.187.84.239";
           user = "prod";
         };
       };
