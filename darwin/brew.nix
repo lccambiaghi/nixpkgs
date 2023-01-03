@@ -3,6 +3,11 @@
 let
   user_name = "luca";
 
+
+  # /Users/cambiaghiluca/git/ran_optimization/.direnv/python-3.9.16/bin/python
+  # cd ~/Downloads && mkdir homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew && sudo mv homebrew /usr/local/homebrew
+
+
 in
 {
   environment.shellInit = ''
@@ -17,26 +22,17 @@ in
     # homebrew.global.noLock = true;
 
     brews = [
-      # "borkdude/brew/babashka"
-      # "kubectx"
-      # "libvterm"
-      # "libtool" # required for vterm
-      # "libomp"
       # required for zmq
       "automake"
       "autogen"
       "autoconf"
-      # "clojure"
-      # "pkg-config"
-      # "shtool"
       # "mas"
-      # "mono"
-      # "nuget"
-      # "parquet-tools"
-      # "crescentrose"/sunshine
-      "libomp"
+      # "libomp"
+      # "openblas"
       "openssl"
       "openssl@1.1"
+      # "pyenv"
+      # "python@3.10"
       "qemu"
       # "msodbcsql17"
       # "mssql-tools"

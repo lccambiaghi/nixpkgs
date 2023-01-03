@@ -79,6 +79,7 @@ in
       # source-code-pro
       # sqlite
       # tree # Should be included in macOS but it's not
+      tree-sitter
       # tmux
       # watch
       wget

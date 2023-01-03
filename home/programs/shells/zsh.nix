@@ -1,20 +1,18 @@
 { config, lib, pkgs, ... }:
+
+let
+  inherit (import ./aliases.nix { pkgs = pkgs; }) shellAliases;
+in
+
 {
   programs.zsh = {
-    # inherit shellAliases;
+    inherit shellAliases;
     enable = true;
     # enableAutosuggestions = true;
     # enableCompletion = true;
     # history.extended = true;
     # enableSyntaxHighlighting = true;
     # enableBashCompletion = true;
-    # envExtra = ''
-    #   # export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
-        # export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home"
-    #   # export PYENV_SHELL="zsh"
-    #   # export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
-    # '';
-    # localVariables = { POWERLEVEL9K_LEFT_PROMPT_ELEMENTS = [ "dir" "vcs" ] ; }
 
     # Called whenever zsh is initialized
     initExtra = ''
@@ -32,10 +30,6 @@
       if [ -f "/Applications/Emacs.app/Contents/MacOS/Emacs" ]; then
         export EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs"
         alias emacs="$EMACS -nw"
-      fi
-
-      if [ -f "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient" ]; then
-        alias emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
       fi
 
     '';

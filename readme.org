@@ -328,6 +328,17 @@ darwin-rebuild switch --flake .#luca-macbookpro
 nix flake update --update-input nixpkgs
 #+end_src
 
+* brew86, pyenv86
+Reference: https://sixty-north.com/blog/pyenv-apple-silicon.html
+#+begin_src shell
+arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+alias brew86="arch -x86_64 /usr/local/bin/brew"
+
+brew86 install openssl readline sqlite3 xz zlib
+CFLAGS="-I$(brew86 --prefix openssl)/include" \
+LDFLAGS="-L$(brew86 --prefix openssl)/lib" \
+pyenv86 install 3.9.16
+#+end_src
 * References
 - https://github.com/malob/nixpkgs
 - https://github.com/kclejeune/system

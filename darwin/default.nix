@@ -103,15 +103,21 @@
       # "$HOME/.emacs.d/bin"
       # "$HOME/git/doom-emacs/bin"
       "/opt/homebrew/bin"
+      "$HOME/bin"
+      "/usr/local/homebrew/bin"
     ];
     variables = {
       EDITOR = "emacsclient";
       KUBE_EDITOR="emacsclient";
       LC_ALL="en_US.UTF-8";
-      LIBRARY_PATH="/usr/bin/gcc";
       # CLOJURE_LOAD_PATH="$HOME/git/clojure-clr/bin/4.0/Release/"; # NOTE this needs to be present and compiled
       EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs";
       SHELL = "${pkgs.zsh}/bin/zsh";
+      LIBRARY_PATH="$(brew --prefix)/lib";
+      CPATH="$(brew --prefix)/include";
+      CFLAGS="-I$(brew --prefix openssl)/include";
+      LDFLAGS="-L$(brew --prefix openssl)/lib";
+      # OPENSSL_ROOT_DIR="/opt/homebrew/Cellar/openssl@3/3.0.7/";
       # BROWSER = "firefox";
       # OPENTYPEFONTS="$HOME/.nix-profile/share/fonts/opentype//:";
     };
