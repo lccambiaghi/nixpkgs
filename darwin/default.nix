@@ -77,7 +77,6 @@
   # services.keybase.enable = true;
   # services.lorri.enable = true;
 
-
   ################
   # environment #
   ################
@@ -103,8 +102,8 @@
       # "$HOME/.emacs.d/bin"
       # "$HOME/git/doom-emacs/bin"
       "/opt/homebrew/bin"
-      "$HOME/bin"
       "/usr/local/homebrew/bin"
+      # "$HOME/bin"
     ];
     variables = {
       EDITOR = "emacsclient";

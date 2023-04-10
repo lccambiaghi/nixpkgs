@@ -1,8 +1,9 @@
 #+TITLE: Luca's nix configuration
-#+STARTUP: content
-#+HTML_HEAD: <script>var clicky_site_ids = clicky_site_ids || []; clicky_site_ids.push(101260027);</script>
-#+HTML_HEAD: <script async src="//static.getclicky.com/js"></script>
-#+STARTUP: content
+#+SLUG: nix
+#+DATE: <2019-10-26>
+#+AUTHOR: Luca Cambiaghi
+#+STARTUP: show2levels
+#+OPTIONS: toc:nil num:nil ^:nil
 
 * Introduction
 ** This repository
@@ -334,11 +335,10 @@ Reference: https://sixty-north.com/blog/pyenv-apple-silicon.html
 arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 alias brew86="arch -x86_64 /usr/local/bin/brew"
 
-brew86 install openssl readline sqlite3 xz zlib
-CFLAGS="-I$(brew86 --prefix openssl)/include" \
-LDFLAGS="-L$(brew86 --prefix openssl)/lib" \
-pyenv86 install 3.9.16
+brew86 install openssl readline sqlite3 xz zlib python@3.9
+# CFLAGS="-I$(brew86 --prefix openssl)/include" LDFLAGS="-L$(brew86 --prefix openssl)/lib" pyenv86 install 3.9.16
 #+end_src
+
 * References
 - https://github.com/malob/nixpkgs
 - https://github.com/kclejeune/system

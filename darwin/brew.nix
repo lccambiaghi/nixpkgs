@@ -1,14 +1,5 @@
 { config, ... }:
 
-let
-  user_name = "luca";
-
-
-  # /Users/cambiaghiluca/git/ran_optimization/.direnv/python-3.9.16/bin/python
-  # cd ~/Downloads && mkdir homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew && sudo mv homebrew /usr/local/homebrew
-
-
-in
 {
   environment.shellInit = ''
     eval "$(${config.homebrew.brewPrefix}/brew shellenv)"
@@ -26,6 +17,7 @@ in
       "automake"
       "autogen"
       "autoconf"
+      "gcc"
       # "mas"
       # "libomp"
       # "openblas"
@@ -36,8 +28,10 @@ in
       "qemu"
       # "msodbcsql17"
       # "mssql-tools"
+      "ruff"
+      "tree-sitter"
       "unixodbc"
-      ##### cross compilation 
+      ##### cross compilation
       # "ldid"
       # "docbook-xsl"
       # "po4a"
@@ -53,6 +47,7 @@ in
       # "dash"
       "docker"
       "dozer"
+      "gifox"
       # "microsoft-edge"
       # "emacs-app-good"
       "firefox"
@@ -90,7 +85,7 @@ in
       # "railwaycat/emacsmacport"
     ];
     extraConfig = ''
-        brew "d12frosted/homebrew-emacs-plus/emacs-plus@29", args: ["with-xwidgets", "with-native-comp"]
+        brew "d12frosted/homebrew-emacs-plus/emacs-plus@29", args: ["with-xwidgets", "with-native-comp", "with-no-frame-refocus"]
     '';
     # cask_args appdir: "~/Applications", require_sha: true
   };

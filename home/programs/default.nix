@@ -85,18 +85,18 @@ Host *
 Host *
   AddKeysToAgent yes
   IdentityFile ~/.ssh/id_ed25519_prod
-      ''; 
+      '';
       # hashKnownHosts = true;
       # userKnownHostsFile = "${xdg.configHome}/ssh/known_hosts";
       matchBlocks = {
         "w3vm" = {
-          hostname = "35.187.84.239";
+          hostname = "104.155.108.203";
           # port = 443;
           user = "cambiaghi.luca";
           # identityFile = "$HOME/.ssh/id_rsa.pub";
         };
         "prodw3vm" = {
-          hostname = "35.187.84.239";
+          hostname = "104.155.108.203";
           user = "prod";
         };
       };

@@ -20,8 +20,8 @@ let
 
 in
 {
-  imports = [ 
-    ./dotfiles 
+  imports = [
+    ./dotfiles
     ./programs
     # ./python
     ./clojure
@@ -63,7 +63,7 @@ in
       # niv # Nix dependency management
       # nixpkgs-fmt
       nodejs # node and npm
-      # nodePackages.pyright
+      nodePackages.pyright
       # nodePackages.prettier
       # pandoc
       # pinentry_mac # Necessary for GPG

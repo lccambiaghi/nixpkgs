@@ -5,7 +5,7 @@ let
 in
 
 {
-  
+
   # echo "$HOME/.nix-profile/bin/fish" | sudo tee -a /etc/shells
   # sudo chsh -s "/run/current-system/sw/bin/fish" "$USER"
   programs.fish = {
@@ -81,11 +81,36 @@ in
       scan_timeout = 10;
       # git_status.format = "";
       git_status.disabled = true;
-      kubernetes.disabled = false;
       kubernetes.format = "on [⛵ $context \($namespace\)](dimmed green) ";
       kubernetes.context_aliases = {
         "core-dev-west-1" = "dev";
       };
+      battery.disabled = true;
+      buf.disabled = true;
+      c.disabled = true;
+      cobol.disabled = true;
+      conda.disabled = true;
+      docker_context.disabled = true;
+      dotnet.disabled = true;
+      elixir.disabled = true;
+      elm.disabled = true;
+      erlang.disabled = true;
+      fennel.disabled = true;
+      gcloud.disabled = true;
+      go.disabled = true;
+      gradle.disabled = true;
+      haskell.disabled = true;
+      haxe.disabled = true;
+      helm.disabled = true;
+      kotlin.disabled = true;
+      kubernetes.disabled = true;
+      lua.disabled = true;
+      meson.disabled = true;
+      nim.disabled = true;
+      nodejs.disabled = true;
+      ocaml.disabled = true;
+      perl.disabled = true;
+      php.disabled = true;
       package.disabled = true;
       # python.format = "via [🐍 ( \($virtualenv\))]($style) ";
       python.disabled = true;
@@ -99,10 +124,7 @@ in
         "$git_commit"
         "$git_status"
         "$kubernetes"
-        "$hg_branch"
-        "$docker_context"
         "$package"
-        "$cmake"
         "$python"
         "$nix_shell"
         "$memory_usage"
@@ -110,7 +132,6 @@ in
         "$cmd_duration"
         "$line_break"
         "$jobs"
-        "$battery"
         "$time"
         "$status"
         "$shell"
