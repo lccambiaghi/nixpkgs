@@ -97,7 +97,7 @@ in
       erlang.disabled = true;
       fennel.disabled = true;
       gcloud.disabled = true;
-      go.disabled = true;
+      # golang.disabled = true;
       gradle.disabled = true;
       haskell.disabled = true;
       haxe.disabled = true;
@@ -114,7 +114,6 @@ in
       package.disabled = true;
       # python.format = "via [🐍 ( \($virtualenv\))]($style) ";
       python.disabled = true;
-      nodejs.disabled = true;
       java.disabled = true;
       format = lib.concatStrings [
         "$username"

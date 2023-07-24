@@ -43,12 +43,14 @@ in
       bat # cat replacement written in Rust
       # cachix
       # cantarell-fonts
-      # cocoapods
+      cocoapods
       cmake
       # conftest
       # curl
+      dasel
       # docker # World's #1 container tool
       # emacs-all-the-icons-fonts
+      # enchant
       exa # ls replacement written in Rust
       fd # find replacement written in Rust
       # font-awesome
@@ -56,6 +58,7 @@ in
       # gitAndTools.gh
       # gitAndTools.git-crypt
       # gnupg # gpg
+      # ispell
       # kubectl # Kubernetes CLI tool
       # kubectx # kubectl context switching
       # lorri # Easy Nix shell
@@ -64,6 +67,7 @@ in
       # nixpkgs-fmt
       nodejs # node and npm
       nodePackages.pyright
+      nodePackages.eslint
       # nodePackages.prettier
       # pandoc
       # pinentry_mac # Necessary for GPG

@@ -7,7 +7,7 @@
 
   homebrew = {
     enable = true;
-    # onActivation.autoUpdate = false;
+    onActivation.autoUpdate = false;
     onActivation.cleanup = "zap";
     global.brewfile = true;
     # homebrew.global.noLock = true;
@@ -18,11 +18,18 @@
       "autogen"
       "autoconf"
       "gcc"
+      # required by krell (cljs RN)
+      # "cocoapods"
+
       # "mas"
       # "libomp"
+      "enchant"
+      "pkgconfig"
+      "macosrec" # macosrec --record emacs --gif (ctrl-c in terminal to stop)
       # "openblas"
       "openssl"
       "openssl@1.1"
+      "pandoc"
       # "pyenv"
       # "python@3.10"
       "qemu"
@@ -51,6 +58,7 @@
       # "microsoft-edge"
       # "emacs-app-good"
       "firefox"
+      "font-sf-mono-nerd-font"
       # "discord"
       # "google-chrome"
       # "keybase"
@@ -80,6 +88,8 @@
       "homebrew/cask-versions"
       "d12frosted/emacs-plus"
       "microsoft/mssql-release"
+      "epk/epk"
+      "xenodium/macosrec"
       # "jimeh/emacs-builds"
       # "borkdude/brew"
       # "railwaycat/emacsmacport"

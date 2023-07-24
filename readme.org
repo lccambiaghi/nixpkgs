@@ -24,32 +24,6 @@ The tangled ~flake.nix~ file imports other ~.nix~ files (e.g. ~darwin/default.ni
 
 This file is better viewed in HTML format [[https://luca.cambiaghi.me/nixpkgs/readme.html][here]] or through ~org-mode~ (clone the repo and open in ~emacs~).
 You can visit my blog at the same [[https://luca.cambiaghi.me][website]].
-** Manual steps
-First build:
-#+begin_src shell
-nix --extra-experimental-features "nix-command flakes" build .#darwinConfigurations.macbookpro.system
-./result/sw/bin/darwin-rebuild switch —flake .#macbookpro
-#+end_src
-
-If something goes wrong with synthetic volume:
-#+begin_src shell
-echo -e "run\tprivate/var/run" | sudo tee -a /etc/synthetic.conf >/dev/null
-/System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -t
-#+end_src
-
-Some files to backup:
-#+begin_src shell
-sudo mv /etc/nix/nix.conf /etc/nix/nix.conf.bak
-sudo mv /etc/shells /etc/shells.bak
-mv ~/.zshrc ~/.zshrc.bak
-#+end_src
-
-Misc TODOs:
-- To use touch id for sudo (e.g. every time you reload configuration) follow this link: https://www.imore.com/how-use-sudo-your-mac-touch-id (open file with ~sudo vim~)
-- Install FontAwesome
-- Configure Amethyst shortcuts (throw windows) and turn off "focus follows mouse"
-- Configure macOS ctrl to be caps
-
 * flake.nix
 ** file structure
 #+begin_src nix :tangle flake.nix :noweb tangle
@@ -316,6 +290,32 @@ git clone git@github.com:lccambiaghi/nixpkgs.git ~/git/nixpkgs
 cd ~/git/nixpkgs && nix build ".#darwinConfigurations.bootstrap-x86.system" && ./result/sw/bin/darwin-rebuild switch --flake .#luca-macbookpro
 #+end_src
 
+** First build on new machine
+First build:
+#+begin_src shell
+nix --extra-experimental-features "nix-command flakes" build .#darwinConfigurations.macbookpro.system
+./result/sw/bin/darwin-rebuild switch —flake .#macbookpro
+#+end_src
+
+If something goes wrong with synthetic volume:
+#+begin_src shell
+echo -e "run\tprivate/var/run" | sudo tee -a /etc/synthetic.conf >/dev/null
+/System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -t
+#+end_src
+
+Some files to backup:
+#+begin_src shell
+sudo mv /etc/nix/nix.conf /etc/nix/nix.conf.bak
+sudo mv /etc/shells /etc/shells.bak
+mv ~/.zshrc ~/.zshrc.bak
+#+end_src
+
+Misc TODOs:
+- To use touch id for sudo (e.g. every time you reload configuration) follow this link: https://www.imore.com/how-use-sudo-your-mac-touch-id (open file with ~sudo vim~)
+- Install FontAwesome
+- Configure Amethyst shortcuts (throw windows) and turn off "focus follows mouse"
+- Configure macOS ctrl to be caps
+
 ** darwin-rebuild
 #+begin_src sh
 darwin-rebuild build --flake .#luca-macbookpro
@@ -335,8 +335,8 @@ Reference: https://sixty-north.com/blog/pyenv-apple-silicon.html
 arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 alias brew86="arch -x86_64 /usr/local/bin/brew"
 
-brew86 install openssl readline sqlite3 xz zlib python@3.9
-# CFLAGS="-I$(brew86 --prefix openssl)/include" LDFLAGS="-L$(brew86 --prefix openssl)/lib" pyenv86 install 3.9.16
+# brew86 install openssl readline sqlite3 xz zlib python@3.9
+brew86 install python@3.11
 #+end_src
 
 * References

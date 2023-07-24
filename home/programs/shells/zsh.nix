@@ -32,6 +32,7 @@ in
         alias emacs="$EMACS -nw"
       fi
 
+      [ -n "$EAT_SHELL_INTEGRATION_DIR" ] && source "$EAT_SHELL_INTEGRATION_DIR/zsh"
     '';
 
     oh-my-zsh = {

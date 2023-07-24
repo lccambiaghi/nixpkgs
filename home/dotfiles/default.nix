@@ -1,8 +1,5 @@
 { config, pkgs, ... }:
 
-let
-  homeDir = "/Users/luca";
-in
 {
   home.file = {
     # brewfile = {
@@ -23,10 +20,10 @@ in
       target = ".ipython";
       recursive = true;
     };
-    ".npmrc".text = "prefix = ${homeDir}/.npm-packages";
+    # ".npmrc".text = "prefix = ${HOME}/.npm-packages";
     ".lintr".text = ''
 linters: with_defaults(
-  line_length_linter(120), 
+  line_length_linter(120),
   commented_code_linter = NULL
 )
 exclude: "# Exclude Linting"

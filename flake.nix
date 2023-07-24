@@ -8,20 +8,20 @@
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixpkgs-stable.url = github:NixOS/nixpkgs/nixpkgs-21.11-darwin;
     nixos-stable.url = github:NixOS/nixpkgs/nixos-21.11;
-    
+
     # Environment/system management
     darwin.url = github:LnL7/nix-darwin;
     darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
     home-manager.url = github:nix-community/home-manager;
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    
+
     # Other sources
     emacs.url = "github:nix-community/emacs-overlay";
     fish-done = { url = "github:franciscolourenco/done"; flake = false; };
     flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
     flake-utils.url = "github:numtide/flake-utils";
   };
-  
+
   # outputs = { self, darwin, home-manager, flake-utils, ... }@inputs:
   outputs = inputs@{ self, nixpkgs, darwin, home-manager, flake-utils, ... }:
     let
