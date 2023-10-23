@@ -1,5 +1,8 @@
 set clipboard+=unnamedplus
 
+" run this to enable repeating keys:
+" defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
 " source ~/.intellimacs/spacemacs.vim
 
 " (Optional) Enable other Intellimacs modules
@@ -12,10 +15,59 @@ set clipboard+=unnamedplus
 
 " (Optional) My own vim commands
 nnoremap Y y$
+vnoremap p pgvy
+
+" set leader to SPC
+let mapleader = " "
+
+" ideavim config
+nnoremap <leader>oc :e ~/.ideavimrc<CR>
+nnoremap <leader>oC :source ~/.ideavimrc<CR>
 
 " (Optional) Comma for major mode
 " nmap , <leader>m
 " vmap , <leader>m
+
+" Refactor
+nmap <leader>ri :action Inline<CR>
+nmap <leader>rr :action RenameElement<CR>
+nmap <leader>rev :action IntroduceVariable<CR>
+vmap <leader>rev :action IntroduceVariable<CR>
+nmap <leader>rem :action ExtractMethod<CR>
+vmap <leader>rem :action ExtractMethod<CR>
+nmap <leader>rm :action Move<CR>
+nmap <leader>ro :action OptimizeImports<CR>
+nmap <leader>rG :action Generate<CR>
+nmap <leader>rq <Action>(Refactorings.QuickListPopupAction)
+nmap <leader>u <Action>(FindUsages)
+
+" warnings
+nmap <leader><enter> <Action>(ShowIntentionActions)
+nmap <leader>e <Action>(ShowErrorDescription)
+
+" Navigation
+nmap <leader>f :action GotoFile<CR>
+nmap <leader>F <Action>(FileStructurePopup)
+nmap <leader>s :action FindInPath<CR>
+nmap <leader>S :action GotoSymbol<CR>
+nmap <leader>t <Action>(SelectInProjectView)
+nmap <leader>u <Action>(FindUsages)
+
+"   panes
+nmap <leader>ws :action SplitHorizontally<cr>
+nmap <leader>wv :action SplitVertically<cr>
+nmap <leader>wd :action Unsplit<cr>
+nmap <leader>wl <Action>(NextSplitter)
+nmap <leader>wh <Action>(PrevSplitter)
+
+" BUILDING, DEBUGGING AND RUNNING
+nmap <leader>b <Action>(ToggleLineBreakpoint)
+nmap <leader>e <Action>(EvaluateExpression)
+nmap <leader>D <Action>(Debug)
+nmap <leader>S <Action>(Stop)
+
+" Plug 'tpope/vim-commentary'		    # [count]gc{motion}, o_gc, v_gc, gcc
+
 
 " (Optional) Add/edit actions
 " nnoremap <leader>gl    :action Vcs.Show.Log<CR>

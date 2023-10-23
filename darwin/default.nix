@@ -96,13 +96,14 @@
     shells = [ pkgs.fish pkgs.zsh ];
     # systemPackages = [ ];
     systemPath = [
-      "/run/current-system/sw/bin/" # TODO how to avoid hardcoding?
+      # "/run/current-system/sw/bin/" # TODO how to avoid hardcoding?
       "$HOME/.npm-packages/bin"
       "$HOME/.poetry/bin"
       # "$HOME/.emacs.d/bin"
       # "$HOME/git/doom-emacs/bin"
-      "/opt/homebrew/bin"
-      "/usr/local/homebrew/bin"
+      # "/opt/homebrew/bin"
+      # "/usr/local/homebrew/bin"
+      # TODO: /usr/local/bin
       # "$HOME/bin"
     ];
     variables = {

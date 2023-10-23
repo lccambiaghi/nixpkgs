@@ -32,7 +32,7 @@
       #   # key = "luca.cambiaghi@me.com";
       #   signByDefault = true;
       # };
-      # Replaces ~/.gitignore
+      # Replaces ~/config/git/ignore
       ignores = [
         ".cache/"
         ".DS_Store"
@@ -44,6 +44,7 @@
         ".vscode/"
         "npm-debug.log"
         "shell.nix"
+        ".direnv/*"
       ];
       # Replaces aliases in ~/.gitconfig
       aliases = {
@@ -84,10 +85,6 @@ Host *
 
 Host *
   AddKeysToAgent yes
-  IdentityFile ~/.ssh/bcgemu
-
-Host *
-  AddKeysToAgent yes
   IdentityFile ~/.ssh/id_ed25519_prod
       '';
       # hashKnownHosts = true;
@@ -106,16 +103,16 @@ Host *
       };
     };
     vim.enable = true;
-    # vscode = {
-    #   enable = true;
-    #   package = with pkgs; vscodium;
-    #   userSettings = {
-    #     "workbench.colorTheme" = "GitHub Dark";
-    #   };
-    #   extensions = with pkgs.vscode-extensions; [
-    #     bbenoist.Nix
-    #   ];
-    # };
+    vscode = {
+      enable = true;
+      # package = with pkgs; vscodium;
+      # userSettings = {
+      #   "workbench.colorTheme" = "GitHub Dark";
+      # };
+      # extensions = with pkgs.vscode-extensions; [
+      #   bbenoist.Nix
+      # ];
+    };
   };
 
 }

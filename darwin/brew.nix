@@ -1,9 +1,9 @@
 { config, ... }:
 
 {
-  environment.shellInit = ''
-    eval "$(${config.homebrew.brewPrefix}/brew shellenv)"
-  '';
+  # environment.shellInit = ''
+  #   eval "$(${config.homebrew.brewPrefix}/brew shellenv)"
+  # '';
 
   homebrew = {
     enable = true;
@@ -18,26 +18,23 @@
       "autogen"
       "autoconf"
       "gcc"
-      # required by krell (cljs RN)
-      # "cocoapods"
-
       # "mas"
       # "libomp"
-      "enchant"
+      "enchant" # spellchecker
       "pkgconfig"
-      "macosrec" # macosrec --record emacs --gif (ctrl-c in terminal to stop)
+      # "macosrec" # macosrec --record emacs --gif (ctrl-c in terminal to stop)
       # "openblas"
       "openssl"
-      "openssl@1.1"
+      # "openssl@1.1"
       "pandoc"
       # "pyenv"
-      # "python@3.10"
-      "qemu"
+      "python@3.11"
+      # "qemu"
       # "msodbcsql17"
       # "mssql-tools"
       "ruff"
       "tree-sitter"
-      "unixodbc"
+      # "unixodbc"
       ##### cross compilation
       # "ldid"
       # "docbook-xsl"
@@ -48,9 +45,11 @@
     casks = [
       # "authy"
       # "altserver"
-      # "1password"
+      "alt-tab"
+      "1password"
       # "1password6"
       "amethyst"
+      "arc"
       # "dash"
       "docker"
       "dozer"
@@ -66,19 +65,20 @@
       # "microsoft-azure-storage-explorer"
       # "microsoft-office"
       "microsoft-teams"
+      "postman"
       # "pycharm-ce"
-      # "pycharm"
-      "raycast"
+      "pycharm"
+      # "raycast"
       # "slack"
+      "spotify"
       "stats"
-      # "iina"
+      "iina"
       # "discord"
       # "docker"
       # "dozer"
       # "dropbox"
-      # "menumeters"
-      # "microsoft-azure-storage-explorer"
-      # "private-internet-access"
+      "private-internet-access"
+      "telegram"
       # "unity"
       # "zulu" # ARM version of Java
     ];
@@ -96,6 +96,7 @@
     ];
     extraConfig = ''
         brew "d12frosted/homebrew-emacs-plus/emacs-plus@29", args: ["with-xwidgets", "with-native-comp", "with-no-frame-refocus"]
+        # TODO: brew86 install python@3.11 unixodbc
     '';
     # cask_args appdir: "~/Applications", require_sha: true
   };

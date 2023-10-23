@@ -56,6 +56,6 @@
     # emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient";
     em="emacsclient -a \"\" -n";
 
-    brew86="arch -x86_64 /usr/local/homebrew/bin/brew";
+    brew86="arch -x86_64 /usr/local/bin/brew";
   };
 }

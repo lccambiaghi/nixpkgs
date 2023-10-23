@@ -53,8 +53,10 @@ in
       # enchant
       exa # ls replacement written in Rust
       fd # find replacement written in Rust
+      # ffmpeg
       # font-awesome
       fira-code
+      gh
       # gitAndTools.gh
       # gitAndTools.git-crypt
       # gnupg # gpg
@@ -71,8 +73,8 @@ in
       # nodePackages.prettier
       # pandoc
       # pinentry_mac # Necessary for GPG
-      poetry
-      pre-commit # Pre-commit CI hook tool
+      # poetry
+      # pre-commit # Pre-commit CI hook tool
       # stable.procs
       # protobuf # Protocol Buffers
       # roboto

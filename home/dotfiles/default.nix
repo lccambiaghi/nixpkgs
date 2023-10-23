@@ -6,6 +6,10 @@
     #   source = ./Brewfile;
     #   target = "Brewfile";
     # };
+    amethyst = {
+      source = ./amethyst.yml;
+      target = ".amethyst.yml";
+    };
     clojure = {
       source = ./clojure;
       target = ".clojure";
@@ -30,15 +34,6 @@ exclude: "# Exclude Linting"
 exclude_start: "# Begin Exclude Linting"
 exclude_end: "# End Exclude Linting"
 
-    '';
-    # NOTE: change profile with echo 'vanilla' > .emacs-profile
-    ".emacs-profiles.el".text = ''
-      (("default" . ((user-emacs-directory . "~/.emacs.default")))
-        ("rational" . ((user-emacs-directory . "~/git/rational-emacs")
-                       (env . (("RATIONAL_EMACS_HOME" . "~/git/rational-emacs")))))
-        ("crafted" . ((user-emacs-directory . "~/git/crafted-emacs")
-                (env . (("CRAFTED_EMACS_HOME" . "~/git/crafted-emacs/personal")))))
-      )
     '';
   };
   xdg = {
