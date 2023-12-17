@@ -51,11 +51,12 @@ in
       # docker # World's #1 container tool
       # emacs-all-the-icons-fonts
       # enchant
-      exa # ls replacement written in Rust
+      eza # ls replacement written in Rust
       fd # find replacement written in Rust
       # ffmpeg
       # font-awesome
       fira-code
+      google-cloud-sdk
       gh
       # gitAndTools.gh
       # gitAndTools.git-crypt
@@ -71,6 +72,7 @@ in
       nodePackages.pyright
       nodePackages.eslint
       # nodePackages.prettier
+      # ollama
       # pandoc
       # pinentry_mac # Necessary for GPG
       # poetry
@@ -82,9 +84,11 @@ in
       ripgrep # grep replacement written in Rust
       # rsync
       # rustup
+      shellcheck
       # source-code-pro
       # sqlite
-      # tree # Should be included in macOS but it's not
+      terraform
+      tree # Should be included in macOS but it's not
       tree-sitter
       # tmux
       # watch

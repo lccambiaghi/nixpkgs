@@ -43,7 +43,6 @@
         # "gccemacs-darwin.cachix.org-1:E0Q1uCBvxw58kfgoWtlletUjzINF+fEIkWknAKBnPhs="
       ];
     };
-    readOnlyStore = true;
     nixPath = [
       "nixpkgs=/etc/${config.environment.etc.nixpkgs.target}"
       "home-manager=/etc/${config.environment.etc.home-manager.target}"
@@ -99,6 +98,7 @@
       # "/run/current-system/sw/bin/" # TODO how to avoid hardcoding?
       "$HOME/.npm-packages/bin"
       "$HOME/.poetry/bin"
+      "$HOME/.modular/pkg/packages.modular.com_mojo/bin"
       # "$HOME/.emacs.d/bin"
       # "$HOME/git/doom-emacs/bin"
       # "/opt/homebrew/bin"
@@ -117,6 +117,7 @@
       CPATH="$(brew --prefix)/include";
       CFLAGS="-I$(brew --prefix openssl)/include";
       LDFLAGS="-L$(brew --prefix openssl)/lib";
+      MODULAR_HOME="$HOME/.modular";
       # OPENSSL_ROOT_DIR="/opt/homebrew/Cellar/openssl@3/3.0.7/";
       # BROWSER = "firefox";
       # OPENTYPEFONTS="$HOME/.nix-profile/share/fonts/opentype//:";
