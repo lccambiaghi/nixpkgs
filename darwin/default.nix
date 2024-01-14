@@ -92,13 +92,13 @@
     '';
     # loginShell = pkgs.fish;
     pathsToLink = [ "/Applications" ];
-    shells = [ pkgs.fish pkgs.zsh ];
+    shells = [ pkgs.zsh ];
     # systemPackages = [ ];
     systemPath = [
       # "/run/current-system/sw/bin/" # TODO how to avoid hardcoding?
       "$HOME/.npm-packages/bin"
       "$HOME/.poetry/bin"
-      "$HOME/.modular/pkg/packages.modular.com_mojo/bin"
+      "/Users/cambiaghiluca/.modular/pkg/packages.modular.com_mojo/bin"
       # "$HOME/.emacs.d/bin"
       # "$HOME/git/doom-emacs/bin"
       # "/opt/homebrew/bin"
@@ -125,7 +125,7 @@
 
   };
 
-  programs.fish.enable = true;
+  programs.fish.enable = false;
   programs.zsh.enable = true;
   programs.bash.enable = true;
 

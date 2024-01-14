@@ -9,7 +9,7 @@ in
   # echo "$HOME/.nix-profile/bin/fish" | sudo tee -a /etc/shells
   # sudo chsh -s "/run/current-system/sw/bin/fish" "$USER"
   programs.fish = {
-    enable = true;
+    enable = false;
     inherit shellAliases;
     shellInit = ''
       direnv hook fish | source
