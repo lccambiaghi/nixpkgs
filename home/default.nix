@@ -1,24 +1,5 @@
-{ config, lib, pkgs, ... }:
-let
-  # Symlink macOS apps installed via Nix into ~/Applications
-  nix-symlink-apps-macos = pkgs.writeShellScriptBin "nix-symlink-apps-macos" ''
-    for app in $(find ~/Applications -name '*.app')
-    do
-      if test -L $app && [[ $(greadlink -f $app) == /nix/store/* ]]; then
-        rm $app
-      fi
-    done
-    for app in $(find ~/.nix-profile/Applications/ -name '*.app' -exec greadlink -f '{}' \;)
-    do
-      echo "symlinking $(basename $app) into ~/Applications"
-      ln -s $app ~/Applications/$(basename $app)
-    done
-  '';
-  scripts = [
-    nix-symlink-apps-macos
-  ];
+{ pkgs, ... }:
 
-in
 {
   imports = [
     ./dotfiles
@@ -28,17 +9,19 @@ in
     # ./R
   ];
 
+  # nixpkgs.config.allowUnsupportedSystem = true;
+
   fonts.fontconfig.enable = true;
 
-  news.display = "silent";
+  # news.display = "silent";
 
   home = {
-    #stateVersion = "20.09";
+    stateVersion = "24.11";
     packages = with pkgs; [
       # argo
       # automake
       # autoconf
-      # azure-cli
+      azure-cli
       bash # /bin/bash
       bat # cat replacement written in Rust
       # cachix
@@ -69,7 +52,7 @@ in
       # niv # Nix dependency management
       # nixpkgs-fmt
       nodejs # node and npm
-      nodePackages.pyright
+      pyright
       nodePackages.eslint
       # nodePackages.prettier
       # ollama
@@ -95,6 +78,6 @@ in
       wget
       yarn # Node.js package manager
       # youtube-dl # Download videos
-    ] ++ scripts;
+    ];
   };
 }

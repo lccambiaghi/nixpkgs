@@ -1,9 +1,10 @@
-{ inputs, config, pkgs, lib, ... }:
+{ inputs, pkgs, lib, ... }:
+
 {
   imports = [
     ./brew.nix
     ./preferences.nix
-    ./spacebar.nix
+    # ./spacebar.nix
   ];
 
   #####################
@@ -15,77 +16,33 @@
     # inputs.emacs-overlay.overlay
   # ];
 
-  nix = {
-    package = pkgs.nixStable;
-    extraOptions = ''
-      keep-outputs = true
-      keep-derivations = true
-      ${lib.optionalString (config.nix.package == pkgs.nixStable)
-      "experimental-features = nix-command flakes"}
-    '';
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 30d";
-    };
-    settings = {
-      max-jobs = 8;
-      cores = 8;
-      substituters = [
-        https://cache.nixos.org
-        https://nix-community.cachix.org
-        # https://mjlbach.cachix.org
-        # https://gccemacs-darwin.cachix.org
-      ];
-      trusted-public-keys = [
-        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        # "mjlbach.cachix.org-1:dR0V90mvaPbXuYria5mXvnDtFibKYqYc2gtl9MWSkqI="
-        # "gccemacs-darwin.cachix.org-1:E0Q1uCBvxw58kfgoWtlletUjzINF+fEIkWknAKBnPhs="
-      ];
-    };
-    nixPath = [
-      "nixpkgs=/etc/${config.environment.etc.nixpkgs.target}"
-      "home-manager=/etc/${config.environment.etc.home-manager.target}"
-      "darwin=/etc/${config.environment.etc.darwin.target}"
-    ];
+  nixpkgs.config = {
+    allowUnfree = true;
   };
+
+  # Disable nix-darwin managing Nix as it is already managed by Determinate
+  nix.enable = false;
+  # services.nix-daemon.enable = false;
 
   ########################
   # System configuration #
   ########################
 
   # Fonts
-  fonts = {
-    fontDir.enable = true;
-    # fonts declared with home-manager
-  };
-
-  networking = {
-    dns = [
-      "1.1.1.1"
-      "8.8.8.8"
-    ];
-  };
+  # networking = {
+  #   dns = [
+  #     "1.1.1.1"
+  #     "8.8.8.8"
+  #   ];
+  # };
 
   # time.timeZone = "Europe/Paris";
-
-  services.nix-daemon.enable = true;
-  # Recreate /run/current-system symlink after boot
-  # services.activate-system.enable = true;
-  # services.gpg-agent.enable = true;
-  # services.keybase.enable = true;
-  # services.lorri.enable = true;
 
   ################
   # environment #
   ################
 
   environment = {
-    etc = {
-      home-manager.source = "${inputs.home-manager}";
-      nixpkgs.source = "${inputs.nixpkgs}";
-      darwin.source = "${inputs.darwin}";
-    };
     extraInit = ''
       # install homebrew
       command -v brew > /dev/null || ${pkgs.bash}/bin/bash -c "$(${pkgs.curl}/bin/curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -128,7 +85,6 @@
   programs.fish.enable = false;
   programs.zsh.enable = true;
   programs.bash.enable = true;
-
   programs.nix-index.enable = true;
 
   # Used for backwards compatibility, please read the changelog before changing.

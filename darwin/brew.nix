@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 
 {
   # environment.shellInit = ''
@@ -17,9 +17,11 @@
       "automake"
       "autogen"
       "autoconf"
+      "databricks"
       "gcc"
+      "graphviz"
       # "mas"
-      # "libomp"
+      "libomp"
       "enchant" # spellchecker
       "pkgconfig"
       # "macosrec" # macosrec --record emacs --gif (ctrl-c in terminal to stop)
@@ -31,11 +33,13 @@
       "pandoc"
       # "pgvector"
       # "pyenv"
+      "python@3.10"
       "python@3.11"
       # "qemu"
       # "msodbcsql17"
       # "mssql-tools"
       "ruff"
+      "spicetify-cli"
       "tree-sitter"
       # "unixodbc"
       ##### cross compilation
@@ -54,6 +58,7 @@
       "amethyst"
       "arc"
       # "dash"
+      "copilot-for-xcode"
       "docker"
       "dozer"
       "gifox"
@@ -64,6 +69,7 @@
       # "discord"
       # "google-chrome"
       # "keybase"
+      "logseq"
       "macfuse"
       # "microsoft-auto-update"
       # "microsoft-azure-storage-explorer"
@@ -88,6 +94,7 @@
     ];
     taps = [
       "clojure/tools"
+      "databricks/tap"
       "homebrew/cask"
       "homebrew/cask-versions"
       "d12frosted/emacs-plus"

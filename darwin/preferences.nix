@@ -1,9 +1,6 @@
 { ... }:
 
-let
-  homeDir = "/Users/luca";
-
-in {
+{
 
   system.activationScripts.postActivation.text = ''
     # Stop iTunes from responding to the keyboard media keys
@@ -42,12 +39,10 @@ in {
       autohide = true;
       mru-spaces = false;
       minimize-to-application = false;
-      expose-group-by-app = true;
+      expose-group-apps = true;
       tilesize            = 36;
       orientation = "left";
     };
-
-    screencapture.location = "${homeDir}/Desktop";
 
     finder = {
       AppleShowAllExtensions = true;
