@@ -75,12 +75,15 @@
       CFLAGS="-I$(brew --prefix openssl)/include";
       LDFLAGS="-L$(brew --prefix openssl)/lib";
       MODULAR_HOME="$HOME/.modular";
+      HOMEBREW_NO_ANALYTICS="1";
       # OPENSSL_ROOT_DIR="/opt/homebrew/Cellar/openssl@3/3.0.7/";
       # BROWSER = "firefox";
       # OPENTYPEFONTS="$HOME/.nix-profile/share/fonts/opentype//:";
     };
 
   };
+
+  security.pam.enableSudoTouchIdAuth = true;
 
   programs.fish.enable = false;
   programs.zsh.enable = true;

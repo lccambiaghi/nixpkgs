@@ -8,11 +8,15 @@ in
   programs.zsh = {
     inherit shellAliases;
     enable = true;
-    # enableAutosuggestions = true;
-    # enableCompletion = true;
-    # history.extended = true;
-    # enableSyntaxHighlighting = true;
-    # enableBashCompletion = true;
+    autocd = true;
+    autosuggestion.enable = true;
+    enableCompletion = true;
+    syntaxHighlighting.enable = true;
+    history = {
+      expireDuplicatesFirst = true;
+      extended = true;
+      ignoreDups = true;
+    };
 
     # Called whenever zsh is initialized
     initExtra = ''
@@ -38,14 +42,6 @@ in
           eval "$(/opt/homebrew/bin/brew shellenv)"
       fi
     '';
-
-    oh-my-zsh = {
-      enable = false;
-      plugins = [
-        "git"
-        "common-aliases"
-     ];
-    };
 
   };
 }

@@ -2,25 +2,27 @@
 {
   imports = [
     # ./kitty
-    ./latex
+    # ./latex
     ./shells
   ];
 
   programs = {
-    home-manager = {
-      enable = true;
-      path = "../home.nix";
-    };
+
     direnv = {
       enable = true;
       # enableFishIntegration = false;
     };
+
     # emacs = {
     #   enable = true;
     #   # package = if pkgs.stdenv.isDarwin then pkgs.emacsGcc else pkgs.emacsPgtkGcc;
     #   package = if pkgs.stdenv.isDarwin then pkgs.emacsMacport else pkgs.emacsPgtkGcc;
     # };
+
+    dircolors.enable = true;
+
     fzf.enable = true;
+
     git = {
       enable = true;
       lfs.enable = true;

@@ -27,12 +27,8 @@
         {
           users.users.${username}.home = "/Users/${username}";
           home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
+          # home-manager.useUserPackages = true;
           home-manager.users.${username} = import ./home/default.nix;
-          # home-manager.users.cambiaghiluca = home-manager.lib.homeManagerConfiguration {
-          #   pkgs = nixpkgs;
-          #   modules = ./home/default.nix;
-          # };
         }
       ];
     };
