@@ -36,7 +36,7 @@
       # enchant
       eza # ls replacement written in Rust
       fd # find replacement written in Rust
-      # ffmpeg
+      ffmpeg
       # font-awesome
       fira-code
       google-cloud-sdk
@@ -70,7 +70,7 @@
       shellcheck
       # source-code-pro
       # sqlite
-      terraform
+      # terraform
       tree # Should be included in macOS but it's not
       tree-sitter
       # tmux

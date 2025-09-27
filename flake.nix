@@ -19,7 +19,7 @@
       username = "cambiaghiluca";
     in
     {
-    darwinConfigurations.CPH-NJ50WV17R = nix-darwin.lib.darwinSystem {
+    darwinConfigurations.MIL-62HW4D25Y = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
         ./darwin/default.nix

@@ -43,10 +43,6 @@
   ################
 
   environment = {
-    extraInit = ''
-      # install homebrew
-      command -v brew > /dev/null || ${pkgs.bash}/bin/bash -c "$(${pkgs.curl}/bin/curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    '';
     # loginShell = pkgs.fish;
     pathsToLink = [ "/Applications" ];
     shells = [ pkgs.zsh ];
@@ -70,10 +66,15 @@
       # CLOJURE_LOAD_PATH="$HOME/git/clojure-clr/bin/4.0/Release/"; # NOTE this needs to be present and compiled
       EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs";
       SHELL = "${pkgs.zsh}/bin/zsh";
-      LIBRARY_PATH="$(brew --prefix)/lib";
-      CPATH="$(brew --prefix)/include";
-      CFLAGS="-I$(brew --prefix openssl)/include";
-      LDFLAGS="-L$(brew --prefix openssl)/lib";
+      # CC="${pkgs.gcc}/bin/gcc";
+      # LIBRARY_PATH	="$(brew --prefix)/lib";
+      # CPATH="$(brew --prefix)/include";
+      # CFLAGS="-I$(brew --prefix openssl)/include";
+      # LDFLAGS="-L$(brew --prefix openssl)/lib";
+      LIBRARY_PATH="/opt/homebrew/lib";
+      CPATH="/opt/homebrew/include";
+      CFLAGS="/opt/homebrew/opt/openssl@3/include";
+      LDFLAGS="/opt/homebrew/opt/openssl@3/lib";
       MODULAR_HOME="$HOME/.modular";
       HOMEBREW_NO_ANALYTICS="1";
       # OPENSSL_ROOT_DIR="/opt/homebrew/Cellar/openssl@3/3.0.7/";

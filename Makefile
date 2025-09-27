@@ -6,7 +6,7 @@ help: ## Show all available targets
 
 .PHONY: reload
 reload: ## Rebuild MBP M1 configuration
-	nix run nix-darwin/nix-darwin-24.11#darwin-rebuild -- switch --flake .#CPH-NJ50WV17R
+	nix run nix-darwin/nix-darwin-24.11#darwin-rebuild -- switch --flake .#MIL-62HW4D25Y
 .PHONY: update
 update: ## Update nixpkgs inputs
 	nix flake update

@@ -22,15 +22,16 @@
       "graphviz"
       # "mas"
       "libomp"
-      "enchant" # spellchecker
+      "llm"
+      # "enchant" # spellchecker
       "pkgconfig"
       # "macosrec" # macosrec --record emacs --gif (ctrl-c in terminal to stop)
       "modular"
       # "openblas"
-      # "ollama"
       "openssl"
       # "openssl@1.1"
       "pandoc"
+      "poppler"
       # "pgvector"
       # "pyenv"
       "python@3.10"
@@ -42,6 +43,7 @@
       "spicetify-cli"
       "tree-sitter"
       # "unixodbc"
+      "uv"
       ##### cross compilation
       # "ldid"
       # "docbook-xsl"
@@ -52,30 +54,38 @@
     casks = [
       # "authy"
       # "altserver"
-      "alt-tab"
+      # "alt-tab"
       "1password"
       # "1password6"
       "amethyst"
-      "arc"
+      # "arc"
+      "chatgpt"
+      "cursor"
+      "embyserver"
       # "dash"
-      "copilot-for-xcode"
+      # "copilot-for-xcode"
       "docker"
-      "dozer"
-      "gifox"
+      "jordanbaird-ice"
+      # "git-credential-manager"
+      # "gifox"
       # "microsoft-edge"
       # "emacs-app-good"
-      "firefox"
+      # "firefox"
       "font-sf-mono-nerd-font"
       # "discord"
       # "google-chrome"
       # "keybase"
+      "lm-studio"
       "logseq"
-      "macfuse"
+      "maccy"
+      # "macfuse"
       # "microsoft-auto-update"
       # "microsoft-azure-storage-explorer"
       # "microsoft-office"
       "microsoft-teams"
-      "postman"
+      "nvidia-geforce-now"
+      # "ollama"
+      # "postman"
       # "pycharm-ce"
       "pycharm"
       # "raycast"
@@ -95,8 +105,6 @@
     taps = [
       "clojure/tools"
       "databricks/tap"
-      "homebrew/cask"
-      "homebrew/cask-versions"
       "d12frosted/emacs-plus"
       "microsoft/mssql-release"
       "epk/epk"
@@ -107,7 +115,7 @@
       # "railwaycat/emacsmacport"
     ];
     extraConfig = ''
-        brew "d12frosted/homebrew-emacs-plus/emacs-plus@29", args: ["with-xwidgets", "with-native-comp", "with-no-frame-refocus"]
+        brew "d12frosted/homebrew-emacs-plus/emacs-plus@31", args: ["with-xwidgets"]
         # TODO: brew86 install python@3.11 unixodbc
     '';
     # cask_args appdir: "~/Applications", require_sha: true
