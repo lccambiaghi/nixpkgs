@@ -2,25 +2,27 @@
 {
   imports = [
     # ./kitty
-    ./latex
+    # ./latex
     ./shells
   ];
 
   programs = {
-    home-manager = {
-      enable = true;
-      path = "../home.nix";
-    };
+
     direnv = {
       enable = true;
       # enableFishIntegration = false;
     };
+
     # emacs = {
     #   enable = true;
     #   # package = if pkgs.stdenv.isDarwin then pkgs.emacsGcc else pkgs.emacsPgtkGcc;
     #   package = if pkgs.stdenv.isDarwin then pkgs.emacsMacport else pkgs.emacsPgtkGcc;
     # };
+
+    dircolors.enable = true;
+
     fzf.enable = true;
+
     git = {
       enable = true;
       lfs.enable = true;
@@ -79,26 +81,32 @@
     ssh = {
       enable = true;
       extraConfig = ''
-Host *
+Host github.com-Cambiaghi-Luca_bcgprod
+  HostName github.com
+  User git
   AddKeysToAgent yes
   IdentityFile ~/.ssh/id_ed25519
 
+Host github.com-lccambiaghi
+  HostName github.com
+  User git
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/id_ed25519_personal
+
 Host *
   AddKeysToAgent yes
-  IdentityFile ~/.ssh/id_ed25519_prod
+  IdentityFile ~/.ssh/id_rsa_cyber
       '';
       # hashKnownHosts = true;
       # userKnownHostsFile = "${xdg.configHome}/ssh/known_hosts";
       matchBlocks = {
-        "w3vm" = {
-          hostname = "104.155.108.203";
-          # port = 443;
-          user = "cambiaghi.luca";
-          # identityFile = "$HOME/.ssh/id_rsa.pub";
+        "c2" = {
+          hostname = "34.34.112.30";
+          user = "cambiaghiluca";
         };
-        "prodw3vm" = {
-          hostname = "104.155.108.203";
-          user = "prod";
+        "c4" = {
+          hostname = "34.133.216.214 ";
+          user = "cambiaghiluca";
         };
       };
     };
