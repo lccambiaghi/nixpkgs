@@ -66,7 +66,7 @@
       # roboto-mono
       ripgrep # grep replacement written in Rust
       # rsync
-      # rustup
+      rustup
       shellcheck
       # source-code-pro
       # sqlite
