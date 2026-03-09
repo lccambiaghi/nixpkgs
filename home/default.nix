@@ -54,6 +54,7 @@
       nodejs # node and npm
       pyright
       nodePackages.eslint
+      nodePackages.mermaid-cli
       # nodePackages.prettier
       # ollama
       # pandoc

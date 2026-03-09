@@ -27,6 +27,7 @@
       # "enchant" # spellchecker
       "pkgconfig"
       # "macosrec" # macosrec --record emacs --gif (ctrl-c in terminal to stop)
+      # "mermaid-cli"
       "modular"
       # "openblas"
       "openssl"
@@ -60,7 +61,8 @@
       "1password"
       # "1password6"
       "amethyst"
-      # "brave-browser"
+      "audacity"
+      "brave-browser"
       # "arc"
       "chatgpt"
       "cursor"
@@ -88,6 +90,7 @@
       "microsoft-teams"
       "nvidia-geforce-now"
       # "ollama"
+      "opencode-desktop"
       # "postman"
       # "pycharm-ce"
       "pycharm"
@@ -101,11 +104,13 @@
       # "dozer"
       # "dropbox"
       "private-internet-access"
+      # "tailscale"
       "telegram"
       # "unity"
       # "zulu" # ARM version of Java
     ];
     taps = [
+      "anomalyco/tap"
       "clojure/tools"
       "databricks/tap"
       "d12frosted/emacs-plus"
