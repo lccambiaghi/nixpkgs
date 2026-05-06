@@ -17,7 +17,7 @@
       "automake"
       "autogen"
       "autoconf"
-      "codex"
+      # "codex" # openai/tap repo removed
       "databricks"
       "gcc"
       "graphviz"
@@ -80,6 +80,7 @@
       # "discord"
       # "google-chrome"
       # "keybase"
+      "libreoffice"
       "lm-studio"
       "logseq"
       "maccy"
@@ -118,6 +119,7 @@
       "epk/epk"
       "xenodium/macosrec"
       "modularml/packages"
+      # "openai/tap" # repo no longer exists
       # "jimeh/emacs-builds"
       # "borkdude/brew"
       # "railwaycat/emacsmacport"
